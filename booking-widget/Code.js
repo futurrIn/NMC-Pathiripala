@@ -644,6 +644,7 @@ function sendConfirmationEmail(data, token, appointmentId, doctorName) {
   }
   
   const subject = "Appointment Confirmed: Token #" + token + " - MEDTRUST Healthcare";
+  const approxTime = calculateApproxTime(data.session, token);
   
   // Premium, responsive HTML template branded with MEDTRUST colors and fonts
   const htmlBody = `
@@ -658,7 +659,8 @@ function sendConfirmationEmail(data, token, appointmentId, doctorName) {
       <div style="padding: 32px; background-color: #FFFFFF; color: #0F172A; line-height: 1.6;">
         <p style="font-size: 15px; margin-top: 0;">Dear <strong>${data.patient_name}</strong>,</p>
         <p style="font-size: 14px; color: #475569;">
-          Thank you for choosing MEDTRUST. Your consultation request has been officially registered and locked in our clinical scheduler database.
+          Thank you for choosing MEDTRUST. Your consultation request has been officially registered and locked in our clinical scheduler database. 
+          Your formal receipt has been compiled and is **attached below as a downloadable PDF**.
         </p>
         
         <!-- Confirmation Token Box -->
@@ -689,7 +691,7 @@ function sendConfirmationEmail(data, token, appointmentId, doctorName) {
           </tr>
           <tr>
             <td style="padding: 10px 0; color: #475569;">Session Block:</td>
-            <td style="padding: 10px 0; text-align: right; font-weight: 700;">${data.session.toUpperCase()} Session</td>
+            <td style="padding: 10px 0; text-align: right; font-weight: 700;">${data.session.toUpperCase()} Session (${approxTime})</td>
           </tr>
         </table>
         
@@ -708,12 +710,258 @@ function sendConfirmationEmail(data, token, appointmentId, doctorName) {
   `;
   
   try {
+    // Generate the PDF receipt blob dynamically
+    const pdfBlob = generateReceiptPDF({
+      patient_name: data.patient_name,
+      email: data.email,
+      phone: data.phone || "-",
+      service: data.service || "Standard Clinical Triage",
+      doctor_name: doctorName,
+      appointment_date: data.appointment_date,
+      session: data.session.toUpperCase(),
+      token: token,
+      approxTime: approxTime,
+      appointment_id: appointmentId
+    });
+    
+    // Send email with PDF attachment
     GmailApp.sendEmail(data.email.trim(), subject, "", {
       htmlBody: htmlBody,
-      name: "MEDTRUST Care Dispatch Desk"
+      name: "MEDTRUST Care Dispatch Desk",
+      attachments: [pdfBlob]
     });
-    console.log("Confirmation email successfully sent to: " + data.email);
+    console.log("Confirmation email with PDF attachment successfully sent to: " + data.email);
   } catch (e) {
     console.error("Failed to send email: " + e.toString());
   }
+}
+
+/**
+ * Generates a premium styled PDF receipt blob using Google Apps Script's HTML compiler.
+ * Matches the style and layout generated on the client-side.
+ * 
+ * @param {Object} appt Appointment details
+ * @return {GoogleAppsScript.Base.Blob} PDF Blob
+ */
+function generateReceiptPDF(appt) {
+  const html = `
+    <html>
+    <head>
+      <style>
+        body {
+          font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+          color: #0F172A;
+          margin: 0;
+          padding: 30px;
+          background-color: #FFFFFF;
+        }
+        .container {
+          border: 2px solid #0D9488;
+          border-radius: 16px;
+          padding: 30px;
+          box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+          background-color: #FFFFFF;
+        }
+        .header {
+          border-bottom: 2px dashed #E2E8F0;
+          padding-bottom: 20px;
+          margin-bottom: 30px;
+        }
+        .logo {
+          font-size: 24px;
+          font-weight: bold;
+          color: #0F172A;
+          float: left;
+        }
+        .logo span {
+          color: #0D9488;
+        }
+        .meta {
+          float: right;
+          text-align: right;
+          font-size: 11px;
+          color: #475569;
+          line-height: 1.5;
+        }
+        .meta strong {
+          color: #0F172A;
+        }
+        .title {
+          font-size: 16px;
+          font-weight: bold;
+          margin-bottom: 20px;
+          color: #0F172A;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+        }
+        .token-box {
+          background-color: #F0FDFA;
+          border: 2px dashed #0D9488;
+          border-radius: 12px;
+          padding: 24px;
+          text-align: center;
+          margin-bottom: 30px;
+        }
+        .token-label {
+          font-size: 11px;
+          font-weight: bold;
+          color: #0D9488;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+        }
+        .token-number {
+          font-size: 38px;
+          font-weight: 900;
+          color: #0F172A;
+          margin: 10px 0;
+        }
+        .token-time {
+          font-size: 14px;
+          font-weight: bold;
+          color: #16A34A;
+        }
+        .details-table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-bottom: 30px;
+        }
+        .details-table th, .details-table td {
+          padding: 12px 0;
+          font-size: 13px;
+          border-bottom: 1px solid #F1F5F9;
+          text-align: left;
+        }
+        .details-table th {
+          color: #475569;
+          font-weight: bold;
+          width: 35%;
+        }
+        .details-table td {
+          color: #0F172A;
+          font-weight: 500;
+          text-align: right;
+        }
+        .guidelines {
+          background-color: #F8FAFC;
+          border-left: 4px solid #0D9488;
+          border-radius: 8px;
+          padding: 16px;
+          font-size: 11px;
+          color: #475569;
+          line-height: 1.6;
+        }
+        .guidelines strong {
+          color: #0F172A;
+          display: block;
+          margin-bottom: 8px;
+        }
+        .footer {
+          text-align: center;
+          margin-top: 40px;
+          font-size: 11px;
+          color: #94A3B8;
+          border-top: 1px solid #F1F5F9;
+          padding-top: 20px;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <div class="logo">MED<span>TRUST</span></div>
+          <div class="meta">
+            <strong>RECEIPT NO:</strong> MT-${Math.floor(100000 + Math.random() * 900000)}<br>
+            <strong>DATE ISSUED:</strong> ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}<br>
+            <strong>STATUS:</strong> <span style="color: #16A34A; font-weight: bold;">CONFIRMED</span>
+          </div>
+          <div style="clear: both;"></div>
+        </div>
+        
+        <div class="title">Appointment Ticket & Clinical Receipt</div>
+        
+        <div class="token-box">
+          <div class="token-label">Your Assigned Queue Token</div>
+          <div class="token-number">Token #${appt.token}</div>
+          <div class="token-time">Approximate Arrival Time: ${appt.approxTime}</div>
+        </div>
+        
+        <table class="details-table">
+          <tr>
+            <th>Appointment ID:</th>
+            <td>${appt.appointment_id}</td>
+          </tr>
+          <tr>
+            <th>Patient Name:</th>
+            <td>${appt.patient_name}</td>
+          </tr>
+          <tr>
+            <th>Registered Email:</th>
+            <td>${appt.email}</td>
+          </tr>
+          <tr>
+            <th>Contact Phone:</th>
+            <td>${appt.phone}</td>
+          </tr>
+          <tr>
+            <th>Specialist Doctor:</th>
+            <td>${appt.doctor_name}</td>
+          </tr>
+          <tr>
+            <th>Care Department:</th>
+            <td>${appt.service}</td>
+          </tr>
+          <tr>
+            <th>Scheduled Date:</th>
+            <td>${appt.appointment_date}</td>
+          </tr>
+          <tr>
+            <th>Session Block:</th>
+            <td>${appt.session} Session</td>
+          </tr>
+        </table>
+        
+        <div class="guidelines">
+          <strong>Important Guidelines for Your Visit</strong>
+          • Virtual Consultation: If scheduled for Telehealth, check your email for a direct secure session link.<br>
+          • Arrival & Intake Triage: Please check in with front-desk reception 10 mins prior to your scheduled time block.<br>
+          • Ticket Verification: You may show this PDF file directly on your smartphone screen to check in.<br>
+          • Rescheduling: Can be managed up to 24 hours prior to appointment time via the MedTrust Patient portal.
+        </div>
+        
+        <div class="footer">
+          <strong>MEDTRUST HEALTHCARE SYSTEM</strong><br>
+          Care You Can Believe In  |  www.medtrust.com<br>
+          420 Pavilion Ave, Suite 100, New York, NY 10001
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+  
+  const htmlOutput = HtmlService.createHtmlOutput(html);
+  const pdfBlob = htmlOutput.getAs('application/pdf');
+  pdfBlob.setName("MEDTRUST_Receipt_" + appt.patient_name.replace(/\s+/g, "_") + ".pdf");
+  return pdfBlob;
+}
+
+/**
+ * Calculates approximate arrival time based on sequential token.
+ * 
+ * @param {string} sessionStr Session code (AM or PM)
+ * @param {number} token Assigned token sequence number
+ * @return {string} Formatted local time string
+ */
+function calculateApproxTime(sessionStr, token) {
+  const isAM = sessionStr.toUpperCase().includes("AM");
+  const startHour = isAM ? 10 : 3;
+  const startMinute = 0;
+
+  const totalMinutes = (token - 1) * 15;
+  const finalHour24 = startHour + Math.floor(totalMinutes / 60);
+  const finalMinute = startMinute + (totalMinutes % 60);
+
+  const amPm = isAM ? "AM" : "PM";
+  const displayHour = finalHour24 > 12 ? finalHour24 - 12 : finalHour24;
+  const formattedMinute = finalMinute === 0 ? "00" : finalMinute;
+  return `${displayHour}:${formattedMinute} ${amPm}`;
 }
