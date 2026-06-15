@@ -2681,3 +2681,340 @@ textarea.form-input {
     gap: 20px !important;
   }
 }
+
+/* ========================================================================
+   8. PREMIUM WHATSAPP FLOATING WIDGET
+   ======================================================================== */
+.whatsapp-widget-container {
+  position: fixed;
+  bottom: 100px; /* Sits perfectly above the Chatbase chatbot icon */
+  right: 24px;
+  z-index: 9999;
+  font-family: var(--font-sans);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+/* Float Toggle Button */
+.whatsapp-toggle-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  background-color: #25D366;
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color var(--transition-fast), box-shadow var(--transition-fast);
+  outline: none;
+  border: none;
+}
+
+.whatsapp-toggle-btn:hover {
+  transform: scale(1.08);
+  background-color: #20BA5A;
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+}
+
+.whatsapp-toggle-btn svg {
+  width: 28px;
+  height: 28px;
+  transition: transform 0.3s ease;
+}
+
+.whatsapp-toggle-btn.open svg {
+  transform: scale(0.85);
+}
+
+/* Pulse Glow Rings around Button */
+.whatsapp-toggle-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-full);
+  border: 1px solid #25D366;
+  animation: wa-pulse 2s infinite;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+@keyframes wa-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Badge count / indicator dot */
+.whatsapp-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  background-color: #EF4444;
+  color: var(--color-white);
+  font-size: 0.7rem;
+  font-weight: 700;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--color-white);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  animation: wa-bounce 1s infinite alternate;
+}
+
+@keyframes wa-bounce {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-4px); }
+}
+
+/* Chat Box popup panel */
+.whatsapp-chat-box {
+  position: absolute;
+  bottom: 72px;
+  right: 0;
+  width: 320px;
+  background-color: var(--color-white);
+  border-radius: var(--radius-md);
+  box-shadow: 0 12px 36px rgba(15, 23, 42, 0.15);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(20px) scale(0.9);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  z-index: 9998;
+}
+
+.whatsapp-chat-box.active {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Header styling */
+.whatsapp-chat-header {
+  background-color: #075E54;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--color-white);
+  position: relative;
+}
+
+.whatsapp-chat-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background-color: rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.125rem;
+  position: relative;
+  font-weight: 700;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.whatsapp-chat-avatar::after {
+  content: '';
+  position: absolute;
+  bottom: 1px;
+  right: 1px;
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  background-color: #22C55E;
+  border: 2px solid #075E54;
+}
+
+.whatsapp-chat-meta {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.whatsapp-chat-name {
+  font-weight: 700;
+  font-size: 0.9375rem;
+  line-height: 1.2;
+}
+
+.whatsapp-chat-status {
+  font-size: 0.75rem;
+  opacity: 0.85;
+}
+
+.whatsapp-chat-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  color: var(--color-white);
+  opacity: 0.8;
+  cursor: pointer;
+  transition: opacity var(--transition-fast);
+  padding: 4px;
+}
+
+.whatsapp-chat-close:hover {
+  opacity: 1;
+}
+
+/* Chat Body (WhatsApp theme) */
+.whatsapp-chat-body {
+  padding: 20px;
+  background-color: #E5DDD5;
+  background-image: radial-gradient(rgba(0,0,0,0.06) 1px, transparent 1px);
+  background-size: 16px 16px;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.whatsapp-chat-bubble {
+  background-color: var(--color-white);
+  padding: 12px 14px;
+  border-radius: 0 12px 12px 12px;
+  font-size: 0.8125rem;
+  color: var(--color-text-primary);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  max-width: 85%;
+  line-height: 1.4;
+  position: relative;
+  text-align: left;
+}
+
+.whatsapp-chat-bubble::before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 0;
+  border-width: 0 8px 8px 0;
+  border-style: solid;
+  border-color: transparent var(--color-white) transparent transparent;
+}
+
+.whatsapp-chat-time {
+  display: block;
+  font-size: 0.65rem;
+  color: var(--color-text-light);
+  text-align: right;
+  margin-top: 4px;
+}
+
+/* CTA Footer area */
+.whatsapp-chat-footer {
+  padding: 16px;
+  background-color: var(--color-white);
+  display: flex;
+  justify-content: center;
+}
+
+.whatsapp-cta-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #25D366;
+  color: var(--color-white);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 700;
+  padding: 12px 24px;
+  border-radius: var(--radius-full);
+  width: 100%;
+  box-shadow: 0 2px 8px rgba(37, 211, 102, 0.2);
+  transition: background-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.whatsapp-cta-btn:hover {
+  background-color: #20BA5A;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35);
+  color: var(--color-white);
+}
+
+.whatsapp-cta-btn svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--color-white);
+}
+
+/* Timed / Hover Tooltip Bubble */
+.whatsapp-tooltip {
+  position: absolute;
+  right: 70px;
+  bottom: 12px;
+  background-color: var(--color-white);
+  color: var(--color-text-primary);
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  border: 1px solid rgba(15, 23, 42, 0.04);
+}
+
+.whatsapp-tooltip::after {
+  content: '';
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  width: 10px;
+  height: 10px;
+  background-color: var(--color-white);
+  border-right: 1px solid rgba(15, 23, 42, 0.04);
+  border-top: 1px solid rgba(15, 23, 42, 0.04);
+}
+
+.whatsapp-widget-container:hover .whatsapp-tooltip {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Hide tooltip when chat box is active */
+.whatsapp-widget-container.active .whatsapp-tooltip {
+  opacity: 0 !important;
+  transform: translateX(10px) !important;
+}
+
+/* Responsive adjustment */
+@media (max-width: 480px) {
+  .whatsapp-widget-container {
+    right: 16px;
+    bottom: 84px;
+  }
+  
+  .whatsapp-chat-box {
+    width: calc(100vw - 32px);
+    right: 0;
+  }
+  
+  .whatsapp-tooltip {
+    display: none; /* Hide hover tooltip on mobile devices */
+  }
+}
