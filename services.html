@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our Services - MEDTRUST Healthcare Services</title>
+  <title>Our Services - NMC Pathiripala Healthcare Services</title>
   <!-- SEO Meta Tags -->
   <meta name="description" content="Browse MEDTRUST's comprehensive healthcare catalog. Access expert partner counseling, general medicine, pediatric diagnostics, and cardiology.">
   <!-- Stylesheets -->
@@ -17,18 +20,16 @@
   <header class="site-header" id="mainHeader">
     <div class="container header-container">
       <a href="index.html" class="brand-logo" id="headerLogo">
-        <svg viewBox="0 0 24 24">
-          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-        </svg>
-        <span>MEDTRUST</span>
+        <img src="assets/images/logo.svg" alt="NMC Pathiripala Logo" class="logo-img">
+        <span class="logo-text"><span class="logo-text-short">NMC</span> <span class="logo-text-long">Pathiripala</span></span>
       </a>
       <nav class="nav-container">
         <ul class="nav-menu">
           <li><a href="index.html" class="nav-link">Home</a></li>
           <li><a href="about.html" class="nav-link">About Us</a></li>
           <li><a href="services.html" class="nav-link active">Services</a></li>
-          <li><a href="patients.html" class="nav-link">Patients</a></li>
-          <li><a href="ai.html" class="nav-link">MEDTRUST Ai</a></li>
+          <li><a href="appointment.html" class="nav-link">Appointment</a></li>
+          <li><a href="facilities.html" class="nav-link">Facilities</a></li>
         </ul>
       </nav>
       <div class="header-actions">
@@ -44,7 +45,7 @@
             <circle cx="12" cy="7" r="4"></circle>
           </svg>
         </button>
-        <a href="patients.html#bookingSection" class="btn btn-dark btn-sans" id="headerBookBtn">Book Now</a>
+        <a href="appointment.html#bookingSection" class="btn btn-dark btn-sans" id="headerBookBtn">Book Now</a>
         <button class="mobile-nav-toggle" id="mobileNavToggler" aria-label="Toggle navigation menu">
           <span></span>
           <span></span>
@@ -60,11 +61,11 @@
       <li><a href="index.html" class="mobile-nav-link">Home</a></li>
       <li><a href="about.html" class="mobile-nav-link">About Us</a></li>
       <li><a href="services.html" class="mobile-nav-link active">Services</a></li>
-      <li><a href="patients.html" class="mobile-nav-link">Patients</a></li>
-      <li><a href="ai.html" class="mobile-nav-link">MEDTRUST Ai</a></li>
+      <li><a href="appointment.html" class="mobile-nav-link">Appointment</a></li>
+      <li><a href="facilities.html" class="mobile-nav-link">Facilities</a></li>
     </ul>
     <div class="mobile-nav-footer">
-      <a href="patients.html#bookingSection" class="btn btn-dark btn-sans">Book Appointment</a>
+      <a href="appointment.html#bookingSection" class="btn btn-dark btn-sans">Book Appointment</a>
     </div>
   </aside>
 
@@ -74,29 +75,20 @@
   <main>
     <section class="services-hero" id="servicesHero">
       <div class="container">
-        <h1 class="about-hero-title">Expert Medical &<br><span>Counseling Services</span></h1>
+        <h1 class="about-hero-title">Clinical Diagnostics &amp;<br><span>Health Packages</span></h1>
         <p class="about-hero-desc">
-          Browse through our full directory of certified medical practices. Search by name or toggle between categories to filter your requirements.
+          Explore our specialized clinical diagnostic services and healthcare packages at NMC Pathiripala. Toggle between categories below to view our lipid, thyroid, organ function, and routine blood/urine test profiles.
         </p>
 
         <!-- Filters Wrapper -->
-        <div class="services-filter-container">
-          <!-- Search input bar -->
-          <div class="search-bar-wrapper">
-            <svg viewBox="0 0 24 24">
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-            <input type="text" placeholder="Search therapies, diagnostics, general practitioners..." class="search-input" aria-label="Search care services">
-          </div>
-
+        <div class="services-filter-container" style="margin-top: 30px;">
           <!-- Category Toggles -->
           <div class="filter-tabs-wrapper">
-            <button class="filter-tab active" data-filter="all">All Specialties</button>
-            <button class="filter-tab" data-filter="counseling">Counseling & Therapy</button>
-            <button class="filter-tab" data-filter="cardiology">Cardiology</button>
-            <button class="filter-tab" data-filter="pediatrics">Pediatrics</button>
-            <button class="filter-tab" data-filter="general">General Medicine</button>
+            <button class="filter-tab active" data-filter="all">All Packages</button>
+            <button class="filter-tab" data-filter="cardiac">Cardiac &amp; Electrolytes</button>
+            <button class="filter-tab" data-filter="metabolic">Metabolic &amp; Thyroid</button>
+            <button class="filter-tab" data-filter="routine">Routine Diagnostics</button>
+            <button class="filter-tab" data-filter="organ">Organ Function</button>
           </div>
         </div>
       </div>
@@ -107,238 +99,342 @@
          ========================================== -->
     <section class="services-section" id="servicesDirectory">
       <div class="container">
-        <div class="services-grid-list">
+                <div class="services-grid-list">
           
-          <!-- Card 1: Partner Counseling -->
-          <article class="service-item-card accent-counseling" data-category="counseling" id="servCard1">
+          <!-- Card 1: Lipid Profile -->
+          <article class="service-item-card accent-cardiac" data-category="cardiac" id="servCard1">
             <div class="service-item-top">
               <div class="service-header-row">
-                <span class="service-item-category badge-counseling">Counseling & Therapy</span>
+                <span class="service-item-category badge-cardiac">Cardiac &amp; Electrolytes</span>
                 <div class="service-icon-box">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
                   </svg>
                 </div>
               </div>
-              <h3 class="service-item-name">Partner Counseling</h3>
+              <h3 class="service-item-name">Lipid Profile</h3>
               <p class="service-item-description">
-                Improve emotional alignment, cultivate active listening, and overcome interpersonal blocks with professional counseling.
+                Monitor your cholesterol levels and assess your risk of heart disease with our comprehensive Lipid Profile.
               </p>
+              <h4 style="font-size:0.75rem; font-weight:700; text-transform:uppercase; margin: 12px 0 6px; letter-spacing:0.02em; color:var(--color-text-primary);">Package Includes:</h4>
               <ul class="service-features">
-                <li><span>✓</span> Video &amp; In-Clinic Sessions</li>
-                <li><span>✓</span> Structured Dialog Matrix</li>
+                <li><span>✓</span> Total Cholesterol</li>
+                <li><span>✓</span> Triglycerides (TG)</li>
+                <li><span>✓</span> HDL (Good Cholesterol)</li>
+                <li><span>✓</span> LDL (Bad Cholesterol)</li>
+                <li><span>✓</span> VLDL (Very Low-Density)</li>
               </ul>
             </div>
             <div class="service-item-meta">
-              <span class="service-item-price">$120 <small>/ hr</small></span>
-              <a href="patients.html#bookingSection" class="service-item-book-btn">Book Now ➔</a>
+              <span class="service-item-price">₹299 <small style="text-decoration: line-through; opacity: 0.6; font-size: 0.85em;">₹350</small></span>
+              <a href="appointment.html#bookingSection" class="service-item-book-btn">Book Now ➔</a>
             </div>
           </article>
 
-          <!-- Card 2: Emotion Therapy -->
-          <article class="service-item-card accent-counseling" data-category="counseling" id="servCard2">
+          <!-- Card 2: Troponin-I Test -->
+          <article class="service-item-card accent-cardiac" data-category="cardiac" id="servCard2">
             <div class="service-item-top">
               <div class="service-header-row">
-                <span class="service-item-category badge-counseling">Counseling & Therapy</span>
+                <span class="service-item-category badge-cardiac">Cardiac &amp; Electrolytes</span>
                 <div class="service-icon-box">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/>
+                    <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
                   </svg>
                 </div>
               </div>
-              <h3 class="service-item-name">Emotion Therapy</h3>
+              <h3 class="service-item-name">Troponin-I Test</h3>
               <p class="service-item-description">
-                Support yourself with specialized emotional frameworks that reduce anxiety, manage chronic fatigue, and build stress tolerance.
+                A cardiac biomarker test used to help diagnose heart muscle injury and detect heart attacks at an early stage.
               </p>
+              <h4 style="font-size:0.75rem; font-weight:700; text-transform:uppercase; margin: 12px 0 6px; letter-spacing:0.02em; color:var(--color-text-primary);">Package Includes:</h4>
               <ul class="service-features">
-                <li><span>✓</span> Stress &amp; Anxiety Reduction</li>
-                <li><span>✓</span> Mindful Action Protocols</li>
+                <li><span>✓</span> Troponin-I Test</li>
               </ul>
             </div>
             <div class="service-item-meta">
-              <span class="service-item-price">$100 <small>/ hr</small></span>
-              <a href="patients.html#bookingSection" class="service-item-book-btn">Book Now ➔</a>
+              <span class="service-item-price">₹299 <small style="text-decoration: line-through; opacity: 0.6; font-size: 0.85em;">₹450</small></span>
+              <a href="appointment.html#bookingSection" class="service-item-book-btn">Book Now ➔</a>
             </div>
           </article>
 
-          <!-- Card 3: Youth Counseling -->
-          <article class="service-item-card accent-counseling" data-category="counseling" id="servCard3">
+          <!-- Card 3: Thyroid Profile -->
+          <article class="service-item-card accent-metabolic" data-category="metabolic" id="servCard3">
             <div class="service-item-top">
               <div class="service-header-row">
-                <span class="service-item-category badge-counseling">Counseling & Therapy</span>
-                <div class="service-icon-box">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                  </svg>
-                </div>
-              </div>
-              <h3 class="service-item-name">Youth Counseling</h3>
-              <p class="service-item-description">
-                Empower children and young adolescents navigating scholastic pressure, identity evolution, and screen habituation.
-              </p>
-              <ul class="service-features">
-                <li><span>✓</span> Academic Stress Triage</li>
-                <li><span>✓</span> Safe Expressions Space</li>
-              </ul>
-            </div>
-            <div class="service-item-meta">
-              <span class="service-item-price">$90 <small>/ hr</small></span>
-              <a href="patients.html#bookingSection" class="service-item-book-btn">Book Now ➔</a>
-            </div>
-          </article>
-
-          <!-- Card 4: Cardiology Check -->
-          <article class="service-item-card accent-cardiology" data-category="cardiology" id="servCard4">
-            <div class="service-item-top">
-              <div class="service-header-row">
-                <span class="service-item-category badge-cardiology">Cardiology</span>
+                <span class="service-item-category badge-metabolic">Metabolic &amp; Thyroid</span>
                 <div class="service-icon-box">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
                   </svg>
                 </div>
               </div>
-              <h3 class="service-item-name">Electrocardiogram (ECG)</h3>
+              <h3 class="service-item-name">Thyroid Profile</h3>
               <p class="service-item-description">
-                Diagnostic cardiac tracing and physical evaluations to evaluate resting heart health rhythms and identify potential abnormalities.
+                Evaluate thyroid gland function and identify thyroid-related disorders.
               </p>
+              <h4 style="font-size:0.75rem; font-weight:700; text-transform:uppercase; margin: 12px 0 6px; letter-spacing:0.02em; color:var(--color-text-primary);">Package Includes:</h4>
               <ul class="service-features">
-                <li><span>✓</span> In-Office Rhythm Tracing</li>
-                <li><span>✓</span> Heart Health Profile Report</li>
+                <li><span>✓</span> T3 (Triiodothyronine)</li>
+                <li><span>✓</span> T4 (Thyroxine)</li>
+                <li><span>✓</span> TSH (Thyroid Stimulating Hormone)</li>
               </ul>
             </div>
             <div class="service-item-meta">
-              <span class="service-item-price">$200 <small>/ ses</small></span>
-              <a href="patients.html#bookingSection" class="service-item-book-btn">Book Now ➔</a>
+              <span class="service-item-price">₹299 <small style="text-decoration: line-through; opacity: 0.6; font-size: 0.85em;">₹350</small></span>
+              <a href="appointment.html#bookingSection" class="service-item-book-btn">Book Now ➔</a>
             </div>
           </article>
 
-          <!-- Card 5: Pediatric Check -->
-          <article class="service-item-card accent-pediatrics" data-category="pediatrics" id="servCard5">
+          <!-- Card 4: Complete Blood Count -->
+          <article class="service-item-card accent-routine" data-category="routine" id="servCard4">
             <div class="service-item-top">
               <div class="service-header-row">
-                <span class="service-item-category badge-pediatrics">Pediatrics</span>
+                <span class="service-item-category badge-routine">Routine Diagnostics</span>
                 <div class="service-icon-box">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/>
+                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
                   </svg>
                 </div>
               </div>
-              <h3 class="service-item-name">Pediatric Diagnostic</h3>
+              <h3 class="service-item-name">Complete Blood Count</h3>
               <p class="service-item-description">
-                General wellness developmental milestones checking, immunizations advice, and active infant care health triaging.
+                A comprehensive blood analysis to evaluate your overall health and detect infections, anemia, and blood disorders.
               </p>
-              <ul class="service-features">
-                <li><span>✓</span> Growth Milestone Tracking</li>
-                <li><span>✓</span> Immunization Counseling</li>
+              <h4 style="font-size:0.75rem; font-weight:700; text-transform:uppercase; margin: 12px 0 6px; letter-spacing:0.02em; color:var(--color-text-primary);">Package Includes:</h4>
+              <ul class="service-features" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px;">
+                <li><span>✓</span> Haemoglobin</li>
+                <li><span>✓</span> Total Count (TC)</li>
+                <li><span>✓</span> Differential Count</li>
+                <li><span>✓</span> PCV (Packed Cell)</li>
+                <li><span>✓</span> ESR &amp; Platelet Count</li>
+                <li><span>✓</span> MCV, MCH, MCHC</li>
+                <li><span>✓</span> RBC &amp; RDW-CV</li>
+                <li><span>✓</span> MPV (Platelet Vol)</li>
               </ul>
             </div>
             <div class="service-item-meta">
-              <span class="service-item-price">$150 <small>/ con</small></span>
-              <a href="patients.html#bookingSection" class="service-item-book-btn">Book Now ➔</a>
+              <span class="service-item-price">₹100 <small style="text-decoration: line-through; opacity: 0.6; font-size: 0.85em;">₹200</small></span>
+              <a href="appointment.html#bookingSection" class="service-item-book-btn">Book Now ➔</a>
             </div>
           </article>
 
-          <!-- Card 6: General Triage -->
-          <article class="service-item-card accent-general" data-category="general" id="servCard6">
+          <!-- Card 5: Urine Analysis -->
+          <article class="service-item-card accent-routine" data-category="routine" id="servCard5">
             <div class="service-item-top">
               <div class="service-header-row">
-                <span class="service-item-category badge-general">General Medicine</span>
+                <span class="service-item-category badge-routine">Routine Diagnostics</span>
+                <div class="service-icon-box">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                  </svg>
+                </div>
+              </div>
+              <h3 class="service-item-name">Urine Analysis</h3>
+              <p class="service-item-description">
+                A routine urine examination to evaluate kidney function, urinary tract infections, diabetes, and other metabolic conditions.
+              </p>
+              <h4 style="font-size:0.75rem; font-weight:700; text-transform:uppercase; margin: 12px 0 6px; letter-spacing:0.02em; color:var(--color-text-primary);">Analysis Includes:</h4>
+              <ul class="service-features" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px;">
+                <li><span>✓</span> Urine Albumin &amp; Sugar</li>
+                <li><span>✓</span> Bile Salt &amp; Pigment</li>
+                <li><span>✓</span> Acetone &amp; Pus Cells</li>
+                <li><span>✓</span> Epithelial &amp; RBC Cells</li>
+                <li><span>✓</span> Bacteria &amp; Casts</li>
+                <li><span>✓</span> Crystals &amp; pH</li>
+              </ul>
+            </div>
+            <div class="service-item-meta">
+              <span class="service-item-price">₹29 <small style="text-decoration: line-through; opacity: 0.6; font-size: 0.85em;">₹60</small></span>
+              <a href="appointment.html#bookingSection" class="service-item-book-btn">Book Now ➔</a>
+            </div>
+          </article>
+
+          <!-- Card 6: Diabetes Screening Package -->
+          <article class="service-item-card accent-metabolic" data-category="metabolic" id="servCard6">
+            <div class="service-item-top">
+              <div class="service-header-row">
+                <span class="service-item-category badge-metabolic">Metabolic &amp; Thyroid</span>
                 <div class="service-icon-box">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
                   </svg>
                 </div>
               </div>
-              <h3 class="service-item-name">Standard Clinical Triage</h3>
+              <h3 class="service-item-name">Diabetes Screening</h3>
               <p class="service-item-description">
-                General health assessments, flu therapy, symptom diagnoses, active prescriptions issuance and primary consultation.
+                Screen and monitor diabetes with essential blood glucose tests.
               </p>
+              <h4 style="font-size:0.75rem; font-weight:700; text-transform:uppercase; margin: 12px 0 6px; letter-spacing:0.02em; color:var(--color-text-primary);">Package Includes:</h4>
               <ul class="service-features">
-                <li><span>✓</span> Expert Intake triaging</li>
-                <li><span>✓</span> e-Prescriptions Transmitted</li>
+                <li><span>✓</span> Fasting Blood Glucose (FBS)</li>
+                <li><span>✓</span> Postprandial Blood Sugar (PPBS)</li>
+                <li><span>✓</span> HbA1c (Glycated Haemoglobin)</li>
               </ul>
             </div>
             <div class="service-item-meta">
-              <span class="service-item-price">$80 <small>/ chk</small></span>
-              <a href="patients.html#bookingSection" class="service-item-book-btn">Book Now ➔</a>
+              <span class="service-item-price">₹333 <small style="text-decoration: line-through; opacity: 0.6; font-size: 0.85em;">₹450</small></span>
+              <a href="appointment.html#bookingSection" class="service-item-book-btn">Book Now ➔</a>
             </div>
           </article>
 
-          <!-- Card 7: Chronic Care Planning -->
-          <article class="service-item-card accent-general" data-category="general" id="servCard7">
+          <!-- Card 7: Liver Function Test -->
+          <article class="service-item-card accent-organ" data-category="organ" id="servCard7">
             <div class="service-item-top">
               <div class="service-header-row">
-                <span class="service-item-category badge-general">General Medicine</span>
+                <span class="service-item-category badge-organ">Organ Function</span>
                 <div class="service-icon-box">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
                   </svg>
                 </div>
               </div>
-              <h3 class="service-item-name">Chronic Care Management</h3>
+              <h3 class="service-item-name">Liver Function Test (LFT)</h3>
               <p class="service-item-description">
-                Long-term clinical plans to control diabetes, chronic pain, arthritis, hypertension, and monitor recovery parameters.
+                Evaluate liver health and diagnose liver diseases through a comprehensive liver profile.
               </p>
-              <ul class="service-features">
-                <li><span>✓</span> Continuous Recovery Checks</li>
-                <li><span>✓</span> Tailored Treatment Plans</li>
+              <h4 style="font-size:0.75rem; font-weight:700; text-transform:uppercase; margin: 12px 0 6px; letter-spacing:0.02em; color:var(--color-text-primary);">Package Includes:</h4>
+              <ul class="service-features" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px;">
+                <li><span>✓</span> Bilirubin Total</li>
+                <li><span>✓</span> Bilirubin Direct</li>
+                <li><span>✓</span> Bilirubin Indirect</li>
+                <li><span>✓</span> SGOT (AST)</li>
+                <li><span>✓</span> SGPT (ALT)</li>
+                <li><span>✓</span> Alkaline Phosphatase</li>
+                <li><span>✓</span> Total Protein</li>
+                <li><span>✓</span> Albumin &amp; Globulin</li>
               </ul>
             </div>
             <div class="service-item-meta">
-              <span class="service-item-price">$180 <small>/ pln</small></span>
-              <a href="patients.html#bookingSection" class="service-item-book-btn">Book Now ➔</a>
+              <span class="service-item-price">₹299 <small style="text-decoration: line-through; opacity: 0.6; font-size: 0.85em;">₹475</small></span>
+              <a href="appointment.html#bookingSection" class="service-item-book-btn">Book Now ➔</a>
             </div>
           </article>
 
-          <!-- Card 8: Sports Medicine -->
-          <article class="service-item-card accent-general" data-category="general" id="servCard8">
+          <!-- Card 8: Kidney Function Test -->
+          <article class="service-item-card accent-organ" data-category="organ" id="servCard8">
             <div class="service-item-top">
               <div class="service-header-row">
-                <span class="service-item-category badge-general">General Medicine</span>
+                <span class="service-item-category badge-organ">Organ Function</span>
                 <div class="service-icon-box">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"/>
+                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
                   </svg>
                 </div>
               </div>
-              <h3 class="service-item-name">Sports Injury Physical</h3>
+              <h3 class="service-item-name">Kidney Function Test (KFT)</h3>
               <p class="service-item-description">
-                Musculoskeletal evaluations, physical endurance checkups, custom bracing prescriptions, and accelerated rehabilitation tracks.
+                Assess kidney performance and detect kidney-related disorders.
               </p>
+              <h4 style="font-size:0.75rem; font-weight:700; text-transform:uppercase; margin: 12px 0 6px; letter-spacing:0.02em; color:var(--color-text-primary);">Package Includes:</h4>
               <ul class="service-features">
-                <li><span>✓</span> Muscle &amp; Joint Assessments</li>
-                <li><span>✓</span> Accelerated Recovery Plans</li>
+                <li><span>✓</span> Blood Urea</li>
+                <li><span>✓</span> Serum Creatinine</li>
+                <li><span>✓</span> Uric Acid</li>
               </ul>
             </div>
             <div class="service-item-meta">
-              <span class="service-item-price">$130 <small>/ phy</small></span>
-              <a href="patients.html#bookingSection" class="service-item-book-btn">Book Now ➔</a>
+              <span class="service-item-price">₹149 <small style="text-decoration: line-through; opacity: 0.6; font-size: 0.85em;">₹250</small></span>
+              <a href="appointment.html#bookingSection" class="service-item-book-btn">Book Now ➔</a>
             </div>
           </article>
-          
+
+          <!-- Card 9: Serum Electrolyte Profile -->
+          <article class="service-item-card accent-cardiac" data-category="cardiac" id="servCard9">
+            <div class="service-item-top">
+              <div class="service-header-row">
+                <span class="service-item-category badge-cardiac">Cardiac &amp; Electrolytes</span>
+                <div class="service-icon-box">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+                  </svg>
+                </div>
+              </div>
+              <h3 class="service-item-name">Serum Electrolyte Profile</h3>
+              <p class="service-item-description">
+                Measure essential electrolytes to monitor hydration, kidney function, heart health, and acid-base balance.
+              </p>
+              <h4 style="font-size:0.75rem; font-weight:700; text-transform:uppercase; margin: 12px 0 6px; letter-spacing:0.02em; color:var(--color-text-primary);">Package Includes:</h4>
+              <ul class="service-features" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px;">
+                <li><span>✓</span> Sodium (Na⁺)</li>
+                <li><span>✓</span> Potassium (K⁺)</li>
+                <li><span>✓</span> Chloride (Cl⁻)</li>
+                <li><span>✓</span> Bicarbonate (HCO₃⁻)</li>
+              </ul>
+            </div>
+            <div class="service-item-meta">
+              <span class="service-item-price">₹279 <small style="text-decoration: line-through; opacity: 0.6; font-size: 0.85em;">₹350</small></span>
+              <a href="appointment.html#bookingSection" class="service-item-book-btn">Book Now ➔</a>
+            </div>
+          </article>
+
+          <!-- Card 10: Sodium & Potassium Test -->
+          <article class="service-item-card accent-cardiac" data-category="cardiac" id="servCard10">
+            <div class="service-item-top">
+              <div class="service-header-row">
+                <span class="service-item-category badge-cardiac">Cardiac &amp; Electrolytes</span>
+                <div class="service-icon-box">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+                  </svg>
+                </div>
+              </div>
+              <h3 class="service-item-name">Sodium &amp; Potassium Test</h3>
+              <p class="service-item-description">
+                A basic electrolyte test to evaluate fluid balance, nerve function, muscle function, and kidney health.
+              </p>
+              <h4 style="font-size:0.75rem; font-weight:700; text-transform:uppercase; margin: 12px 0 6px; letter-spacing:0.02em; color:var(--color-text-primary);">Package Includes:</h4>
+              <ul class="service-features">
+                <li><span>✓</span> Sodium (Na⁺)</li>
+                <li><span>✓</span> Potassium (K⁺)</li>
+              </ul>
+            </div>
+            <div class="service-item-meta">
+              <span class="service-item-price">₹199 <small style="text-decoration: line-through; opacity: 0.6; font-size: 0.85em;">₹250</small></span>
+              <a href="appointment.html#bookingSection" class="service-item-book-btn">Book Now ➔</a>
+            </div>
+          </article>
+
+        </div>
+    </section>
+
+    <!-- ==========================================
+         GOOGLE MAP INTEGRATION SECTION
+         ========================================== -->
+    <section class="map-section" id="googleMapSection" style="padding-bottom: 80px;">
+      <div class="container">
+        <h2 class="section-subtitle-center" style="margin-bottom: 24px; font-size: 2rem;">Our Facility Location</h2>
+        <div style="border-radius: var(--radius-xl); overflow: hidden; box-shadow: 0 15px 35px rgba(17, 24, 39, 0.08); border: 1px solid rgba(17, 24, 39, 0.08);">
+          <iframe
+            src="https://maps.google.com/maps?q=NMC%20Hospital%20Pathiripala,%20Palakkad,%20Kerala&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            width="100%"
+            height="450"
+            style="border:0; display: block;"
+            allowfullscreen=""
+            loading="lazy">
+          </iframe>
         </div>
       </div>
     </section>
 
     <!-- ==========================================
-         CALL TO ACTION SECTION
+         REACH OUT CALL TO ACTION (FOOTER CTA)
          ========================================== -->
-    <section class="footer-cta-container" style="padding-top: 20px;">
+    <section class="footer-cta-container" id="ctaSection">
       <div class="container">
         <div class="cta-banner">
           <div class="cta-content">
-            <h2 class="cta-title">Need specialized clinical <br><span>advice or customized plans?</span></h2>
-            <p class="cta-desc">
-              Get in touch with our triage team. We are available to set up specific diagnostic routines or assign emergency clinicians.
+            <h2 class="cta-title" id="ctaTitle">Reach out for expert <br><span>care and support today</span></h2>
+            <p class="cta-desc" id="ctaDesc">
+              Our clinical dispatch assistants are ready to triage your request and match you with the exact specialist
+              you need.
             </p>
             <div class="cta-buttons">
-              <a href="about.html#contactSection" class="btn btn-dark btn-sans">Send Care Inquiry</a>
-              <a href="patients.html#faqsSection" class="btn-text btn-sans">Read Service FAQs</a>
+              <a href="about.html#contactSection" class="btn btn-dark btn-sans" id="ctaContactBtn">Contact Us Today</a>
+              <a href="services.html" class="btn-text btn-sans" id="ctaReadBtn">Our Packages</a>
             </div>
           </div>
           <div class="cta-image-wrapper">
-            <img src="assets/images/support_agent.png" alt="Clinical operator support">
+            <img src="assets/images/department_bento/pediatrics.png" alt="Helpful client support agent" id="ctaImg">
           </div>
         </div>
       </div>
@@ -352,10 +448,8 @@
     <div class="container footer-grid">
       <div class="footer-info">
         <a href="index.html" class="brand-logo">
-          <svg viewBox="0 0 24 24">
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-          </svg>
-          <span>MEDTRUST</span>
+          <img src="assets/images/logo.svg" alt="NMC Pathiripala Logo" class="logo-img">
+          <span class="logo-text"><span class="logo-text-short">NMC</span> <span class="logo-text-long">Pathiripala</span></span>
         </a>
         <p class="footer-desc">
           Providing high-touch medical care and psychological consultations to maximize your daily well-being.
@@ -365,16 +459,15 @@
         <h4 class="footer-title">About Us</h4>
         <ul class="footer-links">
           <li><a href="about.html" class="footer-link">Our Story</a></li>
-          <li><a href="about.html#timelineSection" class="footer-link">Timeline</a></li>
           <li><a href="about.html#doctorsSection" class="footer-link">Our Doctors</a></li>
-          <li><a href="patients.html#faqsSection" class="footer-link">FAQs</a></li>
+          <li><a href="appointment.html#faqsSection" class="footer-link">FAQs</a></li>
         </ul>
       </div>
       <div>
         <h4 class="footer-title">Support</h4>
         <ul class="footer-links">
           <li><a href="about.html#contactSection" class="footer-link">Help Desk</a></li>
-          <li><a href="patients.html" class="footer-link">Portal Care</a></li>
+          <li><a href="appointment.html" class="footer-link">Portal Care</a></li>
           <li><a href="services.html" class="footer-link">Therapies</a></li>
           <li><a href="about.html#contactSection" class="footer-link">Contact</a></li>
         </ul>
@@ -384,11 +477,11 @@
         <div class="footer-contact-info">
           <div class="contact-item">
             <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-            <span>420 Pavilion Ave, Suite 100, New York, NY 10001</span>
+            <span>Pathiripala Kongad Rd, Madhavi Nagar, Palakkad, Kerala 678642</span>
           </div>
           <div class="contact-item">
             <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.15 15.15 0 0 0 6.5 6.5l2.2-2.2c.27-.27.67-.36 1.01-.24 1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-            <span>(800) 555-0199</span>
+            <span>0491 287 4700</span>
           </div>
         </div>
         <form class="signup-form" id="newsletterForm">
@@ -404,7 +497,7 @@
       </div>
     </div>
     <div class="container footer-bottom">
-      <p>&copy; 2026 MEDTRUST Healthcare Inc. All rights reserved.</p>
+      <p>&copy; 2026 NMC Pathiripala. All rights reserved.</p>
       <div class="footer-bottom-links">
         <a href="#">Privacy Policy</a>
         <a href="#">Terms of Service</a>

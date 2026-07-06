@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MEDTRUST - We Care for Your Health Every Day</title>
+  <title>NMC Pathiripala - We Care for Your Health Every Day</title>
   <!-- SEO Meta Tags -->
-  <meta name="description" content="Access premium healthcare advice, personalized counseling, and 24/7 telehealth consultations at MEDTRUST. Dedicated to your family's daily well-being.">
-  <meta name="keywords" content="healthcare, medical counseling, online doctor consultation, partner therapy, pediatric care">
+  <meta name="description"
+    content="Access premium healthcare advice, personalized counseling, and 24/7 telehealth consultations at NMC Pathiripala. Dedicated to your family's daily well-being.">
+  <meta name="keywords"
+    content="healthcare, medical counseling, online doctor consultation, partner therapy, pediatric care">
+  <!-- Preload Initial Hero Scroll Frame -->
+  <link rel="preload" as="image" href="assets/images/her2/ezgif-frame-001.jpg" fetchpriority="high">
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/style.css?v=2.0">
 </head>
-<body>
 
+<body class="home-page">
   <!-- ==========================================
        SITE HEADER
        ========================================== -->
@@ -19,10 +27,9 @@
     <div class="container header-container">
       <!-- Logo -->
       <a href="index.html" class="brand-logo" id="headerLogo">
-        <svg viewBox="0 0 24 24">
-          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-        </svg>
-        <span>MEDTRUST</span>
+        <img src="assets/images/logo.svg" alt="NMC Pathiripala Logo" class="logo-img">
+        <span class="logo-text"><span class="logo-text-short">NMC</span> <span
+            class="logo-text-long">Pathiripala</span></span>
       </a>
 
       <!-- Desktop Nav Menu -->
@@ -31,8 +38,8 @@
           <li><a href="index.html" class="nav-link active">Home</a></li>
           <li><a href="about.html" class="nav-link">About Us</a></li>
           <li><a href="services.html" class="nav-link">Services</a></li>
-          <li><a href="patients.html" class="nav-link">Patients</a></li>
-          <li><a href="ai.html" class="nav-link">MEDTRUST Ai</a></li>
+          <li><a href="appointment.html" class="nav-link">Appointment</a></li>
+          <li><a href="facilities.html" class="nav-link">Facilities</a></li>
         </ul>
       </nav>
 
@@ -40,21 +47,23 @@
       <div class="header-actions">
         <!-- Search Icon -->
         <button class="action-btn" id="searchActionBtn" data-open-modal="searchModal" aria-label="Search site">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
         </button>
         <!-- Profile Icon -->
         <button class="action-btn" id="profileActionBtn" data-open-modal="loginModal" aria-label="User Account">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
             <circle cx="12" cy="7" r="4"></circle>
           </svg>
         </button>
         <!-- CTA button -->
-        <a href="patients.html#bookingSection" class="btn btn-dark btn-sans" id="headerBookBtn">Book Now</a>
-        
+        <a href="appointment.html#bookingSection" class="btn btn-dark btn-sans" id="headerBookBtn">Book Now</a>
+
         <!-- Hamburger Menu Toggle (Mobile) -->
         <button class="mobile-nav-toggle" id="mobileNavToggler" aria-label="Toggle navigation menu">
           <span></span>
@@ -71,11 +80,11 @@
       <li><a href="index.html" class="mobile-nav-link active">Home</a></li>
       <li><a href="about.html" class="mobile-nav-link">About Us</a></li>
       <li><a href="services.html" class="mobile-nav-link">Services</a></li>
-      <li><a href="patients.html" class="mobile-nav-link">Patients</a></li>
-      <li><a href="ai.html" class="mobile-nav-link">MEDTRUST Ai</a></li>
+      <li><a href="appointment.html" class="mobile-nav-link">Appointment</a></li>
+      <li><a href="facilities.html" class="mobile-nav-link">Facilities</a></li>
     </ul>
     <div class="mobile-nav-footer">
-      <a href="patients.html#bookingSection" class="btn btn-dark btn-sans">Book Appointment</a>
+      <a href="appointment.html#bookingSection" class="btn btn-dark btn-sans">Book Appointment</a>
     </div>
   </aside>
 
@@ -83,223 +92,375 @@
        HERO SECTION
        ========================================== -->
   <main>
-    <section class="hero-section" id="hero">
-      <div class="container hero-grid">
-        <!-- Hero Text -->
-        <div class="hero-content">
-          <h1 class="hero-title" id="heroTitle">We care for Your <br><span>health every day</span></h1>
-          <p class="hero-description" id="heroDesc">
-            Access medical support that covers your family's needs. Talk to expert online doctors and certified psychologists from the comfort of your home.
+    <section class="hero-scroll-animation-section" id="heroScrollSection">
+      <div class="sticky-wrapper">
+        <canvas id="heroCanvas"></canvas>
+        <div class="canvas-overlay"></div>
+
+        <!-- Floating Casualty Badge (Covers watermarked spark in background frames) -->
+        <div class="hero-triage-badge"
+          style="position: absolute; bottom: 40px; right: 40px; background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.6); padding: 14px 20px; border-radius: var(--radius-md); box-shadow: 0 12px 35px rgba(11, 27, 61, 0.1); display: flex; align-items: center; gap: 12px; z-index: 10; border-left: 4px solid #10B981; transition: transform 0.2s ease;"
+          onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
+          <div style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: rgba(16, 185, 129, 0.1); border-radius: 50%;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+          </div>
+          <div>
+            <span style="display: block; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-light); line-height: 1.2;">Casualty Support 24/7</span>
+            <span style="display: block; font-size: 0.95rem; font-weight: 800; color: var(--color-text-primary); font-family: var(--font-sans); margin-top: 2px;">0491 287 4700</span>
+          </div>
+        </div>
+
+        <div class="container hero-overlay-container">
+          <!-- Narrative Step 1 -->
+          <div class="scroll-text-step" id="scrollStep1">
+            <h1 class="hero-scroll-title" id="scrollStep1Title">Empowering Lives<br>Through Health</h1>
+            <p class="hero-scroll-desc" id="scrollStep1Desc">
+              Welcome to NMC Pathiripala, where we provide advanced healthcare, diagnostic excellence, and comprehensive
+              medical treatments to prioritize your daily well-being.
+            </p>
+            <div class="hero-scroll-actions">
+              <a href="appointment.html#bookingSection" class="btn btn-dark btn-sans" id="scrollStep1BookBtn">Book
+                Appointment</a>
+              <a href="about.html#doctorsSection" class="btn btn-outline btn-sans" id="scrollStep1DocBtn">Specialist
+                Doctors</a>
+            </div>
+          </div>
+
+          <!-- Narrative Step 2 -->
+          <div class="scroll-text-step" id="scrollStep2">
+            <h2 class="hero-scroll-subtitle" id="scrollStep2Title">Advanced Healthcare & Diagnostics</h2>
+            <p class="hero-scroll-desc" id="scrollStep2Desc">
+              Equipped with a 24/7 casualty, specialized clinical departments, and modern imaging centers, we coordinate
+              complete medical solutions with empathy and precision.
+            </p>
+            <div class="hero-scroll-actions">
+              <a href="services.html" class="btn btn-dark btn-sans" id="scrollStep2ServicesBtn">Our Specialties</a>
+              <a href="about.html" class="btn btn-outline btn-sans" id="scrollStep2AboutBtn">About NMC Pathiripala</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         WELCOME TO NMC PATHIRIPALA SECTION
+         ========================================== -->
+    <section class="welcome-section section-padding" id="welcomeSection">
+      <div class="container welcome-container">
+        <!-- Left Side: Image with decorative elements -->
+        <div class="welcome-image-wrapper reveal-element reveal-left">
+          <div class="welcome-image-slideshow" id="welcomeSlideshow">
+            <img src="assets/images/hospital 2/Front Intrance.jpg" alt="NMC Pathiripala Front Entrance"
+              class="welcome-slide-img" id="welcomeImg1">
+            <img src="assets/images/hospital 2/NMCHospital.png" alt="NMC Pathiripala Hospital Building"
+              class="welcome-slide-img" id="welcomeImg2">
+            <img src="assets/images/hospital 2/Reception.png" alt="NMC Pathiripala Reception Area"
+              class="welcome-slide-img" id="welcomeImg3">
+            <img src="assets/images/hospital 2/Corridoor1.png" alt="NMC Pathiripala Interior Corridor"
+              class="welcome-slide-img" id="welcomeImg4">
+          </div>
+          <!-- Floating Badge -->
+          <div class="welcome-badge" id="welcomeBadge">
+            <span class="badge-number">24/7</span>
+            <span class="badge-text">Emergency Care Available</span>
+          </div>
+        </div>
+
+        <!-- Right Side: Content -->
+        <div class="welcome-content" id="welcomeContent">
+          <h2 class="welcome-title reveal-element reveal-delay-1" id="welcomeTitle">Welcome to NMC Pathiripala</h2>
+          <p class="welcome-text reveal-element reveal-delay-2" id="welcomeText1">
+            NMC Pathiripala stands as a beacon of advanced healthcare and clinical excellence, serving our community
+            with dedication and professional expertise. We merge patient-centered clinical care with modern diagnostic
+            solutions to ensure you and your loved ones receive the highest quality treatment.
           </p>
-          <div class="hero-actions">
-            <a href="patients.html#bookingSection" class="btn btn-dark btn-sans" id="heroBookBtn">Book an Appointment</a>
-            <a href="about.html" class="btn btn-outline btn-sans" id="heroAboutBtn">Watch Video</a>
-          </div>
-          <!-- Statistics Row -->
-          <div class="hero-stats">
-            <div class="stat-item" id="statUsers">
-              <span class="stat-number">
-                <span class="stat-number-value" data-target="2140">0</span>+
-                <span class="stat-avatars">
-                  <img src="assets/images/support_agent.png" class="stat-avatar" alt="User 1">
-                  <img src="assets/images/patient_molecular.png" class="stat-avatar" alt="User 2">
-                  <img src="assets/images/hero_doctors.png" class="stat-avatar" alt="User 3">
-                </span>
-              </span>
-              <span class="stat-label">Active patients using our directory daily.</span>
-            </div>
-            <div class="stat-item" id="statDoctors">
-              <span class="stat-number">
-                <span class="stat-number-value" data-target="800">0</span>+
-              </span>
-              <span class="stat-label">Certified clinicians on active call.</span>
-            </div>
-          </div>
-        </div>
 
-        <!-- Hero Photo & Badge -->
-        <div class="hero-visual">
-          <div class="hero-image-wrapper">
-            <img src="assets/images/hero_doctors.png" alt="Friendly smiling doctors at MEDTRUST" id="heroImg">
-          </div>
-          <!-- Floating badge element -->
-          <div class="hero-floating-badge" id="heroFloatingBadge">
-            <span>Before <br>Service</span>
-            <div class="badge-arrow-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
+          <div class="welcome-features" id="welcomeFeatures">
+            <div class="feature-item reveal-element reveal-delay-3" id="welcomeFeature1">
+              <div class="feature-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+              </div>
+              <div class="feature-content">
+                <h4>Expert Medical Specialists</h4>
+                <p>Consult with highly qualified, certified clinical leaders and dedicated care teams.</p>
+              </div>
             </div>
+            <div class="feature-item reveal-element reveal-delay-4" id="welcomeFeature2">
+              <div class="feature-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                </svg>
+              </div>
+              <div class="feature-content">
+                <h4>24/7 Emergency & Casualty</h4>
+                <p>Equipped with state-of-the-art trauma suites and active ambulance response teams.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="welcome-actions reveal-element reveal-delay-5" id="welcomeActions">
+            <a href="about.html" class="btn btn-dark btn-sans" id="welcomeAboutBtn">Learn More About Us</a>
+            <a href="services.html" class="btn btn-outline btn-sans" id="welcomeServicesBtn">Our Specialties</a>
           </div>
         </div>
       </div>
     </section>
-
     <!-- ==========================================
-         UNDER-HERO CARD LAYOUT GRID
+         OUR SPECIALITIES & DEPARTMENTS
          ========================================== -->
-    <section class="under-hero-cards" id="quickFeatures">
-      <div class="container grid-4col">
-        <!-- Card 1 (Mint Background) -->
-        <div class="feature-card highlight-mint" id="featCard1">
-          <div class="feature-card-image-wrapper">
-            <img src="assets/images/indian_family_health.png" alt="Comprehensive care for Indian families">
-            <div class="feature-card-content">
-              <div class="feature-card-header">
-                <div class="feature-icon-wrapper">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
-                  </svg>
-                </div>
-                <a href="services.html" class="feature-card-btn" aria-label="Go to service">↗</a>
-              </div>
-              <h3 class="feature-card-title">Comprehensive care for humans & families</h3>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="feature-card" id="featCard2">
-          <div class="feature-card-image-wrapper">
-            <img src="assets/images/indian_pediatric_care.png" alt="Pediatric care and child development">
-            <div class="feature-card-content">
-              <div class="feature-card-header">
-                <div class="feature-icon-wrapper">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <path d="M12 8v8M8 12h8"/>
-                  </svg>
-                </div>
-                <a href="services.html" class="feature-card-btn" aria-label="Go to service">↗</a>
-              </div>
-              <h3 class="feature-card-title">Pediatric care & child development</h3>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="feature-card highlight-yellow" id="featCard3">
-          <div class="feature-card-image-wrapper">
-            <img src="assets/images/indian_cardiologist.png" alt="Cardiology and heart diagnosis">
-            <div class="feature-card-content">
-              <div class="feature-card-header">
-                <div class="feature-icon-wrapper">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
-                  </svg>
-                </div>
-                <a href="services.html" class="feature-card-btn" aria-label="Go to service">↗</a>
-              </div>
-              <h3 class="feature-card-title">Cardiology & heart diagnosis</h3>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 4 -->
-        <div class="feature-card" id="featCard4">
-          <div class="feature-card-image-wrapper">
-            <img src="assets/images/indian_support_team.png" alt="Experienced clinical support team">
-            <div class="feature-card-content">
-              <div class="feature-card-header">
-                <div class="feature-icon-wrapper">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="9" cy="7" r="4"></circle>
-                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                  </svg>
-                </div>
-                <a href="about.html" class="feature-card-btn" aria-label="Go to service">↗</a>
-              </div>
-              <h3 class="feature-card-title">Experienced clinical support team</h3>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- ==========================================
-         THE ROAD TO COMPLETE WELL-BEING (COUNSELING)
+         OUR SPECIALITIES & DEPARTMENTS (SLIDER)
          ========================================== -->
-    <section class="section-padding" id="counselingSection">
+    <section class="section-padding" id="specialitiesSection">
       <div class="container">
         <!-- Section Header -->
         <div class="section-header">
-          <h2 class="section-title" id="counselingTitle">The Road to <br>Complete Well-being</h2>
+          <h2 class="section-title" id="specialitiesTitle">Our Departments</h2>
           <div class="section-header-right">
-            <p class="section-header-desc" id="counselingDesc">
-              Explore specialized support structures tailored to overcome anxiety, support transition cycles, and nurture interpersonal relationships with clinical empathy.
+            <p class="section-header-desc" id="specialitiesDesc">
+              Explore our core medical departments and healthcare specialities.
             </p>
-            <a href="services.html" class="btn btn-dark btn-sans" id="counselingExploreBtn">Explore All Services</a>
+            <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+              <a href="services.html" class="btn btn-dark btn-sans" id="specialitiesExploreBtn">Explore All Services</a>
+            </div>
           </div>
         </div>
 
-        <!-- 4-Card Counseling Grid -->
-        <div class="counseling-grid">
-          <!-- Counseling Card 1 -->
-          <article class="counseling-card" id="counselCard1">
-            <div class="counseling-card-top">
-              <div class="counseling-tags">
-                <span class="tag-label tag-mint">Therapy</span>
-                <span class="tag-label tag-white">Offices</span>
-              </div>
-              <h3 class="counseling-title">Partner Counseling</h3>
-              <p class="counseling-desc">Guiding relationships through effective communication matrices.</p>
-            </div>
-            <div class="counseling-image-wrapper">
-              <img src="assets/images/counseling_partner.png" alt="Couple in counseling session">
-              <a href="services.html" class="counseling-overlay-btn">Learn More ➔</a>
-            </div>
-          </article>
+        <!-- Specialities Slider Wrapper -->
+        <div class="specialities-slider-wrapper">
+          <button class="slider-arrow prev" aria-label="Previous specialty">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+          </button>
 
-          <!-- Counseling Card 2 -->
-          <article class="counseling-card" id="counselCard2">
-            <div class="counseling-card-top">
-              <div class="counseling-tags">
-                <span class="tag-label tag-mint">Mental</span>
-                <span class="tag-label tag-white">Sessions</span>
-              </div>
-              <h3 class="counseling-title">Emotion Therapy</h3>
-              <p class="counseling-desc">Nurturing behavioral shifts to alleviate chronic stress.</p>
-            </div>
-            <div class="counseling-image-wrapper">
-              <img src="assets/images/counseling_emotion.png" alt="One on one emotional therapy">
-              <a href="services.html" class="counseling-overlay-btn">Learn More ➔</a>
-            </div>
-          </article>
+          <!-- Text & Image Scroll Container -->
+          <div class="specialities-scroll-container">
 
-          <!-- Counseling Card 3 -->
-          <article class="counseling-card" id="counselCard3">
-            <div class="counseling-card-top">
-              <div class="counseling-tags">
-                <span class="tag-label tag-mint">Children</span>
-                <span class="tag-label tag-white">Support</span>
+            <!-- Speciality Card 1: General Medicine & Diabetology -->
+            <article class="speciality-image-card" id="specCardGenMed" data-dept="general-medicine">
+              <div class="speciality-card-img-wrapper">
+                <img src="assets/images/department_bento/general_medicine.png" alt="General Medicine & Diabetology">
               </div>
-              <h3 class="counseling-title">Youth Counseling</h3>
-              <p class="counseling-desc">Supporting younger minds navigating social stressors.</p>
-            </div>
-            <div class="counseling-image-wrapper">
-              <img src="assets/images/counseling_youth.png" alt="Teens counselor speaking supportively">
-              <a href="services.html" class="counseling-overlay-btn">Learn More ➔</a>
-            </div>
-          </article>
+              <div class="speciality-card-overlay"></div>
+              <div class="speciality-card-body">
+                <div class="speciality-dept">General Medicine & Diabetology</div>
+                <p class="speciality-desc">Comprehensive healthcare for acute and chronic conditions, specializing in
+                  diabetes management and preventative wellness.</p>
+              </div>
+            </article>
 
-          <!-- Counseling Card 4 -->
-          <article class="counseling-card" id="counselCard4">
-            <div class="counseling-card-top">
-              <div class="counseling-tags">
-                <span class="tag-label tag-mint">Healing</span>
-                <span class="tag-label tag-white">Groups</span>
+            <!-- Speciality Card 2: Radiology -->
+            <article class="speciality-image-card" id="specCardRadiology" data-dept="radiology">
+              <div class="speciality-card-img-wrapper">
+                <img src="assets/images/department_bento/radiology.png" alt="Radiology">
               </div>
-              <h3 class="counseling-title">Recovery Therapy</h3>
-              <p class="counseling-desc">Empowering pathways to conquer lifestyle dependencies.</p>
-            </div>
-            <div class="counseling-image-wrapper">
-              <img src="assets/images/counseling_recovery.png" alt="Support group session sitting in circle">
-              <a href="services.html" class="counseling-overlay-btn">Learn More ➔</a>
-            </div>
-          </article>
+              <div class="speciality-card-overlay"></div>
+              <div class="speciality-card-body">
+                <div class="speciality-dept">Radiology</div>
+                <p class="speciality-desc">Advanced medical imaging services including X-rays, ultrasounds, and
+                  diagnostic scans for accurate and fast health insights.</p>
+              </div>
+            </article>
+
+            <!-- Speciality Card 3: Dental Department -->
+            <article class="speciality-image-card" id="specCardDental" data-dept="dental">
+              <div class="speciality-card-img-wrapper">
+                <img src="assets/images/department_bento/dental.png" alt="Dental Department">
+              </div>
+              <div class="speciality-card-overlay"></div>
+              <div class="speciality-card-body">
+                <div class="speciality-dept">Dental Department</div>
+                <p class="speciality-desc">Expert dental care from routine cleanings to advanced orthodontics, keeping
+                  your smile bright and healthy.</p>
+              </div>
+            </article>
+
+            <!-- Speciality Card 4: Paediatrics -->
+            <article class="speciality-image-card" id="specCardPaediatrics" data-dept="paediatrics">
+              <div class="speciality-card-img-wrapper">
+                <img src="assets/images/department_bento/paediatrics.png" alt="Paediatrics">
+              </div>
+              <div class="speciality-card-overlay"></div>
+              <div class="speciality-card-body">
+                <div class="speciality-dept">Paediatrics</div>
+                <p class="speciality-desc">Compassionate medical care for infants, children, and adolescents, supporting
+                  healthy growth and development.</p>
+              </div>
+            </article>
+
+            <!-- Speciality Card 5: Casualty & Trauma Care -->
+            <article class="speciality-image-card" id="specCardCasualty" data-dept="casualty">
+              <div class="speciality-card-img-wrapper">
+                <img src="assets/images/department_bento/casualty.png" alt="Casualty & Trauma Care">
+              </div>
+              <div class="speciality-card-overlay"></div>
+              <div class="speciality-card-body">
+                <div class="speciality-dept">Casualty & Trauma Care</div>
+                <p class="speciality-desc">24/7 emergency services equipped with expert medical staff to handle trauma,
+                  critical injuries, and urgent care.</p>
+              </div>
+            </article>
+
+            <!-- Speciality Card 6: Psychology -->
+            <article class="speciality-image-card" id="specCardPsychology" data-dept="psychology">
+              <div class="speciality-card-img-wrapper">
+                <img src="assets/images/department_bento/psychology.png" alt="Psychology">
+              </div>
+              <div class="speciality-card-overlay"></div>
+              <div class="speciality-card-body">
+                <div class="speciality-dept">Psychology</div>
+                <p class="speciality-desc">Professional counseling and psychological therapy services to support mental
+                  well-being, mindfulness, and emotional health.</p>
+              </div>
+            </article>
+
+            <!-- Speciality Card 7: Physiotherapy -->
+            <article class="speciality-image-card" id="specCardPhysiotherapy" data-dept="physiotherapy">
+              <div class="speciality-card-img-wrapper">
+                <img src="assets/images/department_bento/physiotherapy.png" alt="Physiotherapy">
+              </div>
+              <div class="speciality-card-overlay"></div>
+              <div class="speciality-card-body">
+                <div class="speciality-dept">Physiotherapy</div>
+                <p class="speciality-desc">Customized physical therapy and rehabilitation programs to restore mobility,
+                  alleviate pain, and rebuild strength.</p>
+              </div>
+            </article>
+
+            <!-- Speciality Card 8: Cardiology -->
+            <article class="speciality-image-card" id="specCardCardiology" data-dept="cardiology">
+              <div class="speciality-card-img-wrapper">
+                <img src="assets/images/department_bento/cardiology.png" alt="Cardiology">
+              </div>
+              <div class="speciality-card-overlay"></div>
+              <div class="speciality-card-body">
+                <div class="speciality-dept">Cardiology</div>
+                <p class="speciality-desc">Specialized heart care and diagnostic testing for cardiovascular health,
+                  heart attack prevention, and long-term cardiac wellness.</p>
+              </div>
+            </article>
+
+            <!-- Speciality Card 9: Gastroenterology -->
+            <article class="speciality-image-card" id="specCardGastro" data-dept="gastro">
+              <div class="speciality-card-img-wrapper">
+                <img src="assets/images/department_bento/gastroenterology.png" alt="Gastroenterology">
+              </div>
+              <div class="speciality-card-overlay"></div>
+              <div class="speciality-card-body">
+                <div class="speciality-dept">Gastroenterology</div>
+                <p class="speciality-desc">Comprehensive treatment for digestive tract disorders, liver care, stomach
+                  issues, and gastrointestinal health.</p>
+              </div>
+            </article>
+
+            <!-- Speciality Card 10: Neurology -->
+            <article class="speciality-image-card" id="specCardNeurology" data-dept="neurology">
+              <div class="speciality-card-img-wrapper">
+                <img src="assets/images/department_bento/neurology.png" alt="Neurology">
+              </div>
+              <div class="speciality-card-overlay"></div>
+              <div class="speciality-card-body">
+                <div class="speciality-dept">Neurology</div>
+                <p class="speciality-desc">Advanced diagnosis and clinical care for brain, spine, nerve disorders, and
+                  neurological conditions.</p>
+              </div>
+            </article>
+
+            <!-- Speciality Card 11: Urology -->
+            <article class="speciality-image-card" id="specCardUrology" data-dept="urology">
+              <div class="speciality-card-img-wrapper">
+                <img src="assets/images/department_bento/urology.png" alt="Urology">
+              </div>
+              <div class="speciality-card-overlay"></div>
+              <div class="speciality-card-body">
+                <div class="speciality-dept">Urology</div>
+                <p class="speciality-desc">Specialized clinical care for urinary tract conditions, kidney wellness, and
+                  reproductive health.</p>
+              </div>
+            </article>
+
+            <!-- Speciality Card 12: Pulmonology -->
+            <article class="speciality-image-card" id="specCardPulmonology" data-dept="pulmonology">
+              <div class="speciality-card-img-wrapper">
+                <img src="assets/images/department_bento/pulmonology.png" alt="Pulmonology">
+              </div>
+              <div class="speciality-card-overlay"></div>
+              <div class="speciality-card-body">
+                <div class="speciality-dept">Pulmonology</div>
+                <p class="speciality-desc">Expert care for respiratory issues, lung diseases, asthma management, and
+                  breathing disorders.</p>
+              </div>
+            </article>
+
+            <!-- Speciality Card 13: General Surgery -->
+            <article class="speciality-image-card" id="specCardSurgery" data-dept="surgery">
+              <div class="speciality-card-img-wrapper">
+                <img src="assets/images/department_bento/general_surgery.png" alt="General Surgery">
+              </div>
+              <div class="speciality-card-overlay"></div>
+              <div class="speciality-card-body">
+                <div class="speciality-dept">General Surgery</div>
+                <p class="speciality-desc">State-of-the-art surgical procedures for varied medical conditions, focusing
+                  on safety and rapid recovery.</p>
+              </div>
+            </article>
+
+            <!-- Speciality Card 14: ENT (Ear, Nose & Throat) -->
+            <article class="speciality-image-card" id="specCardEnt" data-dept="ent">
+              <div class="speciality-card-img-wrapper">
+                <img src="assets/images/department_bento/ent.png" alt="ENT (Ear, Nose & Throat)">
+              </div>
+              <div class="speciality-card-overlay"></div>
+              <div class="speciality-card-body">
+                <div class="speciality-dept">ENT (Ear, Nose & Throat)</div>
+                <p class="speciality-desc">Expert diagnosis and medical care for ear, nose, and throat ailments, sinus
+                  problems, and hearing issues.</p>
+              </div>
+            </article>
+
+            <!-- Speciality Card 15: Orthopaedics -->
+            <article class="speciality-image-card" id="specCardOrthopaedics" data-dept="ortho">
+              <div class="speciality-card-img-wrapper">
+                <img src="assets/images/department_bento/orthopaedics.png" alt="Orthopaedics">
+              </div>
+              <div class="speciality-card-overlay"></div>
+              <div class="speciality-card-body">
+                <div class="speciality-dept">Orthopaedics</div>
+                <p class="speciality-desc">Comprehensive care for bones, joints, muscles, ligaments, and sports
+                  injuries, helping you move freely and pain-free.</p>
+              </div>
+            </article>
+
+            <!-- Speciality Card 16: Gynaecology -->
+            <article class="speciality-image-card" id="specCardGynaecology" data-dept="gynaecology">
+              <div class="speciality-card-img-wrapper">
+                <img src="assets/images/department_bento/gynaecology.png" alt="Gynaecology">
+              </div>
+              <div class="speciality-card-overlay"></div>
+              <div class="speciality-card-body">
+                <div class="speciality-dept">Gynaecology</div>
+                <p class="speciality-desc">Compassionate healthcare for women at every stage of life, including prenatal
+                  care, pregnancy, and reproductive wellness.</p>
+              </div>
+            </article>
+
+          </div>
+
+          <button class="slider-arrow next" aria-label="Next specialty">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
         </div>
       </div>
     </section>
@@ -312,38 +473,123 @@
       <div class="container support-grid">
         <!-- Left: Image showing telemedicine consultation -->
         <div class="support-left-card" id="supportLeftCard">
-          <img src="assets/images/patient_virtual.png" alt="Telehealth virtual consultation session">
+          <img src="assets\images\hospital 2\OrthoOT1.png" alt="NMC Pathiripala Hospital Building">
         </div>
 
         <!-- Right: Checklists and cards -->
         <div class="support-right-content">
-          <h2 class="section-title" id="supportTitle">Support Anytime, <br>Anywhere</h2>
-          
+          <h2 class="section-title" id="supportTitle">24/7 Emergency & <br>Comprehensive Care</h2>
+
           <div class="support-list-wrapper">
             <div class="support-list-item" id="supportListItem1">
               <div class="check-circle">✓</div>
-              <span class="support-list-text">Simple Intake & Appointment Scheduling</span>
+              <span class="support-list-text">Round-the-Clock Casualty & Emergency Triage</span>
             </div>
             <div class="support-list-item" id="supportListItem2">
               <div class="check-circle">✓</div>
-              <span class="support-list-text">Immediate Call Access with Certified Doctors</span>
+              <span class="support-list-text">Advanced ICU, Pharmacy & Fully Equipped Laboratory</span>
             </div>
             <div class="support-list-item" id="supportListItem3">
               <div class="check-circle">✓</div>
-              <span class="support-list-text">24/7 Virtual Support Delivery Network</span>
+              <span class="support-list-text">Modern Diagnostic Scanning (X-Ray & Ultrasound)</span>
             </div>
           </div>
 
-          <!-- Small Split Grid -->
-          <div class="support-small-grid">
-            <div class="support-small-photo" id="supportSmallPhoto">
-              <img src="assets/images/counseling_youth.png" alt="Specialist in clinic">
-            </div>
-            <div class="support-yellow-box" id="supportYellowBox">
-              <h4 class="support-yellow-box-title">Get Virtual Appointment Scheduling</h4>
-              <a href="patients.html#bookingSection" class="btn btn-dark btn-sans" style="font-size: 0.75rem; padding: 10px 20px;">Book Now ➔</a>
-            </div>
+          <!-- Support Hotline Banner -->
+          <div class="support-yellow-box" id="supportYellowBox">
+            <h4 class="support-yellow-box-title">Need Direct Medical Support?</h4>
+            <a href="about.html#contactSection" class="btn btn-dark btn-sans"
+              style="font-size: 0.75rem; padding: 10px 20px;">Contact Helpline ➔</a>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         PATIENT REVIEWS (GOOGLE REVIEWS)
+         ========================================== -->
+    <section class="reviews-section" id="reviewsSection">
+      <div class="container">
+        <!-- Section Header -->
+        <div class="section-header-center" style="text-align: center; margin-bottom: 50px;">
+          <h2 class="section-subtitle-center">What Our Patients Say</h2>
+          <p class="section-desc-center">
+            Real patient testimonials from our Google Business Profile, highlighting our commitment to quality,
+            affordable healthcare in Pathiripala.
+          </p>
+        </div>
+
+        <!-- Reviews Grid -->
+        <div class="reviews-grid">
+          <!-- Review Card 1: Gopal Govind -->
+          <article class="review-card reveal-element reveal-delay-1" id="reviewCardGopal">
+            <div class="review-card-header">
+              <div class="reviewer-avatar">GG</div>
+              <div class="reviewer-meta">
+                <h3 class="reviewer-name">Gopal Govind</h3>
+                <span class="reviewer-stats">14 reviews • 9 months ago</span>
+              </div>
+              <div class="google-logo-badge">G</div>
+            </div>
+            <div class="review-stars">★★★★★</div>
+            <blockquote class="review-text-content">
+              "Experienced doctors, very reasonable fees, warm service. Honest, trustworthy hospital."
+            </blockquote>
+          </article>
+
+          <!-- Review Card 2: Srikanth Raghavan -->
+          <article class="review-card reveal-element reveal-delay-2" id="reviewCardSrikanth">
+            <div class="review-card-header">
+              <div class="reviewer-avatar">SR</div>
+              <div class="reviewer-meta">
+                <h3 class="reviewer-name">Srikanth Raghavan</h3>
+                <span class="reviewer-stats">11 reviews • 2 photos • 2 years ago</span>
+              </div>
+              <div class="google-logo-badge">G</div>
+            </div>
+            <div class="review-stars">★★★★★</div>
+            <blockquote class="review-text-content">
+              "A good small town hospital with very cordial staff. Duty doctor was polite and to the point. Charges are
+              minimal. Expect honesty from hospital staff."
+            </blockquote>
+          </article>
+
+          <!-- Review Card 3: Sanika OS -->
+          <article class="review-card reveal-element reveal-delay-3" id="reviewCardSanika">
+            <div class="review-card-header">
+              <div class="reviewer-avatar">SO</div>
+              <div class="reviewer-meta">
+                <h3 class="reviewer-name">Sanika OS</h3>
+                <span class="reviewer-stats">1 review • 4 years ago</span>
+              </div>
+              <div class="google-logo-badge">G</div>
+            </div>
+            <div class="review-stars">★★★★★</div>
+            <blockquote class="review-text-content">
+              "This review is for <strong>DR. KEVIN sir</strong> (ENT) who is associated with NMC. Really a very good
+              doctor, very calm, accurate analysis of the problem and got relief in single visit. Thank you so much
+              doctor."
+            </blockquote>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         GOOGLE MAP INTEGRATION SECTION
+         ========================================== -->
+    <section class="map-section" id="googleMapSection" style="padding-bottom: 80px;">
+      <div class="container">
+        <h2 class="section-subtitle-center" style="margin-bottom: 24px; font-size: 2rem;">Our Facility Location</h2>
+        <div style="border-radius: var(--radius-xl); overflow: hidden; box-shadow: 0 15px 35px rgba(17, 24, 39, 0.08); border: 1px solid rgba(17, 24, 39, 0.08);">
+          <iframe
+            src="https://maps.google.com/maps?q=NMC%20Hospital%20Pathiripala,%20Palakkad,%20Kerala&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            width="100%"
+            height="450"
+            style="border:0; display: block;"
+            allowfullscreen=""
+            loading="lazy">
+          </iframe>
         </div>
       </div>
     </section>
@@ -357,15 +603,16 @@
           <div class="cta-content">
             <h2 class="cta-title" id="ctaTitle">Reach out for expert <br><span>care and support today</span></h2>
             <p class="cta-desc" id="ctaDesc">
-              Our clinical dispatch assistants are ready to triage your request and match you with the exact specialist you need.
+              Our clinical dispatch assistants are ready to triage your request and match you with the exact specialist
+              you need.
             </p>
             <div class="cta-buttons">
               <a href="about.html#contactSection" class="btn btn-dark btn-sans" id="ctaContactBtn">Contact Us Today</a>
-              <a href="patients.html" class="btn-text btn-sans" id="ctaReadBtn">Read Patient Stories</a>
+              <a href="services.html" class="btn-text btn-sans" id="ctaReadBtn">Our Packages</a>
             </div>
           </div>
           <div class="cta-image-wrapper">
-            <img src="assets/images/support_agent.png" alt="Helpful client support agent" id="ctaImg">
+            <img src="assets/images/department_bento/pediatrics.png" alt="Helpful client support agent" id="ctaImg">
           </div>
         </div>
       </div>
@@ -380,10 +627,9 @@
       <!-- Info Column -->
       <div class="footer-info" id="footerColInfo">
         <a href="index.html" class="brand-logo">
-          <svg viewBox="0 0 24 24">
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-          </svg>
-          <span>MEDTRUST</span>
+          <img src="assets/images/logo.svg" alt="NMC Pathiripala Logo" class="logo-img">
+          <span class="logo-text"><span class="logo-text-short">NMC</span> <span
+              class="logo-text-long">Pathiripala</span></span>
         </a>
         <p class="footer-desc">
           Providing high-touch medical care and psychological consultations to maximize your daily well-being.
@@ -395,9 +641,8 @@
         <h4 class="footer-title">About Us</h4>
         <ul class="footer-links">
           <li><a href="about.html" class="footer-link">Our Story</a></li>
-          <li><a href="about.html#timelineSection" class="footer-link">Timeline</a></li>
           <li><a href="about.html#doctorsSection" class="footer-link">Our Doctors</a></li>
-          <li><a href="patients.html#faqsSection" class="footer-link">FAQs</a></li>
+          <li><a href="appointment.html#faqsSection" class="footer-link">FAQs</a></li>
         </ul>
       </div>
 
@@ -406,7 +651,7 @@
         <h4 class="footer-title">Support</h4>
         <ul class="footer-links">
           <li><a href="about.html#contactSection" class="footer-link">Help Desk</a></li>
-          <li><a href="patients.html" class="footer-link">Portal Care</a></li>
+          <li><a href="appointment.html" class="footer-link">Portal Care</a></li>
           <li><a href="services.html" class="footer-link">Therapies</a></li>
           <li><a href="about.html#contactSection" class="footer-link">Contact</a></li>
         </ul>
@@ -417,17 +662,24 @@
         <h4 class="footer-title">Office Hours</h4>
         <div class="footer-contact-info">
           <div class="contact-item">
-            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-            <span>420 Pavilion Ave, Suite 100, New York, NY 10001</span>
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+            </svg>
+            <span>Pathiripala Kongad Rd, Madhavi Nagar, Palakkad, Kerala 678642</span>
           </div>
           <div class="contact-item">
-            <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.15 15.15 0 0 0 6.5 6.5l2.2-2.2c.27-.27.67-.36 1.01-.24 1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-            <span>(800) 555-0199</span>
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M6.62 10.79a15.15 15.15 0 0 0 6.5 6.5l2.2-2.2c.27-.27.67-.36 1.01-.24 1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+            </svg>
+            <span>0491 287 4700</span>
           </div>
         </div>
 
         <form class="signup-form" id="newsletterForm">
-          <input type="email" placeholder="Your Email Address" class="signup-input" required aria-label="Email address for updates">
+          <input type="email" placeholder="Your Email Address" class="signup-input" required
+            aria-label="Email address for updates">
           <button type="submit" class="signup-btn">Subscribe</button>
         </form>
 
@@ -442,7 +694,7 @@
 
     <!-- Bottom Copyright -->
     <div class="container footer-bottom">
-      <p>&copy; 2026 MEDTRUST Healthcare Inc. All rights reserved.</p>
+      <p>&copy; 2026 NMC Pathiripala. All rights reserved.</p>
       <div class="footer-bottom-links">
         <a href="#">Privacy Policy</a>
         <a href="#">Terms of Service</a>
@@ -458,7 +710,7 @@
   <div class="modal-overlay" id="searchModal">
     <div class="modal-box">
       <button class="modal-close-btn" data-close-modal>✕</button>
-      <h3 class="modal-title">Search MEDTRUST</h3>
+      <h3 class="modal-title">Search NMC Pathiripala</h3>
       <p class="modal-desc">Type queries to locate doctors, resources, or advice.</p>
       <div style="display:flex; gap:10px;">
         <input type="text" placeholder="Enter keywords..." class="form-input" style="flex-grow:1;">
@@ -488,6 +740,7 @@
   </div>
 
   <!-- Scripts -->
+  <script src="js/departments-data.js"></script>
   <script src="js/main.js"></script>
   <script>
     window.embeddedChatbotConfig = {
@@ -495,11 +748,8 @@
       domain: "www.chatbase.co"
     }
   </script>
-  <script
-    src="https://www.chatbase.co/embed.min.js"
-    chatbotId="goVvsBK5-kd0DtnN0Y-8F"
-    domain="www.chatbase.co"
-    defer>
+  <script src="https://www.chatbase.co/embed.min.js" chatbotId="goVvsBK5-kd0DtnN0Y-8F" domain="www.chatbase.co" defer>
   </script>
 </body>
+
 </html>

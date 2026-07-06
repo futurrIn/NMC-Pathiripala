@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Us - The MEDTRUST Vision & Doctors</title>
+  <title>About Us - The NMC Pathiripala Vision & Doctors</title>
   <!-- SEO Meta Tags -->
   <meta name="description" content="Meet MEDTRUST's world-class clinical team. Explore our history timeline, medical values, and directly inquire with our patient support desk.">
   <!-- Stylesheets -->
@@ -17,18 +20,16 @@
   <header class="site-header" id="mainHeader">
     <div class="container header-container">
       <a href="index.html" class="brand-logo" id="headerLogo">
-        <svg viewBox="0 0 24 24">
-          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-        </svg>
-        <span>MEDTRUST</span>
+        <img src="assets/images/logo.svg" alt="NMC Pathiripala Logo" class="logo-img">
+        <span class="logo-text"><span class="logo-text-short">NMC</span> <span class="logo-text-long">Pathiripala</span></span>
       </a>
       <nav class="nav-container">
         <ul class="nav-menu">
           <li><a href="index.html" class="nav-link">Home</a></li>
           <li><a href="about.html" class="nav-link active">About Us</a></li>
           <li><a href="services.html" class="nav-link">Services</a></li>
-          <li><a href="patients.html" class="nav-link">Patients</a></li>
-          <li><a href="ai.html" class="nav-link">MEDTRUST Ai</a></li>
+          <li><a href="appointment.html" class="nav-link">Appointment</a></li>
+          <li><a href="facilities.html" class="nav-link">Facilities</a></li>
         </ul>
       </nav>
       <div class="header-actions">
@@ -44,7 +45,7 @@
             <circle cx="12" cy="7" r="4"></circle>
           </svg>
         </button>
-        <a href="patients.html#bookingSection" class="btn btn-dark btn-sans" id="headerBookBtn">Book Now</a>
+        <a href="appointment.html#bookingSection" class="btn btn-dark btn-sans" id="headerBookBtn">Book Now</a>
         <button class="mobile-nav-toggle" id="mobileNavToggler" aria-label="Toggle navigation menu">
           <span></span>
           <span></span>
@@ -60,11 +61,11 @@
       <li><a href="index.html" class="mobile-nav-link">Home</a></li>
       <li><a href="about.html" class="mobile-nav-link active">About Us</a></li>
       <li><a href="services.html" class="mobile-nav-link">Services</a></li>
-      <li><a href="patients.html" class="mobile-nav-link">Patients</a></li>
-      <li><a href="ai.html" class="mobile-nav-link">MEDTRUST Ai</a></li>
+      <li><a href="appointment.html" class="mobile-nav-link">Appointment</a></li>
+      <li><a href="facilities.html" class="mobile-nav-link">Facilities</a></li>
     </ul>
     <div class="mobile-nav-footer">
-      <a href="patients.html#bookingSection" class="btn btn-dark btn-sans">Book Appointment</a>
+      <a href="appointment.html#bookingSection" class="btn btn-dark btn-sans">Book Appointment</a>
     </div>
   </aside>
 
@@ -112,57 +113,6 @@
     </section>
 
     <!-- ==========================================
-         MEDTRUST HISTORY TIMELINE SECTION
-         ========================================== -->
-    <section class="timeline-section" id="timelineSection">
-      <div class="container">
-        <h2 class="section-subtitle-center">Our Historic Pathway</h2>
-        <p class="section-desc-center">
-          How we expanded from a single family counseling clinic to a nationwide telemedicine and multi-disciplinary healthcare leader.
-        </p>
-
-        <!-- Timeline container -->
-        <div class="timeline-container">
-          <!-- Timeline Item 1 -->
-          <div class="timeline-item" id="timeNode1">
-            <div class="timeline-year">2012</div>
-            <h4 class="timeline-title">The Foundation Clinic</h4>
-            <p class="timeline-desc">
-              MEDTRUST began as a focused psychological counseling service in New York, specializing in behavioral modifications and couple support.
-            </p>
-          </div>
-
-          <!-- Timeline Item 2 -->
-          <div class="timeline-item" id="timeNode2">
-            <div class="timeline-year">2017</div>
-            <h4 class="timeline-title">Clinical Expansion</h4>
-            <p class="timeline-desc">
-              We expanded our healthcare network by incorporating general practitioners, clinical cardiologists, and pediatric departments.
-            </p>
-          </div>
-
-          <!-- Timeline Item 3 -->
-          <div class="timeline-item" id="timeNode3">
-            <div class="timeline-year">2021</div>
-            <h4 class="timeline-title">Telehealth Revolution</h4>
-            <p class="timeline-desc">
-              Launched 24/7 video diagnostics dispatching. Allowed remote patients instant clinical intake via mobile web triages.
-            </p>
-          </div>
-
-          <!-- Timeline Item 4 -->
-          <div class="timeline-item" id="timeNode4">
-            <div class="timeline-year">2026</div>
-            <h4 class="timeline-title">The Modern Vision</h4>
-            <p class="timeline-desc">
-              Operating 12 active physical medical facilities, with over 800 certified specialists and AI-matched clinical assignments.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==========================================
          DOCTORS TEAM SECTION
          ========================================== -->
     <section class="doctors-section" id="doctorsSection">
@@ -172,50 +122,215 @@
           Tap each doctor to view certified clinical specializations, histories, and appointment availability slots.
         </p>
 
-        <div class="doctors-grid">
-          <!-- Doctor 1 -->
-          <div class="doctor-card" data-open-modal="doctorBioModal1" id="docCard1">
-            <div class="doctor-img-wrapper">
-              <img src="assets/images/doctor_rajesh.png" alt="Dr. Rajesh Sen">
+                <div class="doctors-grid">
+          <!-- Doctor 1: Dr. Akhil Prakash -->
+          <a href="department-details.html?dept=general-medicine" class="doctor-card" id="docCard1">
+            <div class="doctor-img-circle">
+              <img src="assets/images/Doctors/Dr.Akhil Prakash.png" alt="Dr. Akhil Prakash">
             </div>
             <div class="doctor-info-box">
-              <h3 class="doctor-name">Dr. Rajesh Sen</h3>
-              <span class="doctor-specialty">Cardiology Director</span>
-            </div>
-          </div>
-
-          <!-- Doctor 2 -->
-          <div class="doctor-card" data-open-modal="doctorBioModal2" id="docCard2">
-            <div class="doctor-img-wrapper">
-              <img src="assets/images/doctor_ananya.png" alt="Dr. Ananya Iyer">
-            </div>
-            <div class="doctor-info-box">
-              <h3 class="doctor-name">Dr. Ananya Iyer</h3>
-              <span class="doctor-specialty">Psychotherapy Lead</span>
-            </div>
-          </div>
-
-          <!-- Doctor 3 -->
-          <div class="doctor-card" data-open-modal="doctorBioModal3" id="docCard3">
-            <div class="doctor-img-wrapper">
-              <img src="assets/images/doctor_vikram.png" alt="Dr. Vikram Nair">
-            </div>
-            <div class="doctor-info-box">
-              <h3 class="doctor-name">Dr. Vikram Nair</h3>
+              <h3 class="doctor-name">Dr. Akhil Prakash</h3>
               <span class="doctor-specialty">General Medicine</span>
             </div>
-          </div>
+          </a>
 
-          <!-- Doctor 4 -->
-          <div class="doctor-card" data-open-modal="doctorBioModal4" id="docCard4">
-            <div class="doctor-img-wrapper">
-              <img src="assets/images/doctor_sunita.png" alt="Dr. Sunita Sharma">
+          <!-- Doctor 2: Dr. Sajeev Kumar -->
+          <a href="department-details.html?dept=paediatrics" class="doctor-card" id="docCard2">
+            <div class="doctor-img-circle">
+              <img src="assets/images/Doctors/Dr. Sajeev Kumar.jpg" alt="Dr. Sajeev Kumar">
             </div>
             <div class="doctor-info-box">
-              <h3 class="doctor-name">Dr. Sunita Sharma</h3>
-              <span class="doctor-specialty">Pediatrics Specialist</span>
+              <h3 class="doctor-name">Dr. Sajeev Kumar</h3>
+              <span class="doctor-specialty">Paediatrics</span>
             </div>
-          </div>
+          </a>
+
+          <!-- Doctor 3: Dr. Nithin Das -->
+          <a href="department-details.html?dept=paediatrics" class="doctor-card" id="docCard3">
+            <div class="doctor-img-circle">
+              <img src="assets/images/Doctors/Dr.Nithin Das.png" alt="Dr. Nithin Das">
+            </div>
+            <div class="doctor-info-box">
+              <h3 class="doctor-name">Dr. Nithin Das</h3>
+              <span class="doctor-specialty">Paediatrics</span>
+            </div>
+          </a>
+
+          <!-- Doctor 4: Dr. Aneesha -->
+          <a href="department-details.html?dept=paediatrics" class="doctor-card" id="docCard4">
+            <div class="doctor-img-circle">
+              <img src="assets/images/Doctors/Dr.Aneesha.png" alt="Dr. Aneesha">
+            </div>
+            <div class="doctor-info-box">
+              <h3 class="doctor-name">Dr. Aneesha</h3>
+              <span class="doctor-specialty">Paediatrics</span>
+            </div>
+          </a>
+
+          <!-- Doctor 5: Dr. Jyothi Murukan -->
+          <a href="department-details.html?dept=casualty" class="doctor-card" id="docCard5">
+            <div class="doctor-img-circle">
+              <img src="assets/images/Doctors/Dr.Jyothi murukan.png" alt="Dr. Jyothi Murukan">
+            </div>
+            <div class="doctor-info-box">
+              <h3 class="doctor-name">Dr. Jyothi Murukan</h3>
+              <span class="doctor-specialty">Casualty Care</span>
+            </div>
+          </a>
+
+          <!-- Doctor 6: Dr. K. Radhakrishnan -->
+          <a href="department-details.html?dept=psychology" class="doctor-card" id="docCard6">
+            <div class="doctor-img-circle">
+              <img src="assets/images/Doctors/Dr.K.Radhakrishnan.jpg" alt="Dr. K. Radhakrishnan">
+            </div>
+            <div class="doctor-info-box">
+              <h3 class="doctor-name">Dr. K. Radhakrishnan</h3>
+              <span class="doctor-specialty">Psychology</span>
+            </div>
+          </a>
+
+          <!-- Doctor 7: Mr. Shyam Kumar -->
+          <a href="department-details.html?dept=physiotherapy" class="doctor-card" id="docCard7">
+            <div class="doctor-img-circle">
+              <img src="assets/images/Doctors/Mr. ShyamKumar.png" alt="Mr. Shyam Kumar">
+            </div>
+            <div class="doctor-info-box">
+              <h3 class="doctor-name">Mr. Shyam Kumar</h3>
+              <span class="doctor-specialty">Physiotherapy</span>
+            </div>
+          </a>
+
+          <!-- Doctor 8: Dr. Rajesh Kumar -->
+          <a href="department-details.html?dept=cardiology" class="doctor-card" id="docCard8">
+            <div class="doctor-img-circle">
+              <img src="assets/images/Doctors/Dr. Rajeshkumar.png" alt="Dr. Rajesh Kumar">
+            </div>
+            <div class="doctor-info-box">
+              <h3 class="doctor-name">Dr. Rajesh Kumar</h3>
+              <span class="doctor-specialty">Cardiology</span>
+            </div>
+          </a>
+
+          <!-- Doctor 9: Dr. Nijin Jose -->
+          <a href="department-details.html?dept=cardiology" class="doctor-card" id="docCard9">
+            <div class="doctor-img-circle">
+              <img src="assets/images/Doctors/Dr.Nijin Jose.png" alt="Dr. Nijin Jose">
+            </div>
+            <div class="doctor-info-box">
+              <h3 class="doctor-name">Dr. Nijin Jose</h3>
+              <span class="doctor-specialty">Cardiology</span>
+            </div>
+          </a>
+
+          <!-- Doctor 10: Dr. Sandheep Janardhanan -->
+          <a href="department-details.html?dept=gastro" class="doctor-card" id="docCard10">
+            <div class="doctor-img-circle">
+              <img src="assets/images/Doctors/Dr.Sandheep.jpg" alt="Dr. Sandheep Janardhanan">
+            </div>
+            <div class="doctor-info-box">
+              <h3 class="doctor-name">Dr. Sandheep</h3>
+              <span class="doctor-specialty">Gastroenterology</span>
+            </div>
+          </a>
+
+          <!-- Doctor 11: Dr. Eeshwaran -->
+          <a href="department-details.html?dept=urology" class="doctor-card" id="docCard11">
+            <div class="doctor-img-circle">
+              <img src="assets/images/Doctors/Dr.Eeshwaran.png" alt="Dr. Eeshwaran">
+            </div>
+            <div class="doctor-info-box">
+              <h3 class="doctor-name">Dr. Eeshwaran</h3>
+              <span class="doctor-specialty">Urology</span>
+            </div>
+          </a>
+
+          <!-- Doctor 12: Dr. Noufal Chooriyath -->
+          <a href="department-details.html?dept=pulmonology" class="doctor-card" id="docCard12">
+            <div class="doctor-img-circle">
+              <img src="assets/images/Doctors/Dr.Noufal chooriyath.jpeg" alt="Dr. Noufal Chooriyath">
+            </div>
+            <div class="doctor-info-box">
+              <h3 class="doctor-name">Dr. Noufal C.</h3>
+              <span class="doctor-specialty">Pulmonology</span>
+            </div>
+          </a>
+
+          <!-- Doctor 13: Dr. Animesh -->
+          <a href="department-details.html?dept=surgery" class="doctor-card" id="docCard13">
+            <div class="doctor-img-circle">
+              <img src="assets/images/Doctors/DR.Animesh.png" alt="Dr. Animesh">
+            </div>
+            <div class="doctor-info-box">
+              <h3 class="doctor-name">Dr. Animesh</h3>
+              <span class="doctor-specialty">General Surgery</span>
+            </div>
+          </a>
+
+          <!-- Doctor 14: Dr. Vidya V. Nair -->
+          <a href="department-details.html?dept=ent" class="doctor-card" id="docCard14">
+            <div class="doctor-img-circle">
+              <img src="assets/images/Doctors/Dr.vidya v Nair.png" alt="Dr. Vidya V. Nair">
+            </div>
+            <div class="doctor-info-box">
+              <h3 class="doctor-name">Dr. Vidya V. Nair</h3>
+              <span class="doctor-specialty">ENT Specialist</span>
+            </div>
+          </a>
+
+          <!-- Doctor 15: Dr. Sajith -->
+          <a href="department-details.html?dept=ortho" class="doctor-card" id="docCard15">
+            <div class="doctor-img-circle">
+              <img src="assets/images/Doctors/Dr.Sajith.png" alt="Dr. Sajith">
+            </div>
+            <div class="doctor-info-box">
+              <h3 class="doctor-name">Dr. Sajith</h3>
+              <span class="doctor-specialty">Orthopaedics</span>
+            </div>
+          </a>
+
+          <!-- Doctor 16: Dr. Shailaja -->
+          <a href="department-details.html?dept=gynaecology" class="doctor-card" id="docCard16">
+            <div class="doctor-img-circle">
+              <img src="assets/images/Doctors/Dr.Shailaja.png" alt="Dr. Shailaja">
+            </div>
+            <div class="doctor-info-box">
+              <h3 class="doctor-name">Dr. Shailaja</h3>
+              <span class="doctor-specialty">Gynaecology</span>
+            </div>
+          </a>
+
+          <!-- Doctor 17: Dr. Nithya Nambiar -->
+          <a href="department-details.html?dept=gynaecology" class="doctor-card" id="docCard17">
+            <div class="doctor-img-circle">
+              <img src="assets/images/Doctors/Dr. Nithya Nambiar.jpg" alt="Dr. Nithya Nambiar">
+            </div>
+            <div class="doctor-info-box">
+              <h3 class="doctor-name">Dr. Nithya N.</h3>
+              <span class="doctor-specialty">Gynaecology</span>
+            </div>
+          </a>
+
+          <!-- Doctor 18: Dr. Mario Jose -->
+          <a href="department-details.html?dept=radiology" class="doctor-card" id="docCard18">
+            <div class="doctor-img-circle">
+              <img src="assets/images/Doctors/Dr.Mario Jose.png" alt="Dr. Mario Jose">
+            </div>
+            <div class="doctor-info-box">
+              <h3 class="doctor-name">Dr. Mario Jose</h3>
+              <span class="doctor-specialty">Radiology</span>
+            </div>
+          </a>
+
+          <!-- Doctor 19: Dr. Sagma -->
+          <a href="department-details.html?dept=dental" class="doctor-card" id="docCard19">
+            <div class="doctor-img-circle">
+              <img src="assets/images/Doctors/Dr.Sagma.jpg" alt="Dr. Sagma">
+            </div>
+            <div class="doctor-info-box">
+              <h3 class="doctor-name">Dr. Sagma</h3>
+              <span class="doctor-specialty">Dentist</span>
+            </div>
+          </a>
         </div>
       </div>
     </section>
@@ -244,21 +359,21 @@
                   <div class="contact-card-icon">☏</div>
                   <div class="contact-card-info">
                     <span class="contact-card-label">Primary Hotline</span>
-                    <span class="contact-card-text">(800) 555-0199</span>
+                    <span class="contact-card-text">0491 287 4700</span>
                   </div>
                 </div>
                 <div class="contact-list-card">
                   <div class="contact-card-icon">✉</div>
                   <div class="contact-card-info">
                     <span class="contact-card-label">General Support Email</span>
-                    <span class="contact-card-text">support@medtrust.org</span>
+                    <span class="contact-card-text">support@nmcpathiripala.com</span>
                   </div>
                 </div>
                 <div class="contact-list-card">
                   <div class="contact-card-icon">⚲</div>
                   <div class="contact-card-info">
                     <span class="contact-card-label">Main Facility Location</span>
-                    <span class="contact-card-text">420 Pavilion Ave, NYC</span>
+                    <span class="contact-card-text">Pathiripala Kongad Rd, Madhavi Nagar, Palakkad, Kerala</span>
                   </div>
                 </div>
               </div>
@@ -309,6 +424,30 @@
         </div>
       </div>
     </section>
+
+    <!-- ==========================================
+         REACH OUT CALL TO ACTION (FOOTER CTA)
+         ========================================== -->
+    <section class="footer-cta-container" id="ctaSection">
+      <div class="container">
+        <div class="cta-banner">
+          <div class="cta-content">
+            <h2 class="cta-title" id="ctaTitle">Reach out for expert <br><span>care and support today</span></h2>
+            <p class="cta-desc" id="ctaDesc">
+              Our clinical dispatch assistants are ready to triage your request and match you with the exact specialist
+              you need.
+            </p>
+            <div class="cta-buttons">
+              <a href="about.html#contactSection" class="btn btn-dark btn-sans" id="ctaContactBtn">Contact Us Today</a>
+              <a href="services.html" class="btn-text btn-sans" id="ctaReadBtn">Our Packages</a>
+            </div>
+          </div>
+          <div class="cta-image-wrapper">
+            <img src="assets/images/department_bento/pediatrics.png" alt="Helpful client support agent" id="ctaImg">
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- ==========================================
@@ -318,10 +457,8 @@
     <div class="container footer-grid">
       <div class="footer-info">
         <a href="index.html" class="brand-logo">
-          <svg viewBox="0 0 24 24">
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-          </svg>
-          <span>MEDTRUST</span>
+          <img src="assets/images/logo.svg" alt="NMC Pathiripala Logo" class="logo-img">
+          <span class="logo-text"><span class="logo-text-short">NMC</span> <span class="logo-text-long">Pathiripala</span></span>
         </a>
         <p class="footer-desc">
           Providing high-touch medical care and psychological consultations to maximize your daily well-being.
@@ -331,16 +468,15 @@
         <h4 class="footer-title">About Us</h4>
         <ul class="footer-links">
           <li><a href="about.html" class="footer-link">Our Story</a></li>
-          <li><a href="about.html#timelineSection" class="footer-link">Timeline</a></li>
           <li><a href="about.html#doctorsSection" class="footer-link">Our Doctors</a></li>
-          <li><a href="patients.html#faqsSection" class="footer-link">FAQs</a></li>
+          <li><a href="appointment.html#faqsSection" class="footer-link">FAQs</a></li>
         </ul>
       </div>
       <div>
         <h4 class="footer-title">Support</h4>
         <ul class="footer-links">
           <li><a href="about.html#contactSection" class="footer-link">Help Desk</a></li>
-          <li><a href="patients.html" class="footer-link">Portal Care</a></li>
+          <li><a href="appointment.html" class="footer-link">Portal Care</a></li>
           <li><a href="services.html" class="footer-link">Therapies</a></li>
           <li><a href="about.html#contactSection" class="footer-link">Contact</a></li>
         </ul>
@@ -350,11 +486,11 @@
         <div class="footer-contact-info">
           <div class="contact-item">
             <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-            <span>420 Pavilion Ave, Suite 100, New York, NY 10001</span>
+            <span>Pathiripala Kongad Rd, Madhavi Nagar, Palakkad, Kerala 678642</span>
           </div>
           <div class="contact-item">
             <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.15 15.15 0 0 0 6.5 6.5l2.2-2.2c.27-.27.67-.36 1.01-.24 1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-            <span>(800) 555-0199</span>
+            <span>0491 287 4700</span>
           </div>
         </div>
         <form class="signup-form" id="newsletterForm">
@@ -370,7 +506,7 @@
       </div>
     </div>
     <div class="container footer-bottom">
-      <p>&copy; 2026 MEDTRUST Healthcare Inc. All rights reserved.</p>
+      <p>&copy; 2026 NMC Pathiripala. All rights reserved.</p>
       <div class="footer-bottom-links">
         <a href="#">Privacy Policy</a>
         <a href="#">Terms of Service</a>
@@ -391,7 +527,7 @@
       <p class="modal-desc" style="font-size:0.875rem; line-height:1.6;">
         Dr. Sen graduated from the All India Institute of Medical Sciences (AIIMS), New Delhi, and has spent over 15 years developing modern cardiac care, advanced electrophysiology systems, and preventative cardiology wellness blueprints.
       </p>
-      <a href="patients.html#bookingSection" class="btn btn-dark btn-sans" style="width:100%;">Schedule with Dr. Sen</a>
+      <a href="appointment.html#bookingSection" class="btn btn-dark btn-sans" style="width:100%;">Schedule with Dr. Sen</a>
     </div>
   </div>
 
@@ -404,7 +540,7 @@
       <p class="modal-desc" style="font-size:0.875rem; line-height:1.6;">
         Dr. Iyer focuses on interpersonal relationship dynamics, family transition counseling, and mindfulness-based cognitive therapies. She leads our comprehensive emotional well-being and partner counseling initiatives.
       </p>
-      <a href="patients.html#bookingSection" class="btn btn-dark btn-sans" style="width:100%;">Schedule with Dr. Iyer</a>
+      <a href="appointment.html#bookingSection" class="btn btn-dark btn-sans" style="width:100%;">Schedule with Dr. Iyer</a>
     </div>
   </div>
 
@@ -417,7 +553,7 @@
       <p class="modal-desc" style="font-size:0.875rem; line-height:1.6;">
         Dr. Nair specializes in primary diagnostic triages, lifestyle-driven illness management, and metabolic syndrome health coaching. He guides our clinical intake and comprehensive family medicine programs.
       </p>
-      <a href="patients.html#bookingSection" class="btn btn-dark btn-sans" style="width:100%;">Schedule with Dr. Nair</a>
+      <a href="appointment.html#bookingSection" class="btn btn-dark btn-sans" style="width:100%;">Schedule with Dr. Nair</a>
     </div>
   </div>
 
@@ -430,7 +566,7 @@
       <p class="modal-desc" style="font-size:0.875rem; line-height:1.6;">
         Dr. Sharma coordinates milestone tracking for infants and toddlers, adolescent behavioral transitions, and pediatric nutritional counseling. She leads our active youth pediatric outreach department.
       </p>
-      <a href="patients.html#bookingSection" class="btn btn-dark btn-sans" style="width:100%;">Schedule with Dr. Sharma</a>
+      <a href="appointment.html#bookingSection" class="btn btn-dark btn-sans" style="width:100%;">Schedule with Dr. Sharma</a>
     </div>
   </div>
 

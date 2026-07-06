@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Department Specialties & Clinic Care - NMC Pathiripala</title>
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css?v=2.0">
+  <!-- Dynamic Department Styles -->
+  <style>
+    /* New Premium Single Section Layout Styling */
+    .dept-single-section {
+      padding: 40px 0 80px 0;
+      background-color: var(--color-bg-base);
+    }
+
+    .dept-single-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 48px;
+    }
+
+    .dept-info-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .dept-title-new {
+      font-family: var(--font-serif);
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--color-teal-dark);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    /* Schedule Appointment CTA Button with Pulse Animation */
+    .booking-cta-container {
+      margin-top: 12px;
+      margin-bottom: 24px;
+    }
+
+    .btn-schedule-appointment {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background-color: var(--color-teal-accent);
+      color: var(--color-white);
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: var(--radius-full);
+      box-shadow: 0 6px 15px rgba(37, 99, 235, 0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+      animation: pulseGlow 2.5s infinite;
+    }
+
+    .btn-schedule-appointment:hover {
+      background-color: var(--color-teal-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(37, 99, 235, 0.25);
+      animation: none;
+    }
+
+    .btn-schedule-appointment svg {
+      transition: transform 0.3s ease;
+    }
+
+    .btn-schedule-appointment:hover svg {
+      transform: translateX(4px);
+    }
+
+    @keyframes pulseGlow {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 6px 15px rgba(37, 99, 235, 0.15);
+      }
+      50% {
+        transform: scale(1.02);
+        box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+      }
+      100% {
+        transform: scale(1);
+        box-shadow: 0 6px 15px rgba(37, 99, 235, 0.15);
+      }
+    }
+
+    .section-sub-title {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      margin-bottom: 20px;
+      border-bottom: 2px solid rgba(15, 23, 42, 0.06);
+      padding-bottom: 10px;
+    }
+
+    .doctors-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid rgba(15, 23, 42, 0.06);
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .section-sub-title-no-border {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      margin: 0;
+    }
+
+    .dept-description {
+      font-family: var(--font-sans);
+      font-size: 1.05rem;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .highlights-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .highlight-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      color: var(--color-text-secondary);
+    }
+
+    .highlight-icon {
+      color: var(--color-teal-accent);
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    /* Doctor Card in single page */
+    .doctors-profile-list {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .doctor-card-simple {
+      background-color: var(--color-white);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(15, 23, 42, 0.04);
+      padding: 24px;
+      display: flex;
+      gap: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.01);
+    }
+
+    .doctor-portrait-simple {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 2px solid rgba(37, 99, 235, 0.08);
+    }
+
+    .doctor-portrait-simple img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .doctor-portrait-icon {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(15, 23, 42, 0.04);
+      color: rgba(15, 23, 42, 0.3);
+    }
+
+    .doctor-portrait-icon svg {
+      width: 48px;
+      height: 48px;
+    }
+
+    .doctor-details-simple {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .dr-name-simple {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-teal-dark);
+      margin-bottom: 2px;
+    }
+
+    .dr-title-simple {
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-teal-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+
+    .dr-qualifications-simple {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      color: var(--color-text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .dr-bio-simple {
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      color: var(--color-text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Simplified single department image style */
+    .dept-gallery-panel {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .dept-image-frame {
+      width: 100%;
+      height: 480px;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      border: 1px solid rgba(15, 23, 42, 0.04);
+      background-color: var(--color-white);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    }
+
+    .dept-image-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .dept-image-frame:hover img {
+      transform: scale(1.02);
+    }
+
+    /* Back Link Button */
+    .back-btn-container {
+      padding: 32px 0 0 0;
+      background-color: var(--color-bg-base);
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      transition: var(--transition-fast);
+    }
+
+    .back-btn:hover {
+      color: var(--color-teal-accent);
+      transform: translateX(-4px);
+    }
+
+    @media (max-width: 991px) {
+      .dept-single-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ==========================================
+       SITE HEADER
+       ========================================== -->
+  <header class="site-header" id="mainHeader">
+    <div class="container header-container">
+      <!-- Logo -->
+      <a href="index.html" class="brand-logo" id="headerLogo">
+        <img src="assets/images/logo.svg" alt="NMC Pathiripala Logo" class="logo-img">
+        <span class="logo-text"><span class="logo-text-short">NMC</span> <span class="logo-text-long">Pathiripala</span></span>
+      </a>
+
+      <!-- Desktop Nav Menu -->
+      <nav class="nav-container">
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="about.html" class="nav-link">About Us</a></li>
+          <li><a href="services.html" class="nav-link">Services</a></li>
+          <li><a href="appointment.html" class="nav-link">Appointment</a></li>
+          <li><a href="facilities.html" class="nav-link">Facilities</a></li>
+        </ul>
+      </nav>
+
+      <!-- Header Actions -->
+      <div class="header-actions">
+        <!-- Search Icon -->
+        <button class="action-btn" id="searchActionBtn" data-open-modal="searchModal" aria-label="Search site">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+        <!-- Profile Icon -->
+        <button class="action-btn" id="profileActionBtn" data-open-modal="loginModal" aria-label="User Account">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </button>
+        <!-- CTA button -->
+        <a href="appointment.html#bookingSection" class="btn btn-dark btn-sans" id="headerBookBtn">Book Now</a>
+
+        <!-- Hamburger Menu Toggle (Mobile) -->
+        <button class="mobile-nav-toggle" id="mobileNavToggler" aria-label="Toggle navigation menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Nav Drawer Menu -->
+  <aside class="mobile-nav-drawer" id="mobileDrawer">
+    <ul class="mobile-nav-list">
+      <li><a href="index.html" class="mobile-nav-link">Home</a></li>
+      <li><a href="about.html" class="mobile-nav-link">About Us</a></li>
+      <li><a href="services.html" class="mobile-nav-link">Services</a></li>
+      <li><a href="appointment.html" class="mobile-nav-link">Appointment</a></li>
+      <li><a href="facilities.html" class="mobile-nav-link">Facilities</a></li>
+    </ul>
+    <div class="mobile-nav-footer">
+      <a href="appointment.html#bookingSection" class="btn btn-dark btn-sans">Book Appointment</a>
+    </div>
+  </aside>
+
+  <main>
+    <!-- Back Link Button Row -->
+    <div class="back-link-row back-btn-container">
+      <div class="container">
+        <a href="index.html#specialitiesSection" class="back-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          Back to Specialties
+        </a>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SINGLE DEPT SECTION
+         ========================================== -->
+    <section class="dept-single-section">
+      <div class="container dept-single-grid">
+        <!-- Left: Info & Doctors -->
+        <div class="dept-info-panel">
+          <h1 class="dept-title-new" id="deptTitle">Department Details</h1>
+          
+          <div class="dept-overview-box">
+            <h2 class="section-sub-title">About the Department</h2>
+            <div id="deptOverviewText" class="dept-description">
+              Loading description...
+            </div>
+            <div class="highlights-list" id="deptHighlightsList">
+              <!-- Dynamically populated highlights -->
+            </div>
+          </div>
+
+          <div class="dept-doctors-box">
+            <div class="doctors-header-row">
+              <h2 class="section-sub-title-no-border">Our Specialist Consultants</h2>
+              <a href="appointment.html#bookingSection" class="btn-schedule-appointment" id="scheduleBtn">
+                <span>Schedule an Appointment</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+            </div>
+            <div class="doctors-profile-list" id="doctorsProfileList">
+              <!-- Dynamically populated doctor profiles -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Department View Frame -->
+        <div class="dept-gallery-panel">
+          <h2 class="section-sub-title">Department View</h2>
+          <div class="dept-image-frame" id="deptImageFrame">
+            <!-- Dynamically populated main image -->
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ==========================================
+         GOOGLE MAP INTEGRATION SECTION
+         ========================================== -->
+    <section class="map-section" id="googleMapSection" style="padding-bottom: 80px;">
+      <div class="container">
+        <h2 class="section-subtitle-center" style="margin-bottom: 24px; font-size: 2rem;">Our Facility Location</h2>
+        <div style="border-radius: var(--radius-xl); overflow: hidden; box-shadow: 0 15px 35px rgba(17, 24, 39, 0.08); border: 1px solid rgba(17, 24, 39, 0.08);">
+          <iframe
+            src="https://maps.google.com/maps?q=NMC%20Hospital%20Pathiripala,%20Palakkad,%20Kerala&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            width="100%"
+            height="450"
+            style="border:0; display: block;"
+            allowfullscreen=""
+            loading="lazy">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         REACH OUT CALL TO ACTION (FOOTER CTA)
+         ========================================== -->
+    <section class="footer-cta-container" id="ctaSection">
+      <div class="container">
+        <div class="cta-banner">
+          <div class="cta-content">
+            <h2 class="cta-title" id="ctaTitle">Reach out for expert <br><span>care and support today</span></h2>
+            <p class="cta-desc" id="ctaDesc">
+              Our clinical dispatch assistants are ready to triage your request and match you with the exact specialist
+              you need.
+            </p>
+            <div class="cta-buttons">
+              <a href="about.html#contactSection" class="btn btn-dark btn-sans" id="ctaContactBtn">Contact Us Today</a>
+              <a href="services.html" class="btn-text btn-sans" id="ctaReadBtn">Our Packages</a>
+            </div>
+          </div>
+          <div class="cta-image-wrapper">
+            <img src="assets/images/department_bento/pediatrics.png" alt="Helpful client support agent" id="ctaImg">
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================
+       SITE FOOTER
+       ========================================== -->
+  <footer class="site-footer" id="mainFooter">
+    <div class="container footer-grid">
+      <!-- Info Column -->
+      <div class="footer-info" id="footerColInfo">
+        <a href="index.html" class="brand-logo">
+          <img src="assets/images/logo.svg" alt="NMC Pathiripala Logo" class="logo-img">
+          <span class="logo-text"><span class="logo-text-short">NMC</span> <span class="logo-text-long">Pathiripala</span></span>
+        </a>
+        <p class="footer-desc">
+          Providing high-touch medical care and psychological consultations to maximize your daily well-being.
+        </p>
+      </div>
+
+      <!-- Links Column 1 -->
+      <div id="footerColLinks1">
+        <h4 class="footer-title">About Us</h4>
+        <ul class="footer-links">
+          <li><a href="about.html" class="footer-link">Our Story</a></li>
+          <li><a href="about.html#doctorsSection" class="footer-link">Our Doctors</a></li>
+          <li><a href="about.html#doctorsSection" class="footer-link">Our Doctors</a></li>
+          <li><a href="appointment.html#faqsSection" class="footer-link">FAQs</a></li>
+        </ul>
+      </div>
+
+      <!-- Links Column 2 -->
+      <div id="footerColLinks2">
+        <h4 class="footer-title">Support</h4>
+        <ul class="footer-links">
+          <li><a href="about.html#contactSection" class="footer-link">Help Desk</a></li>
+          <li><a href="appointment.html" class="footer-link">Portal Care</a></li>
+          <li><a href="services.html" class="footer-link">Therapies</a></li>
+          <li><a href="about.html#contactSection" class="footer-link">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact/Signup Column -->
+      <div class="footer-signup" id="footerColSignup">
+        <h4 class="footer-title">Office Hours</h4>
+        <div class="footer-contact-info">
+          <div class="contact-item">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+            </svg>
+            <span>Pathiripala Kongad Rd, Madhavi Nagar, Palakkad, Kerala 678642</span>
+          </div>
+          <div class="contact-item">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M6.62 10.79a15.15 15.15 0 0 0 6.5 6.5l2.2-2.2c.27-.27.67-.36 1.01-.24 1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+            </svg>
+            <span>0491 287 4700</span>
+          </div>
+        </div>
+
+        <form class="signup-form" id="newsletterForm">
+          <input type="email" placeholder="Your Email Address" class="signup-input" required
+            aria-label="Email address for updates">
+          <button type="submit" class="signup-btn">Subscribe</button>
+        </form>
+
+        <div class="social-links">
+          <a href="#" class="social-btn" aria-label="Facebook">FB</a>
+          <a href="#" class="social-btn" aria-label="Twitter">TW</a>
+          <a href="#" class="social-btn" aria-label="Instagram">IG</a>
+          <a href="#" class="social-btn" aria-label="LinkedIn">LN</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Copyright -->
+    <div class="container footer-bottom">
+      <p>&copy; 2026 NMC Pathiripala. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================
+       MODALS SYSTEM (SEARCH & LOGIN)
+       ========================================== -->
+  <!-- Search Modal -->
+  <div class="modal-overlay" id="searchModal">
+    <div class="modal-box">
+      <button class="modal-close-btn" data-close-modal>✕</button>
+      <h3 class="modal-title">Search MEDTRUST</h3>
+      <p class="modal-desc">Type queries to locate doctors, resources, or advice.</p>
+      <div style="display:flex; gap:10px;">
+        <input type="text" placeholder="Enter keywords..." class="form-input" style="flex-grow:1;">
+        <button class="btn btn-dark btn-sans" style="padding:10px 20px;">Search</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Login Modal -->
+  <div class="modal-overlay" id="loginModal">
+    <div class="modal-box">
+      <button class="modal-close-btn" data-close-modal>✕</button>
+      <h3 class="modal-title">Patient Portal Login</h3>
+      <p class="modal-desc">Access clinical history, active appointments and billing files.</p>
+      <form style="display:flex; flex-direction:column; gap:16px;">
+        <div>
+          <label class="input-label">Email Address</label>
+          <input type="email" class="form-input" required>
+        </div>
+        <div>
+          <label class="input-label">Password</label>
+          <input type="password" class="form-input" required>
+        </div>
+        <button type="submit" class="btn btn-dark btn-sans" style="margin-top:10px;">Login Account</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Dynamic Department Loader Script -->
+  <script src="js/departments-data.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. Mobile navigation toggler support
+      const mobileNavToggler = document.getElementById("mobileNavToggler");
+      const mobileDrawer = document.getElementById("mobileDrawer");
+
+      if (mobileNavToggler && mobileDrawer) {
+        mobileNavToggler.addEventListener("click", () => {
+          mobileNavToggler.classList.toggle("open");
+          mobileDrawer.classList.toggle("open");
+        });
+      }
+
+      // 2. Modals system triggers support
+      const modalOpenTriggers = document.querySelectorAll("[data-open-modal]");
+      const modalCloseTriggers = document.querySelectorAll("[data-close-modal]");
+      const overlays = document.querySelectorAll(".modal-overlay");
+
+      modalOpenTriggers.forEach(btn => {
+        btn.addEventListener("click", () => {
+          const targetModal = document.getElementById(btn.getAttribute("data-open-modal"));
+          if (targetModal) targetModal.classList.add("active");
+        });
+      });
+
+      modalCloseTriggers.forEach(btn => {
+        btn.addEventListener("click", () => {
+          btn.closest(".modal-overlay").classList.remove("active");
+        });
+      });
+
+      overlays.forEach(overlay => {
+        overlay.addEventListener("click", (e) => {
+          if (e.target === overlay) overlay.classList.remove("active");
+        });
+      });
+
+      // 3. Dynamic content loader from database
+      const urlParams = new URLSearchParams(window.location.search);
+      let deptKey = urlParams.get("dept") || "general-medicine";
+
+      // If key is invalid, fallback
+      if (!DEPARTMENTS_DATA[deptKey]) {
+        deptKey = "general-medicine";
+      }
+
+      const data = DEPARTMENTS_DATA[deptKey];
+
+      // Populate Title
+      document.title = `${data.name} - NMC Pathiripala`;
+      document.getElementById("deptTitle").innerText = data.name;
+
+      // Populate Left Column Text & Highlights
+      document.getElementById("deptOverviewText").innerText = data.intro;
+
+      const highlightsList = document.getElementById("deptHighlightsList");
+      highlightsList.innerHTML = "";
+      data.careHighlights.forEach(highlight => {
+        const li = document.createElement("div");
+        li.className = "highlight-item";
+        li.innerHTML = `
+          <svg class="highlight-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <span>${highlight}</span>
+        `;
+        highlightsList.appendChild(li);
+      });
+
+      // Populate Specialist profiles list
+      const docList = document.getElementById("doctorsProfileList");
+      docList.innerHTML = "";
+      data.doctors.forEach((dr) => {
+        const card = document.createElement("article");
+        card.className = "doctor-card-simple";
+        
+        const hasCustomPhoto = dr.image && dr.image.startsWith("assets/images/Doctors/");
+        const portraitHtml = hasCustomPhoto 
+          ? `<img src="${dr.image}" alt="${dr.name}">`
+          : `<div class="doctor-portrait-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+             </div>`;
+
+        card.innerHTML = `
+          <div class="doctor-portrait-simple">
+            ${portraitHtml}
+          </div>
+          <div class="doctor-details-simple">
+            <h3 class="dr-name-simple">${dr.name}</h3>
+            <div class="dr-title-simple">${dr.title}</div>
+            <div class="dr-qualifications-simple">${dr.qualifications}</div>
+            <p class="dr-bio-simple">${dr.bio}</p>
+          </div>
+        `;
+        docList.appendChild(card);
+      });
+
+      // Populate Department Image Frame
+      const imageFrame = document.getElementById("deptImageFrame");
+      imageFrame.innerHTML = `
+        <img src="${data.heroImage}" alt="${data.name} Department view">
+      `;
+    });
+  </script>
+</body>
+
+</html>

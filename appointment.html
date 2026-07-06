@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Appointment Portal & Scheduling - MEDTRUST</title>
+  <!-- SEO Meta Tags -->
+  <meta name="description"
+    content="Welcome to the MEDTRUST Patient Hub. Download registration forms, browse diagnostic guidelines, or schedule your clinical appointments online.">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- ==========================================
+       SITE HEADER
+       ========================================== -->
+  <header class="site-header" id="mainHeader">
+    <div class="container header-container">
+      <a href="index.html" class="brand-logo" id="headerLogo">
+        <img src="assets/images/logo.svg" alt="NMC Pathiripala Logo" class="logo-img">
+        <span class="logo-text"><span class="logo-text-short">NMC</span> <span class="logo-text-long">Pathiripala</span></span>
+      </a>
+      <nav class="nav-container">
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="about.html" class="nav-link">About Us</a></li>
+          <li><a href="services.html" class="nav-link">Services</a></li>
+          <li><a href="appointment.html" class="nav-link active">Appointment</a></li>
+          <li><a href="facilities.html" class="nav-link">Facilities</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button class="action-btn" id="searchActionBtn" data-open-modal="searchModal" aria-label="Search site">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+        <button class="action-btn" id="profileActionBtn" data-open-modal="loginModal" aria-label="User Account">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </button>
+        <a href="appointment.html#bookingSection" class="btn btn-dark btn-sans" id="headerBookBtn">Book Now</a>
+        <button class="mobile-nav-toggle" id="mobileNavToggler" aria-label="Toggle navigation menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Nav Drawer Menu -->
+  <aside class="mobile-nav-drawer" id="mobileDrawer">
+    <ul class="mobile-nav-list">
+      <li><a href="index.html" class="mobile-nav-link">Home</a></li>
+      <li><a href="about.html" class="mobile-nav-link">About Us</a></li>
+      <li><a href="services.html" class="mobile-nav-link">Services</a></li>
+      <li><a href="appointment.html" class="mobile-nav-link active">Appointment</a></li>
+      <li><a href="facilities.html" class="mobile-nav-link">Facilities</a></li>
+    </ul>
+    <div class="mobile-nav-footer">
+      <a href="appointment.html#bookingSection" class="btn btn-dark btn-sans">Book Appointment</a>
+    </div>
+  </aside>
+
+  <main>
+    <!-- ==========================================
+         ACTIVE BOOKING CONTAINER (LOCAL STORAGE DRIVEN)
+         ========================================== -->
+    <div id="activeBookingContainer" style="display: none; padding-top: 160px; margin-bottom: 20px;">
+      <div class="container">
+        <div class="active-booking-card"
+          style="background: var(--color-white); border-radius: var(--radius-xl); border: 1px solid rgba(17, 24, 39, 0.08); box-shadow: 0 15px 35px rgba(17, 24, 39, 0.04); padding: 32px; display: flex; flex-direction: column; gap: 24px; position: relative;">
+          <!-- Header -->
+          <div
+            style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(17, 24, 39, 0.06); padding-bottom: 16px; flex-wrap: wrap; gap: 16px;">
+            <div>
+              <span
+                style="font-size: 0.75rem; font-weight: 800; color: #16A34A; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 8px;">
+                <span class="pulse-dot"
+                  style="width: 8px; height: 8px; background-color: #16A34A; border-radius: 50%; display: inline-block;"></span>
+                Active Scheduled Consultation
+              </span>
+              <h3 style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; margin: 6px 0 0;"
+                id="activeCardGreeting">Welcome back, Patient!</h3>
+            </div>
+            <button id="btnCancelActiveBooking"
+              style="font-size: 0.75rem; font-weight: 700; color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.2); background-color: rgba(239, 68, 68, 0.02); padding: 10px 20px; border-radius: var(--radius-full); transition: var(--transition-fast);">Cancel
+              Appointment</button>
+          </div>
+
+          <!-- Info Details -->
+          <div class="active-card-info"
+            style="max-width: 500px; width: 100%; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; background-color: rgba(13, 148, 136, 0.03); border: 1px solid rgba(13, 148, 136, 0.1); padding: 28px; border-radius: var(--radius-lg);">
+            <div
+              style="display: flex; justify-content: space-between; font-size: 0.875rem; border-bottom: 1px solid rgba(17, 24, 39, 0.04); padding-bottom: 8px;">
+              <span style="color: var(--color-text-secondary);">Selected Doctor:</span><strong id="activeCardDoctor"
+                style="color: var(--color-text-primary);">-</strong></div>
+            <div
+              style="display: flex; justify-content: space-between; font-size: 0.875rem; border-bottom: 1px solid rgba(17, 24, 39, 0.04); padding-bottom: 8px;">
+              <span style="color: var(--color-text-secondary);">Appointment Date:</span><strong id="activeCardDate"
+                style="color: var(--color-text-primary);">-</strong></div>
+            <div
+              style="display: flex; justify-content: space-between; font-size: 0.875rem; border-bottom: 1px solid rgba(17, 24, 39, 0.04); padding-bottom: 8px;">
+              <span style="color: var(--color-text-secondary);">Session Block:</span><strong id="activeCardTime"
+                style="color: var(--color-text-primary);">-</strong></div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.875rem; padding-bottom: 4px;">
+              <span style="color: var(--color-text-secondary);">Department/Care:</span><strong id="activeCardService"
+                style="color: var(--color-text-primary);">-</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         INTERACTIVE APPOINTMENT SCHEDULER WIZARD
+         ========================================== -->
+    <section class="wizard-section" id="bookingSection">
+      <div class="container">
+        <h2 class="section-subtitle-center" style="font-size: 2.25rem;">Schedule Your Consultation</h2>
+        <p class="section-desc-center">
+          Experience our simplified 4-step intake flow to schedule stethoscopic checking or psychiatric consults.
+        </p>
+
+        <!-- Wizard Card wrapper -->
+        <div class="wizard-card-wrapper" id="bookingWizard">
+          <!-- Wizard Steps Headers -->
+          <div class="wizard-header-steps">
+            <div class="wizard-step-node active" data-step="1" style="grid-column: span 2;">
+              <span class="step-num">1</span>
+              <span>Intake Form</span>
+            </div>
+            <div class="wizard-step-node" data-step="2" style="grid-column: span 2;">
+              <span class="step-num">2</span>
+              <span>Confirmed</span>
+            </div>
+          </div>
+
+          <!-- Wizard Panels Form Body -->
+          <div class="wizard-form-body">
+
+            <!-- STEP 1: General Simple Form -->
+            <div class="wizard-step-panel active" data-step="1">
+              <h3 class="wizard-panel-title">Enter Consultation Details</h3>
+
+              <div class="contact-form-grid">
+                <div>
+                  <label class="input-label" for="patientName">Full Legal Name</label>
+                  <input type="text" id="patientName" placeholder="e.g. Johnathan Carter" class="form-input" required>
+                </div>
+                <div>
+                  <label class="input-label" for="patientPhone">Phone Number</label>
+                  <input type="tel" id="patientPhone" placeholder="e.g. 9876543210" class="form-input" required>
+                  <span class="error-msg" id="phoneError"
+                    style="color: #EF4444; font-size: 0.725rem; display: none; margin-top: 4px; font-weight: 500;">Please
+                    enter a valid 10-12 digit phone number</span>
+                </div>
+
+                <div>
+                  <label class="input-label" for="patientService">Select Diagnostic / Consultation Service</label>
+                  <select id="patientService" class="form-input" required>
+                    <option value="" disabled selected>-- Select a Package or Service --</option>
+                    <option value="Lipid Profile">Lipid Profile (₹299)</option>
+                    <option value="Troponin-I Test">Troponin-I Test (₹299)</option>
+                    <option value="Thyroid Profile">Thyroid Profile (₹299)</option>
+                    <option value="Complete Blood Count">Complete Blood Count (₹100)</option>
+                    <option value="Urine Analysis">Urine Analysis (₹80)</option>
+                    <option value="Diabetes Screening">Diabetes Screening (₹150)</option>
+                    <option value="Liver Function Test">Liver Function Test (₹350)</option>
+                    <option value="Renal Function Test">Renal Function Test (₹350)</option>
+                    <option value="Electrolytes Panel">Electrolytes Panel (₹250)</option>
+                    <option value="General Consultation">General Consultation (₹150)</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="input-label" for="patientDate">Preferred Date</label>
+                  <input type="date" id="patientDate" class="form-input" required>
+                </div>
+                <div>
+                  <label class="input-label" for="patientTime">Preferred Session Block</label>
+                  <select id="patientTime" class="form-input" required>
+                    <option value="" disabled selected>-- Select Session --</option>
+                    <option value="AM Session (10:00 AM - 01:00 PM)">AM Session (10:00 AM - 01:00 PM)</option>
+                    <option value="PM Session (03:00 PM - 06:00 PM)">PM Session (03:00 PM - 06:00 PM)</option>
+                  </select>
+                </div>
+                <div class="form-group-full">
+                  <label class="input-label" for="consultReason">Brief Symptoms or Notes (Optional)</label>
+                  <textarea id="consultReason"
+                    placeholder="Enter any medical history or specific reasons for this booking request..."
+                    class="form-input"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 2: Confirmation screen -->
+            <div class="wizard-step-panel" data-step="2">
+              <div class="success-stamp">
+                <div class="success-icon-badge">✓</div>
+                <h3 class="success-stamp-title">Request Submitted Successfully!</h3>
+                <p class="success-stamp-desc">
+                  Your appointment request has been submitted. Our team will review your details and call you back shortly to confirm your booking date and session block.
+                </p>
+
+                <!-- Ticket Summary Card -->
+                <div class="wizard-summary-card">
+                  <div class="summary-row">
+                    <span class="summary-label">Selected Department</span>
+                    <span class="summary-value" id="summaryService">-</span>
+                  </div>
+                  <div class="summary-row" style="display: none;">
+                    <span class="summary-label">Assigned Clinician</span>
+                    <span class="summary-value" id="summaryDoctor">-</span>
+                  </div>
+                  <div class="summary-row">
+                    <span class="summary-label">Preferred Date</span>
+                    <span class="summary-value" id="summaryDate">-</span>
+                  </div>
+                  <div class="summary-row">
+                    <span class="summary-label">Preferred Session</span>
+                    <span class="summary-value" id="summaryTime">-</span>
+                  </div>
+                  <div class="summary-row">
+                    <span class="summary-label">Patient Name</span>
+                    <span class="summary-value" id="summaryName">-</span>
+                  </div>
+                  <div class="summary-row">
+                    <span class="summary-label">Phone Number</span>
+                    <span class="summary-value" id="summaryPhone">-</span>
+                  </div>
+
+                </div>
+
+                <div style="margin-top: 32px;">
+                  <a href="index.html" class="btn btn-dark btn-sans">Back to Home</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Wizard Footer Navigation panel -->
+          <div class="wizard-footer-nav">
+            <button type="button" class="btn btn-outline btn-sans" id="wizardPrevBtn" style="display: none;">Back</button>
+            <button type="button" class="btn btn-dark btn-sans" id="wizardNextBtn" disabled>Submit Request</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         PATIENT PORTAL FAQS ACCORDION
+         ========================================== -->
+    <section class="faqs-section" id="faqsSection">
+      <div class="container">
+        <h2 class="section-subtitle-center">Frequently Asked Questions</h2>
+        <p class="section-desc-center">
+          Find instant answers below detailing online intake rules, video guidelines, and payment networks.
+        </p>
+
+        <!-- Accordion wrapper -->
+        <div class="accordion-wrapper">
+          <!-- FAQ 1 -->
+          <div class="accordion-item" id="faq1">
+            <div class="accordion-header">
+              <span>How do I prepare for my first virtual psychology session?</span>
+              <span class="accordion-chevron">▼</span>
+            </div>
+            <div class="accordion-body">
+              Make sure you have a stable high-speed internet connection and are sitting in a quiet, confidential space.
+              Log in via our patient portal link 10 minutes prior to your scheduled consultation hour. Have your legal
+              identification documents ready in case our clinicians need to cross-check records.
+            </div>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="accordion-item" id="faq2">
+            <div class="accordion-header">
+              <span>What health insurance networks does MEDTRUST accept?</span>
+              <span class="accordion-chevron">▼</span>
+            </div>
+            <div class="accordion-body">
+              We work with a large spectrum of major clinical insurance providers including Aetna, Cigna, Blue Cross
+              Blue Shield, and UnitedHealthcare. If your specific plan requires co-payments, you will be prompted to
+              settle these securely via email prior to starting your telemetry call.
+            </div>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="accordion-item" id="faq3">
+            <div class="accordion-header">
+              <span>Can I cancel or reschedule my telehealth appointment?</span>
+              <span class="accordion-chevron">▼</span>
+            </div>
+            <div class="accordion-body">
+              Yes. You can easily reschedule or cancel any scheduled consultation up to 24 hours prior to your scheduled
+              time without incurring any penalty. Simply access the Patient Portal link from your dashboard or click the
+              cancellation link in your intake email.
+            </div>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="accordion-item" id="faq4">
+            <div class="accordion-header">
+              <span>How are prescriptions handled during video consultations?</span>
+              <span class="accordion-chevron">▼</span>
+            </div>
+            <div class="accordion-body">
+              If your assigned MEDTRUST clinician diagnoses an active symptom requiring medication, they can issue
+              verified electronic prescriptions instantly. These will be sent securely to your local pharmacy for local
+              pickup.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         REACH OUT CALL TO ACTION (FOOTER CTA)
+         ========================================== -->
+    <section class="footer-cta-container" id="ctaSection">
+      <div class="container">
+        <div class="cta-banner">
+          <div class="cta-content">
+            <h2 class="cta-title" id="ctaTitle">Reach out for expert <br><span>care and support today</span></h2>
+            <p class="cta-desc" id="ctaDesc">
+              Our clinical dispatch assistants are ready to triage your request and match you with the exact specialist
+              you need.
+            </p>
+            <div class="cta-buttons">
+              <a href="about.html#contactSection" class="btn btn-dark btn-sans" id="ctaContactBtn">Contact Us Today</a>
+              <a href="services.html" class="btn-text btn-sans" id="ctaReadBtn">Our Packages</a>
+            </div>
+          </div>
+          <div class="cta-image-wrapper">
+            <img src="assets/images/department_bento/pediatrics.png" alt="Helpful client support agent" id="ctaImg">
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================
+       SITE FOOTER
+       ========================================== -->
+  <footer class="site-footer" id="mainFooter">
+    <div class="container footer-grid">
+      <div class="footer-info">
+        <a href="index.html" class="brand-logo">
+          <img src="assets/images/logo.svg" alt="NMC Pathiripala Logo" class="logo-img">
+          <span class="logo-text"><span class="logo-text-short">NMC</span> <span class="logo-text-long">Pathiripala</span></span>
+        </a>
+        <p class="footer-desc">
+          Providing high-touch medical care and psychological consultations to maximize your daily well-being.
+        </p>
+      </div>
+      <div>
+        <h4 class="footer-title">About Us</h4>
+        <ul class="footer-links">
+          <li><a href="about.html" class="footer-link">Our Story</a></li>
+          <li><a href="about.html#doctorsSection" class="footer-link">Our Doctors</a></li>
+          <li><a href="appointment.html#faqsSection" class="footer-link">FAQs</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-title">Support</h4>
+        <ul class="footer-links">
+          <li><a href="about.html#contactSection" class="footer-link">Help Desk</a></li>
+          <li><a href="appointment.html" class="footer-link">Portal Care</a></li>
+          <li><a href="services.html" class="footer-link">Therapies</a></li>
+          <li><a href="about.html#contactSection" class="footer-link">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-signup">
+        <h4 class="footer-title">Office Hours</h4>
+        <div class="footer-contact-info">
+          <div class="contact-item">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+            </svg>
+            <span>Pathiripala Kongad Rd, Madhavi Nagar, Palakkad, Kerala 678642</span>
+          </div>
+          <div class="contact-item">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M6.62 10.79a15.15 15.15 0 0 0 6.5 6.5l2.2-2.2c.27-.27.67-.36 1.01-.24 1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+            </svg>
+            <span>0491 287 4700</span>
+          </div>
+        </div>
+        <form class="signup-form" id="newsletterForm">
+          <input type="email" placeholder="Your Email Address" class="signup-input" required
+            aria-label="Email address for updates">
+          <button type="submit" class="signup-btn">Subscribe</button>
+        </form>
+        <div class="social-links">
+          <a href="#" class="social-btn" aria-label="Facebook">FB</a>
+          <a href="#" class="social-btn" aria-label="Twitter">TW</a>
+          <a href="#" class="social-btn" aria-label="Instagram">IG</a>
+          <a href="#" class="social-btn" aria-label="LinkedIn">LN</a>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>&copy; 2026 NMC Pathiripala. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================
+       MODALS SYSTEM (SEARCH & LOGIN)
+       ========================================== -->
+  <!-- Search Modal -->
+  <div class="modal-overlay" id="searchModal">
+    <div class="modal-box">
+      <button class="modal-close-btn" data-close-modal>✕</button>
+      <h3 class="modal-title">Search MEDTRUST</h3>
+      <p class="modal-desc">Type queries to locate doctors, resources, or advice.</p>
+      <div style="display:flex; gap:10px;">
+        <input type="text" placeholder="Enter keywords..." class="form-input" style="flex-grow:1;">
+        <button class="btn btn-dark btn-sans" style="padding:10px 20px;">Search</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Login Modal -->
+  <div class="modal-overlay" id="loginModal">
+    <div class="modal-box">
+      <button class="modal-close-btn" data-close-modal>✕</button>
+      <h3 class="modal-title">Patient Portal Login</h3>
+      <p class="modal-desc">Access clinical history, active appointments and billing files.</p>
+      <form style="display:flex; flex-direction:column; gap:16px;">
+        <div>
+          <label class="input-label">Email Address</label>
+          <input type="email" class="form-input" required>
+        </div>
+        <div>
+          <label class="input-label">Password</label>
+          <input type="password" class="form-input" required>
+        </div>
+        <button type="submit" class="btn btn-dark btn-sans" style="margin-top:10px;">Login Account</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+  <script>
+    window.embeddedChatbotConfig = {
+      chatbotId: "goVvsBK5-kd0DtnN0Y-8F",
+      domain: "www.chatbase.co"
+    }
+  </script>
+  <script
+    src="https://www.chatbase.co/embed.min.js"
+    chatbotId="goVvsBK5-kd0DtnN0Y-8F"
+    domain="www.chatbase.co"
+    defer>
+  </script>
+</body>
+</html>

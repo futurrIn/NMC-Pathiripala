@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Facilities - NMC Pathiripala Healthcare Services</title>
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="View our state-of-the-art medical and diagnostic facilities at NMC Pathiripala, including emergency casualty, ICU, specialized OTs, labs, and diagnostic scanning.">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ==========================================
+       SITE HEADER
+       ========================================== -->
+  <header class="site-header" id="mainHeader">
+    <div class="container header-container">
+      <a href="index.html" class="brand-logo" id="headerLogo">
+        <img src="assets/images/logo.svg" alt="NMC Pathiripala Logo" class="logo-img">
+        <span class="logo-text"><span class="logo-text-short">NMC</span> <span class="logo-text-long">Pathiripala</span></span>
+      </a>
+      <nav class="nav-container">
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="about.html" class="nav-link">About Us</a></li>
+          <li><a href="services.html" class="nav-link">Services</a></li>
+          <li><a href="appointment.html" class="nav-link">Appointment</a></li>
+          <li><a href="facilities.html" class="nav-link active">Facilities</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button class="action-btn" id="searchActionBtn" data-open-modal="searchModal" aria-label="Search site">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+        <button class="action-btn" id="profileActionBtn" data-open-modal="loginModal" aria-label="User Account">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </button>
+        <a href="appointment.html#bookingSection" class="btn btn-dark btn-sans" id="headerBookBtn">Book Now</a>
+        <button class="mobile-nav-toggle" id="mobileNavToggler" aria-label="Toggle navigation menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Nav Drawer Menu -->
+  <aside class="mobile-nav-drawer" id="mobileDrawer">
+    <ul class="mobile-nav-list">
+      <li><a href="index.html" class="mobile-nav-link">Home</a></li>
+      <li><a href="about.html" class="mobile-nav-link">About Us</a></li>
+      <li><a href="services.html" class="mobile-nav-link">Services</a></li>
+      <li><a href="appointment.html" class="mobile-nav-link">Appointment</a></li>
+      <li><a href="facilities.html" class="mobile-nav-link active">Facilities</a></li>
+    </ul>
+    <div class="mobile-nav-footer">
+      <a href="appointment.html#bookingSection" class="btn btn-dark btn-sans">Book Appointment</a>
+    </div>
+  </aside>
+
+  <main>
+    <!-- ==========================================
+         FACILITIES HERO
+         ========================================== -->
+    <section class="facilities-hero" id="facilitiesHero">
+      <div class="container">
+        <h1 class="about-hero-title">Our Modern Clinical<br><span>Healthcare Facilities</span></h1>
+        <p class="about-hero-desc">
+          At NMC Pathiripala, we leverage state-of-the-art facilities and equipment to ensure you receive precise diagnostic screening and professional treatment pathways.
+        </p>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         FACILITIES GRID SECTION
+         ========================================== -->
+    <section class="facilities-section" id="facilitiesDirectory">
+      <div class="container">
+                <div class="facilities-grid">
+
+          <!-- Facility 1: Emergency Casualty -->
+          <article class="facility-card reveal-element reveal-delay-1" id="facCard1">
+            <div class="facility-img-wrapper">
+              <img src="assets/images/hospital 2/Casuality1.png" alt="Emergency Casualty Ward">
+            </div>
+            <div class="facility-info">
+              <h3 class="facility-card-title">24/7 Emergency Casualty</h3>
+              <p class="facility-desc">
+                Fully prepared triage beds with round-the-clock emergency medical practitioners and critical care monitoring systems.
+              </p>
+            </div>
+          </article>
+
+          <!-- Facility 2: Intensive Care Unit (ICU) -->
+          <article class="facility-card reveal-element reveal-delay-2" id="facCard2">
+            <div class="facility-img-wrapper">
+              <img src="assets/images/hospital 2/ICU1.png" alt="Intensive Care Unit">
+            </div>
+            <div class="facility-info">
+              <h3 class="facility-card-title">Intensive Care Unit (ICU)</h3>
+              <p class="facility-desc">
+                Highly sterile environment designed for advanced life support, continuous vital tracking, and focused nurse-to-patient ratio.
+              </p>
+            </div>
+          </article>
+
+          <!-- Facility 3: Neonatal ICU (NICU) -->
+          <article class="facility-card reveal-element reveal-delay-3" id="facCard3">
+            <div class="facility-img-wrapper">
+              <img src="assets/images/hospital 2/NICU.png" alt="Neonatal Intensive Care Unit">
+            </div>
+            <div class="facility-info">
+              <h3 class="facility-card-title">Neonatal ICU (NICU)</h3>
+              <p class="facility-desc">
+                Specialized incubation, thermoregulation, and respiratory support systems for premature infants and critical newborns.
+              </p>
+            </div>
+          </article>
+
+          <!-- Facility 4: Pediatric ICU (PICU) -->
+          <article class="facility-card reveal-element reveal-delay-1" id="facCard4">
+            <div class="facility-img-wrapper">
+              <img src="assets/images/hospital 2/PICU.png" alt="Pediatric Intensive Care Unit">
+            </div>
+            <div class="facility-info">
+              <h3 class="facility-card-title">Pediatric ICU (PICU)</h3>
+              <p class="facility-desc">
+                Dedicated critical monitoring and specialized therapeutic support systems designed specifically for children.
+              </p>
+            </div>
+          </article>
+
+          <!-- Facility 5: General Operation Theater -->
+          <article class="facility-card reveal-element reveal-delay-2" id="facCard5">
+            <div class="facility-img-wrapper">
+              <img src="assets/images/hospital 2/generalSurgeryOT1.png" alt="General Surgery Operation Theater">
+            </div>
+            <div class="facility-info">
+              <h3 class="facility-card-title">General Operation Theater</h3>
+              <p class="facility-desc">
+                Modern surgical suites equipped with high-precision anesthesia units, advanced ventilation, and sterile laminator airflows.
+              </p>
+            </div>
+          </article>
+
+          <!-- Facility 6: Gynecology OT -->
+          <article class="facility-card reveal-element reveal-delay-3" id="facCard6">
+            <div class="facility-img-wrapper">
+              <img src="assets/images/hospital 2/GynicOT1.png" alt="Gynecology Operation Theater">
+            </div>
+            <div class="facility-info">
+              <h3 class="facility-card-title">Gynecology OT</h3>
+              <p class="facility-desc">
+                Specialized surgery suite equipped for maternity safety, obstetric care, and gynecological procedures.
+              </p>
+            </div>
+          </article>
+
+          <!-- Facility 7: Orthopedic OT -->
+          <article class="facility-card reveal-element reveal-delay-1" id="facCard7">
+            <div class="facility-img-wrapper">
+              <img src="assets/images/hospital 2/OrthoOT1.png" alt="Orthopedic Operation Theater">
+            </div>
+            <div class="facility-info">
+              <h3 class="facility-card-title">Orthopedic OT</h3>
+              <p class="facility-desc">
+                Dedicated surgical suite containing fracture tables, diagnostic aligners, and orthopedic surgical tools.
+              </p>
+            </div>
+          </article>
+
+          <!-- Facility 8: Maternity Labour Room -->
+          <article class="facility-card reveal-element reveal-delay-2" id="facCard8">
+            <div class="facility-img-wrapper">
+              <img src="assets/images/hospital 2/LabourRoom.png" alt="Labour Room Maternity">
+            </div>
+            <div class="facility-info">
+              <h3 class="facility-card-title">Maternity Labour Room</h3>
+              <p class="facility-desc">
+                Compassionate childbirth suites configured for obstetric delivery safety and immediate neonate primary care protocols.
+              </p>
+            </div>
+          </article>
+
+          <!-- Facility 9: Patient Wards -->
+          <article class="facility-card reveal-element reveal-delay-3" id="facCard9">
+            <div class="facility-img-wrapper">
+              <img src="assets/images/hospital 2/Male Ward.png" alt="Patient Wards">
+            </div>
+            <div class="facility-info">
+              <h3 class="facility-card-title">Patient Wards</h3>
+              <p class="facility-desc">
+                Comfortable inpatient ward rooms with modern patient beds, quick-response call systems, and continuous care.
+              </p>
+            </div>
+          </article>
+
+          <!-- Facility 10: Hospital Corridor -->
+          <article class="facility-card reveal-element reveal-delay-1" id="facCard10">
+            <div class="facility-img-wrapper">
+              <img src="assets/images/hospital 2/Corridoor1.png" alt="Hospital Corridor">
+            </div>
+            <div class="facility-info">
+              <h3 class="facility-card-title">Hospital Corridors</h3>
+              <p class="facility-desc">
+                Spacious, clean, and well-lit corridors designed for safe patient transfer, accessibility, and emergency exit routes.
+              </p>
+            </div>
+          </article>
+
+          <!-- Facility 11: Advanced Pathology Lab -->
+          <article class="facility-card reveal-element reveal-delay-2" id="facCard11">
+            <div class="facility-img-wrapper">
+              <img src="assets/images/hospital 2/Lab.png" alt="Clinical Pathology Laboratory">
+            </div>
+            <div class="facility-info">
+              <h3 class="facility-card-title">Advanced Pathology Lab</h3>
+              <p class="facility-desc">
+                High-throughput automated analyzers executing molecular hematology, hormone profiles, and blood biochemistries.
+              </p>
+            </div>
+          </article>
+
+          <!-- Facility 12: X-Ray & Ultrasound Diagnostics -->
+          <article class="facility-card reveal-element reveal-delay-3" id="facCard12">
+            <div class="facility-img-wrapper">
+              <img src="assets/images/hospital 2/ScanningX-Ray.png" alt="Diagnostics X-Ray and Ultrasound">
+            </div>
+            <div class="facility-info">
+              <h3 class="facility-card-title">Radiological Scanning</h3>
+              <p class="facility-desc">
+                Precise imaging systems including digital high-frequency X-Rays and multi-dimensional color Dopplers.
+              </p>
+            </div>
+          </article>
+
+          <!-- Facility 13: Dental Care Unit -->
+          <article class="facility-card reveal-element reveal-delay-1" id="facCard13">
+            <div class="facility-img-wrapper">
+              <img src="assets/images/hospital 2/Dental1.png" alt="Dental Care Chair Unit">
+            </div>
+            <div class="facility-info">
+              <h3 class="facility-card-title">Dental Clinic Suite</h3>
+              <p class="facility-desc">
+                State-of-the-art dental chairs with intra-oral imaging cameras and clean sanitization layouts for comprehensive diagnostics.
+              </p>
+            </div>
+          </article>
+
+          <!-- Facility 14: Physiotherapy Center -->
+          <article class="facility-card reveal-element reveal-delay-2" id="facCard14">
+            <div class="facility-img-wrapper">
+              <img src="assets/images/hospital 2/psysiotherapy1.png" alt="Physiotherapy Rehabilitation Center">
+            </div>
+            <div class="facility-info">
+              <h3 class="facility-card-title">Physiotherapy Center</h3>
+              <p class="facility-desc">
+                Rehabilitation area equipped with advanced mobility trainers, ultrasound muscle stimulation, and traction boards.
+              </p>
+            </div>
+          </article>
+
+          <!-- Facility 15: 24/7 Pharmacy -->
+          <article class="facility-card reveal-element reveal-delay-3" id="facCard15">
+            <div class="facility-img-wrapper">
+              <img src="assets/images/hospital 2/Pharmacy1.png" alt="NMC Pathiripala Pharmacy">
+            </div>
+            <div class="facility-info">
+              <h3 class="facility-card-title">24/7 In-House Pharmacy</h3>
+              <p class="facility-desc">
+                Fully stocked medical dispensing counter providing continuous availability of emergency drugs and vital prescriptions.
+              </p>
+            </div>
+          </article>
+
+          <!-- Facility 16: CSSD Unit -->
+          <article class="facility-card reveal-element reveal-delay-1" id="facCard16">
+            <div class="facility-img-wrapper">
+              <img src="assets/images/hospital 2/cssd.png" alt="CSSD Sterile Unit">
+            </div>
+            <div class="facility-info">
+              <h3 class="facility-card-title">Sterile Supply Dept (CSSD)</h3>
+              <p class="facility-desc">
+                High-capacity industrial autoclaves implementing rigorous sterile cycles for all surgical tool sets and textiles.
+              </p>
+            </div>
+          </article>
+
+          <!-- Facility 17: Administrative Office -->
+          <article class="facility-card reveal-element reveal-delay-2" id="facCard17">
+            <div class="facility-img-wrapper">
+              <img src="assets/images/hospital 2/Office.png" alt="Administrative Office">
+            </div>
+            <div class="facility-info">
+              <h3 class="facility-card-title">Administrative Office</h3>
+              <p class="facility-desc">
+                Admissions, insurance coordination, and health records management center supporting smooth clinical checkups.
+              </p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         CALL TO ACTION SECTION
+         ========================================== -->
+    <!-- ==========================================
+         GOOGLE MAP INTEGRATION SECTION
+         ========================================== -->
+    <section class="map-section" id="googleMapSection" style="padding-bottom: 80px;">
+      <div class="container">
+        <h2 class="section-subtitle-center" style="margin-bottom: 24px; font-size: 2rem;">Our Facility Location</h2>
+        <div style="border-radius: var(--radius-xl); overflow: hidden; box-shadow: 0 15px 35px rgba(17, 24, 39, 0.08); border: 1px solid rgba(17, 24, 39, 0.08);">
+          <iframe
+            src="https://maps.google.com/maps?q=NMC%20Hospital%20Pathiripala,%20Palakkad,%20Kerala&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            width="100%"
+            height="450"
+            style="border:0; display: block;"
+            allowfullscreen=""
+            loading="lazy">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         REACH OUT CALL TO ACTION (FOOTER CTA)
+         ========================================== -->
+    <section class="footer-cta-container" id="ctaSection">
+      <div class="container">
+        <div class="cta-banner">
+          <div class="cta-content">
+            <h2 class="cta-title" id="ctaTitle">Reach out for expert <br><span>care and support today</span></h2>
+            <p class="cta-desc" id="ctaDesc">
+              Our clinical dispatch assistants are ready to triage your request and match you with the exact specialist
+              you need.
+            </p>
+            <div class="cta-buttons">
+              <a href="about.html#contactSection" class="btn btn-dark btn-sans" id="ctaContactBtn">Contact Us Today</a>
+              <a href="services.html" class="btn-text btn-sans" id="ctaReadBtn">Our Packages</a>
+            </div>
+          </div>
+          <div class="cta-image-wrapper">
+            <img src="assets/images/department_bento/pediatrics.png" alt="Helpful client support agent" id="ctaImg">
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================
+       SITE FOOTER
+       ========================================== -->
+  <footer class="site-footer" id="mainFooter">
+    <div class="container footer-grid">
+      <div class="footer-info">
+        <a href="index.html" class="brand-logo">
+          <img src="assets/images/logo.svg" alt="NMC Pathiripala Logo" class="logo-img">
+          <span class="logo-text"><span class="logo-text-short">NMC</span> <span class="logo-text-long">Pathiripala</span></span>
+        </a>
+        <p class="footer-desc">
+          Providing high-quality clinical diagnostic checkups, specialized emergency medical triage, and multi-disciplinary healthcare treatments inside Pathiripala.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="footer-title">About Us</h4>
+        <ul class="footer-links">
+          <li><a href="about.html" class="footer-link">Our Story</a></li>
+          <li><a href="about.html#doctorsSection" class="footer-link">Our Doctors</a></li>
+          <li><a href="appointment.html#faqsSection" class="footer-link">FAQs</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Support</h4>
+        <ul class="footer-links">
+          <li><a href="about.html#contactSection" class="footer-link">Help Desk</a></li>
+          <li><a href="appointment.html" class="footer-link">Portal Care</a></li>
+          <li><a href="services.html" class="footer-link">Therapies</a></li>
+          <li><a href="about.html#contactSection" class="footer-link">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-signup">
+        <h4 class="footer-title">Office Hours</h4>
+        <div class="footer-contact-info">
+          <div class="contact-item">
+            <svg viewBox="0 0 24 24" style="width:16px; height:16px; fill:currentColor; flex-shrink:0;">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+            </svg>
+            <span>Pathiripala Kongad Rd, Madhavi Nagar, Palakkad, Kerala 678642</span>
+          </div>
+          <div class="contact-item">
+            <svg viewBox="0 0 24 24" style="width:16px; height:16px; fill:currentColor; flex-shrink:0;">
+              <path d="M6.62 10.79a15.15 15.15 0 0 0 6.5 6.5l2.2-2.2c.27-.27.67-.36 1.01-.24 1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+            </svg>
+            <span>0491 287 4700</span>
+          </div>
+        </div>
+        <form class="signup-form" id="newsletterForm">
+          <input type="email" placeholder="Your Email Address" class="signup-input" required aria-label="Email address for updates">
+          <button type="submit" class="signup-btn">Subscribe</button>
+        </form>
+        <div class="social-links">
+          <a href="#" class="social-btn" aria-label="Facebook">FB</a>
+          <a href="#" class="social-btn" aria-label="Twitter">TW</a>
+          <a href="#" class="social-btn" aria-label="Instagram">IG</a>
+          <a href="#" class="social-btn" aria-label="LinkedIn">LN</a>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p class="copyright-text">&copy; 2026 NMC Pathiripala. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms &amp; Conditions</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================
+       MODAL BOX OVERLAYS
+       ========================================== -->
+  <!-- Search Modal -->
+  <div class="modal-overlay" id="searchModal">
+    <div class="modal-box">
+      <button class="modal-close-btn" data-close-modal>×</button>
+      <h3 class="modal-title">Search NMC Pathiripala</h3>
+      <p class="modal-desc">Type queries to locate doctors, resources, or advice.</p>
+      <form style="display:flex; gap:12px; margin-top:20px;">
+        <input type="text" placeholder="Enter keywords..." class="form-input" style="flex-grow:1;">
+        <button class="btn btn-dark btn-sans" style="padding:10px 20px;">Search</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Login Modal -->
+  <div class="modal-overlay" id="loginModal">
+    <div class="modal-box">
+      <button class="modal-close-btn" data-close-modal>×</button>
+      <h3 class="modal-title">Patient Portal Login</h3>
+      <p class="modal-desc">Access clinical history, active appointments and billing files.</p>
+      <form style="display:flex; flex-direction:column; gap:16px; margin-top:20px;">
+        <div>
+          <label class="input-label">Email Address</label>
+          <input type="email" class="form-input" required>
+        </div>
+        <div>
+          <label class="input-label">Password</label>
+          <input type="password" class="form-input" required>
+        </div>
+        <button type="submit" class="btn btn-dark btn-sans" style="margin-top:10px;">Login Account</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Core Javascript -->
+  <script src="js/main.js"></script>
+</body>
+</html>

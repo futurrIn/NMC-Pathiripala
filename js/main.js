@@ -21,6 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initModals();
   initActiveBookingNavbarBadge(); // Initialize navbar booking indicator badge
   initWhatsAppWidget(); // Initialize floating WhatsApp CTA widget
+  initSpecialitiesSlider(); // Initialize specialties horizontal image slider
+  initScrollReveal(); // Initialize scroll-reveal intro animations
+  initHeroScrollAnimation(); // Initialize scroll-driven hero frame animation
 });
 
 /* ========================================================================
@@ -207,395 +210,71 @@ function initBookingWizard() {
   const prevBtn = wizard.querySelector('#wizardPrevBtn');
   const nextBtn = wizard.querySelector('#wizardNextBtn');
 
+  // Spacing: set today's min date
+  const dateInput = document.getElementById('patientDate');
+  if (dateInput) {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    dateInput.min = `${yyyy}-${mm}-${dd}`;
+  }
+
+  const nameInput = document.getElementById('patientName');
+  const phoneInput = document.getElementById('patientPhone');
+  const serviceSelect = document.getElementById('patientService');
+  const timeSelect = document.getElementById('patientTime');
+  const notesTextarea = document.getElementById('consultReason');
+
   let currentStep = 1;
-  const totalSteps = 4;
+  const totalSteps = 2;
 
-  // Wizard state data
-  const bookingData = {
-    service: '',
-    doctor: '',
-    doctor_id: '',
-    working_days: '',
-    date: '',
-    time: '',
-    name: '',
-    email: '',
-    phone: '',
-    reason: ''
-  };
+  const validateForm = () => {
+    const nameVal = nameInput ? nameInput.value.trim() : '';
+    const phoneVal = phoneInput ? phoneInput.value.trim() : '';
+    const serviceVal = serviceSelect ? serviceSelect.value : '';
+    const dateVal = dateInput ? dateInput.value : '';
+    const timeVal = timeSelect ? timeSelect.value : '';
 
-  // Panel selections
-  const serviceOptions = wizard.querySelectorAll('.select-service-opt');
-  const calendarDays = wizard.querySelectorAll('.calendar-day-node');
-  const timeSlots = wizard.querySelectorAll('.select-session-opt');
+    const isNameValid = nameVal.length >= 2;
 
-  // Option selection logic: Service
-  serviceOptions.forEach(opt => {
-    opt.addEventListener('click', () => {
-      serviceOptions.forEach(o => o.classList.remove('selected'));
-      opt.classList.add('selected');
-      bookingData.service = opt.getAttribute('data-value');
-      validateCurrentStep();
-    });
-  });
+    const cleanPhone = phoneVal.replace(/[\s\(\)\+-]/g, '');
+    const isPhoneValid = /^[0-9]{10,12}$/.test(cleanPhone);
 
-  // --- Reset AM/PM Session Plate layouts ---
-  const resetSessionPlates = () => {
-    timeSlots.forEach(slot => {
-      slot.classList.remove('selected');
-      slot.style.pointerEvents = 'auto';
-      slot.style.opacity = '1';
-      const label = slot.querySelector('.badge-avail');
-      if (label) {
-        label.textContent = "✓ Session Available";
-        label.style.color = '#16A34A';
-        label.style.backgroundColor = 'rgba(22, 163, 74, 0.08)';
-      }
-    });
-  };
+    const phoneErrorSpan = wizard.querySelector('#phoneError');
 
-  // --- Dynamic Day of Week Mapper for June 2026 ---
-  const getDayOfWeekName = (dayNumber) => {
-    // June 1, 2026 is a Monday (index 1)
-    // Days array mapping: Monday=1, Tuesday=2, Wednesday=3, Thursday=4, Friday=5, Saturday=6, Sunday=0
-    const startDayOffset = 1;
-    const dayIndex = (startDayOffset + (dayNumber - 1)) % 7;
-    const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sa"];
-    return dayNames[dayIndex];
-  };
-
-  // --- Enable/Disable calendar days based on selected doctor working days ---
-  const updateCalendarDisplayForDoctor = (workingDaysStr) => {
-    const workingDaysList = workingDaysStr.split(',').map(d => d.trim().toLowerCase());
-
-    calendarDays.forEach(day => {
-      const dayNum = parseInt(day.textContent, 10);
-      if (isNaN(dayNum)) return;
-
-      const dayOfWeek = getDayOfWeekName(dayNum);
-      const isWorking = workingDaysList.includes(dayOfWeek.toLowerCase());
-
-      if (isWorking) {
-        day.classList.remove('disabled');
-        day.style.opacity = '1';
-        day.style.pointerEvents = 'auto';
-      } else {
-        day.classList.add('disabled');
-        day.style.opacity = '0.25';
-        day.style.pointerEvents = 'none';
-        day.classList.remove('selected');
-      }
-    });
-  };
-
-  // --- Fetch live session token availability from Google Sheets ---
-  const fetchSessionAvailability = async (doctorId, dateStr) => {
-    const amLabel = document.querySelector('.select-session-opt[data-value="AM"] .badge-avail');
-    const pmLabel = document.querySelector('.select-session-opt[data-value="PM"] .badge-avail');
-
-    if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.trim() === "") {
-      if (amLabel) amLabel.textContent = "✓ Session Available";
-      if (pmLabel) pmLabel.textContent = "✓ Session Available";
-      return;
+    if (phoneErrorSpan) {
+      phoneErrorSpan.style.display = (phoneVal.length > 0 && !isPhoneValid) ? 'block' : 'none';
+      if (phoneInput) phoneInput.style.borderColor = (phoneVal.length > 0 && !isPhoneValid) ? '#EF4444' : '';
     }
 
-    try {
-      if (amLabel) amLabel.textContent = "Checking slots... ⏳";
-      if (pmLabel) pmLabel.textContent = "Checking slots... ⏳";
-
-      // Convert June 15, 2026 to 2026-06-15
-      const parts = dateStr.replace(",", "").split(" ");
-      const monthNum = "06";
-      const dayNum = parts[1].padStart(2, '0');
-      const yearNum = parts[2];
-      const apiDate = `${yearNum}-${monthNum}-${dayNum}`;
-
-      const response = await fetch(`${APPS_SCRIPT_URL}?action=getAvailableSessions&doctor_id=${doctorId}&date=${apiDate}`);
-      const result = await response.json();
-
-      if (result.success && result.sessions) {
-        const returnedSessions = result.sessions.map(s => s.session.toUpperCase());
-
-        ["AM", "PM"].forEach(sessionType => {
-          const opt = wizard.querySelector(`.select-session-opt[data-value="${sessionType}"]`);
-          const label = opt ? opt.querySelector('.badge-avail') : null;
-
-          const sess = result.sessions.find(s => s.session.toUpperCase() === sessionType);
-
-          if (!sess) {
-            // Not configured / missing from Google Sheet for this doctor!
-            if (label) {
-              label.textContent = `❌ No slots available`;
-              label.style.color = '#EF4444';
-            }
-            if (opt) {
-              opt.style.pointerEvents = 'none';
-              opt.style.opacity = '0.4';
-              opt.classList.remove('selected');
-              if (bookingData.time.includes(sessionType)) {
-                bookingData.time = '';
-              }
-            }
-          } else if (sess.available_tokens > 0) {
-            if (label) {
-              label.textContent = `✓ ${sess.available_tokens} slots left`;
-              label.style.color = '#16A34A';
-            }
-            if (opt) {
-              opt.style.pointerEvents = 'auto';
-              opt.style.opacity = '1';
-            }
-          } else {
-            if (label) {
-              label.textContent = `❌ Session Full`;
-              label.style.color = '#EF4444';
-            }
-            if (opt) {
-              opt.style.pointerEvents = 'none';
-              opt.style.opacity = '0.4';
-              opt.classList.remove('selected');
-              if (bookingData.time.includes(sess.session)) {
-                bookingData.time = '';
-              }
-            }
-          }
-        });
-        validateCurrentStep();
-      }
-    } catch (err) {
-      console.error("Error fetching session capacity:", err);
-      if (amLabel) amLabel.textContent = "✓ Session Available";
-      if (pmLabel) pmLabel.textContent = "✓ Session Available";
-    }
-  };
-
-  // --- Dynamic Doctor Card Renderer ---
-  const renderDoctorOptions = (doctorsList) => {
-    const grid = document.getElementById('doctorSelectGrid');
-    if (!grid) return;
-
-    grid.innerHTML = ''; // Clear hardcoded HTML options
-
-    doctorsList.forEach(doc => {
-      const card = document.createElement('div');
-      card.className = 'select-card-option select-doctor-opt';
-      card.setAttribute('data-value', doc.doctor_name);
-      card.setAttribute('data-id', doc.doctor_id);
-
-      card.innerHTML = `
-        <h4 class="select-option-title">${doc.doctor_name}</h4>
-        <span class="select-option-subtitle" style="font-size: 0.8125rem; opacity: 0.95;">${doc.specialization || doc.department}</span>
-        <span style="display: block; font-size: 0.725rem; margin-top: 6px; font-weight: 700; color: var(--color-teal-accent); text-transform: uppercase; letter-spacing: 0.02em;">Works: ${doc.working_days}</span>
-      `;
-
-      card.addEventListener('click', () => {
-        grid.querySelectorAll('.select-doctor-opt').forEach(o => o.classList.remove('selected'));
-        card.classList.add('selected');
-
-        bookingData.doctor = doc.doctor_name;
-        bookingData.doctor_id = doc.doctor_id;
-        bookingData.working_days = doc.working_days;
-
-        // Reset selected dates and plates upon changing clinical therapist
-        bookingData.date = '';
-        bookingData.time = '';
-        calendarDays.forEach(d => d.classList.remove('selected'));
-        resetSessionPlates();
-
-        // Update active calendar node visual states
-        updateCalendarDisplayForDoctor(doc.working_days);
-        validateCurrentStep();
-      });
-
-      grid.appendChild(card);
-    });
-  };
-
-  // --- Load and Initialize Dynamic Doctors on Start ---
-  const loadDynamicDoctors = async () => {
-    let list = [];
-    if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.trim() === "") {
-      // Mock Fallback
-      list = [
-        { doctor_id: "D001", doctor_name: "Dr. Rajesh Sen", department: "Cardiology", specialization: "Cardiologist", working_days: "Mon,Tue,Wed,Fri" },
-        { doctor_id: "D002", doctor_name: "Dr. Ananya Iyer", department: "Therapy", specialization: "Clinical Psychologist", working_days: "Mon,Tue,Thu" },
-        { doctor_id: "D003", doctor_name: "Dr. Vikram Nair", department: "General", specialization: "General Practitioner", working_days: "Mon,Wed,Fri" },
-        { doctor_id: "D004", doctor_name: "Dr. Sunita Sharma", department: "Pediatrics", specialization: "Pediatric Specialist", working_days: "Tue,Thu,Fri" }
-      ];
-      renderDoctorOptions(list);
-      return;
-    }
-
-    try {
-      const response = await fetch(`${APPS_SCRIPT_URL}?action=getDoctors`);
-      const result = await response.json();
-      if (result.success && result.doctors) {
-        // Group by doctor_id to represent distinct clinical profiles
-        const unique = {};
-        result.doctors.forEach(doc => {
-          if (!unique[doc.doctor_id]) {
-            unique[doc.doctor_id] = doc;
-          }
-        });
-        list = Object.values(unique);
-        renderDoctorOptions(list);
-      }
-    } catch (e) {
-      console.error("Failed to load clinicians dynamically from sheet:", e);
-      // Failover mock loading
-      list = [
-        { doctor_id: "D001", doctor_name: "Dr. Rajesh Sen", department: "Cardiology", specialization: "Cardiologist", working_days: "Mon,Tue,Wed,Fri" },
-        { doctor_id: "D002", doctor_name: "Dr. Ananya Iyer", department: "Therapy", specialization: "Clinical Psychologist", working_days: "Mon,Tue,Thu" },
-        { doctor_id: "D003", doctor_name: "Dr. Vikram Nair", department: "General", specialization: "General Practitioner", working_days: "Mon,Wed,Fri" }
-      ];
-      renderDoctorOptions(list);
-    }
-  };
-
-  loadDynamicDoctors(); // Trigger dynamically on start!
-
-  // Option selection logic: Calendar Day Node
-  calendarDays.forEach(day => {
-    day.addEventListener('click', () => {
-      if (day.classList.contains('disabled')) return;
-
-      calendarDays.forEach(d => d.classList.remove('selected'));
-      day.classList.add('selected');
-      bookingData.date = `June ${day.textContent}, 2026`;
-
-      // Reset AM/PM selections and query real-time remaining tokens from Google Sheet
-      bookingData.time = '';
-      resetSessionPlates();
-
-      if (bookingData.doctor_id) {
-        fetchSessionAvailability(bookingData.doctor_id, bookingData.date);
-      }
-
-      validateCurrentStep();
-    });
-  });
-
-  // Option selection logic: AM/PM Session Plate
-  timeSlots.forEach(slot => {
-    slot.addEventListener('click', () => {
-      if (slot.style.opacity === '0.4' || slot.style.pointerEvents === 'none') return;
-
-      timeSlots.forEach(s => s.classList.remove('selected'));
-      slot.classList.add('selected');
-      const sessionVal = slot.getAttribute('data-value');
-      bookingData.time = sessionVal === 'AM' ? 'AM Session (10:00 AM - 1:00 PM)' : 'PM Session (3:00 PM - 6:00 PM)';
-      validateCurrentStep();
-    });
-  });
-
-  // Step validation
-  const validateCurrentStep = () => {
-    let isValid = false;
-
-    if (currentStep === 1) {
-      isValid = bookingData.service !== '' && bookingData.doctor !== '';
-    } else if (currentStep === 2) {
-      isValid = bookingData.date !== '' && bookingData.time !== '';
-    } else if (currentStep === 3) {
-      const nameInput = wizard.querySelector('#patientName');
-      const emailInput = wizard.querySelector('#patientEmail');
-      const phoneInput = wizard.querySelector('#patientPhone');
-      const reasonInput = wizard.querySelector('#consultReason');
-
-      if (nameInput && emailInput && phoneInput) {
-        bookingData.name = nameInput.value.trim();
-        bookingData.email = emailInput.value.trim();
-        bookingData.phone = phoneInput.value.trim();
-        bookingData.reason = reasonInput ? reasonInput.value.trim() : '';
-
-        const emailVal = bookingData.email;
-        const phoneVal = bookingData.phone;
-
-        const isNameValid = bookingData.name.length > 1;
-
-        // Strict high-fidelity Email regex check
-        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        const isEmailValid = emailRegex.test(emailVal);
-
-        // Strict Phone validation (strip common separators like spaces, brackets, hyphens, and leading +)
-        const cleanPhone = phoneVal.replace(/[\s\(\)\+-]/g, '');
-        const isPhoneValid = /^[0-9]{10,12}$/.test(cleanPhone);
-
-        // Dynamic inline validation visual helpers
-        const emailErrorSpan = wizard.querySelector('#emailError');
-        const phoneErrorSpan = wizard.querySelector('#phoneError');
-
-        if (emailErrorSpan) {
-          if (emailVal.length > 0 && !isEmailValid) {
-            emailErrorSpan.style.display = 'block';
-            emailInput.style.borderColor = '#EF4444';
-          } else {
-            emailErrorSpan.style.display = 'none';
-            emailInput.style.borderColor = '';
-          }
-        }
-
-        if (phoneErrorSpan) {
-          if (phoneVal.length > 0 && !isPhoneValid) {
-            phoneErrorSpan.style.display = 'block';
-            phoneInput.style.borderColor = '#EF4444';
-          } else {
-            phoneErrorSpan.style.display = 'none';
-            phoneInput.style.borderColor = '';
-          }
-        }
-
-        isValid = isNameValid && isEmailValid && isPhoneValid;
-      }
-    } else {
-      isValid = true;
-    }
-
-    nextBtn.disabled = !isValid;
+    const isValid = isNameValid && isPhoneValid && serviceVal !== '' && dateVal !== '' && timeVal !== '';
+    if (nextBtn) nextBtn.disabled = !isValid;
     return isValid;
   };
 
-  // Helper to calculate approximate arrival time based on sequential token
+  // Add event listeners to input fields to validate on input
+  [nameInput, phoneInput, serviceSelect, dateInput, timeSelect].forEach(input => {
+    if (input) {
+      input.addEventListener('input', validateForm);
+      input.addEventListener('change', validateForm);
+    }
+  });
+
   const calculateApproxTime = (sessionStr, token) => {
     const isAM = sessionStr.toUpperCase().includes("AM");
     const startHour = isAM ? 10 : 3;
-    const startMinute = 0;
-
     const totalMinutes = (token - 1) * 15;
     const finalHour24 = startHour + Math.floor(totalMinutes / 60);
-    const finalMinute = startMinute + (totalMinutes % 60);
+    const finalMinute = totalMinutes % 60;
 
-    // Format clean readable AM/PM time
     const amPm = isAM ? "AM" : "PM";
     const displayHour = finalHour24 > 12 ? finalHour24 - 12 : finalHour24;
     const formattedMinute = finalMinute === 0 ? "00" : finalMinute;
     return `${displayHour}:${formattedMinute} ${amPm}`;
   };
 
-  // Populate summary page before showing it
-  const updateBookingSummary = () => {
-    // Generate a mock sequential token (between 2 and 6)
-    const tokenNum = Math.floor(Math.random() * 5) + 2;
-    const approxTime = calculateApproxTime(bookingData.time, tokenNum);
-
-    wizard.querySelector('#summaryService').textContent = bookingData.service;
-    wizard.querySelector('#summaryDoctor').textContent = bookingData.doctor;
-    wizard.querySelector('#summaryDate').textContent = bookingData.date;
-    wizard.querySelector('#summaryTime').textContent = bookingData.time;
-    wizard.querySelector('#summaryName').textContent = bookingData.name;
-    wizard.querySelector('#summaryPhone').textContent = bookingData.phone;
-    wizard.querySelector('#summaryEmail').textContent = bookingData.email;
-
-    // Populate Token Card details
-    wizard.querySelector('#summaryToken').textContent = "Token #" + tokenNum;
-    wizard.querySelector('#summaryApproxTime').textContent = "Approximate Consultation Time: " + approxTime;
-  };
-
-  let isFirstLoad = true;
-
-  // Update panels display
   const updateWizardDisplay = () => {
-    // Toggle active panel
     panels.forEach(panel => {
       panel.classList.remove('active');
       if (parseInt(panel.getAttribute('data-step'), 10) === currentStep) {
@@ -603,7 +282,6 @@ function initBookingWizard() {
       }
     });
 
-    // Toggle active wizard headers
     nodes.forEach(node => {
       const stepNum = parseInt(node.getAttribute('data-step'), 10);
       node.classList.remove('active', 'completed');
@@ -614,189 +292,71 @@ function initBookingWizard() {
       }
     });
 
-    // Button states
     if (currentStep === 1) {
-      prevBtn.style.visibility = 'hidden';
-      nextBtn.textContent = 'Next Step';
-    } else if (currentStep === totalSteps) {
-      // Form successfully finished!
-      prevBtn.style.display = 'none';
-      nextBtn.style.display = 'none';
-      wizard.querySelector('.wizard-header-steps').style.display = 'none';
-    } else {
-      prevBtn.style.visibility = 'visible';
-      prevBtn.style.display = 'flex';
-      nextBtn.style.display = 'flex';
-
-      if (currentStep === 3) {
-        nextBtn.textContent = 'Submit Booking';
-      } else {
-        nextBtn.textContent = 'Next Step';
+      if (prevBtn) prevBtn.style.display = 'none';
+      if (nextBtn) {
+        nextBtn.style.display = 'flex';
+        nextBtn.textContent = 'Submit Request';
       }
+      wizard.querySelector('.wizard-header-steps').style.display = 'grid';
+    } else if (currentStep === 2) {
+      if (prevBtn) prevBtn.style.display = 'none';
+      if (nextBtn) nextBtn.style.display = 'none';
+      wizard.querySelector('.wizard-header-steps').style.display = 'none';
     }
+  };
 
-    validateCurrentStep();
+  // Submit request action
+  if (nextBtn) {
+    nextBtn.addEventListener('click', async () => {
+      if (!validateForm()) return;
 
-    // Smoothly scroll to the top of the wizard, compensating for the sticky header
-    if (!isFirstLoad) {
+      nextBtn.disabled = true;
+      nextBtn.textContent = 'Submitting Request... ⏳';
+
+      const serviceVal = serviceSelect.value;
+      const dateVal = dateInput.value;
+      const timeVal = timeSelect.value;
+      const nameVal = nameInput.value.trim();
+      const phoneVal = phoneInput.value.trim();
+      const notesVal = notesTextarea ? notesTextarea.value.trim() : '';
+
+      // Populate Success views
+      wizard.querySelector('#summaryService').textContent = serviceVal;
+      wizard.querySelector('#summaryDate').textContent = dateVal;
+      wizard.querySelector('#summaryTime').textContent = timeVal;
+      wizard.querySelector('#summaryName').textContent = nameVal;
+      wizard.querySelector('#summaryPhone').textContent = phoneVal;
+
+      // Save to localStorage for the active booking card dashboard!
+      const activeBooking = {
+        name: nameVal,
+        phone: phoneVal,
+        service: serviceVal,
+        doctor: 'Specialist Clinician', // General doctor placeholder
+        date: dateVal,
+        time: timeVal
+      };
+      localStorage.setItem('medtrust_active_booking', JSON.stringify(activeBooking));
+
+      if (typeof initActiveBookingNavbarBadge === 'function') {
+        initActiveBookingNavbarBadge();
+      }
+
+      currentStep = 2;
+      updateWizardDisplay();
+
+      // Smooth scroll to top
       const headerOffset = 100;
       const wizardTop = wizard.getBoundingClientRect().top + window.scrollY;
       window.scrollTo({
         top: wizardTop - headerOffset,
         behavior: 'smooth'
       });
-    } else {
-      isFirstLoad = false;
-    }
-  };
+    });
+  }
 
-  // Button Click events
-  nextBtn.addEventListener('click', async () => {
-    if (!validateCurrentStep()) return;
-
-    if (currentStep === 3) {
-      nextBtn.disabled = true;
-      const originalText = nextBtn.textContent;
-      nextBtn.textContent = 'Scheduling Consultation... ⏳';
-
-      let tokenVal = '';
-      let approxVal = '';
-
-      // Map display doctor to matching Google Sheets ID
-      const mapDoctorId = (docName) => {
-        if (docName.includes("Rajesh")) return "D003";
-        if (docName.includes("Ananya")) return "D001";
-        if (docName.includes("Vikram")) return "D004";
-        if (docName.includes("Sunita")) return "D005";
-        return "D001";
-      };
-
-      // Convert "June 15, 2026" to "2026-06-15"
-      const formatDateForAPI = (dateStr) => {
-        try {
-          const parts = dateStr.replace(",", "").split(" ");
-          const monthName = parts[0];
-          const day = parts[1].padStart(2, '0');
-          const year = parts[2];
-
-          const months = {
-            "January": "01", "February": "02", "March": "03", "April": "04",
-            "May": "05", "June": "06", "July": "07", "August": "08",
-            "September": "09", "October": "10", "November": "11", "December": "12"
-          };
-          const monthNum = months[monthName] || "06";
-          return `${year}-${monthNum}-${day}`;
-        } catch (e) {
-          return "2026-06-15";
-        }
-      };
-
-      // If Apps Script Web App URL is configured, book in Google Sheets!
-      if (APPS_SCRIPT_URL && APPS_SCRIPT_URL.trim() !== "") {
-        try {
-          const payload = {
-            doctor_id: bookingData.doctor_id || mapDoctorId(bookingData.doctor),
-            patient_name: bookingData.name,
-            phone: bookingData.phone,
-            email: bookingData.email,
-            appointment_date: formatDateForAPI(bookingData.date),
-            session: bookingData.time.includes("AM") ? "AM" : "PM",
-            service: bookingData.service,
-            notes: bookingData.reason || ''
-          };
-
-          const response = await fetch(`${APPS_SCRIPT_URL}?action=bookAppointment`, {
-            method: 'POST',
-            mode: 'cors',
-            headers: {
-              'Content-Type': 'text/plain' // Use text/plain to avoid preflight issues in standard Apps Script configurations
-            },
-            body: JSON.stringify(payload)
-          });
-
-          const result = await response.json();
-
-          if (result.success) {
-            tokenVal = String(result.token);
-            approxVal = calculateApproxTime(bookingData.time, result.token);
-          } else {
-            alert(`Booking reservation failed: ${result.message || 'Unknown clinical error'}`);
-            nextBtn.disabled = false;
-            nextBtn.textContent = originalText;
-            return;
-          }
-        } catch (err) {
-          console.error("Apps Script Connection Error: ", err);
-          alert("Network error: Could not complete booking on Google Sheets. Verify your Apps Script Web App URL and Sheet permissions.");
-          nextBtn.disabled = false;
-          nextBtn.textContent = originalText;
-          return;
-        }
-      }
-
-      // If mock mode or fallback, use local mock token generator
-      if (!tokenVal) {
-        const tokenNum = Math.floor(Math.random() * 5) + 2;
-        tokenVal = String(tokenNum);
-        approxVal = calculateApproxTime(bookingData.time, tokenNum);
-      }
-
-      // Populate Step 4 Success summaries
-      wizard.querySelector('#summaryService').textContent = bookingData.service;
-      wizard.querySelector('#summaryDoctor').textContent = bookingData.doctor;
-      wizard.querySelector('#summaryDate').textContent = bookingData.date;
-      wizard.querySelector('#summaryTime').textContent = bookingData.time;
-      wizard.querySelector('#summaryName').textContent = bookingData.name;
-      wizard.querySelector('#summaryPhone').textContent = bookingData.phone;
-      wizard.querySelector('#summaryEmail').textContent = bookingData.email;
-
-      wizard.querySelector('#summaryToken').textContent = "Token #" + tokenVal;
-      wizard.querySelector('#summaryApproxTime').textContent = "Approximate Consultation Time: " + approxVal;
-
-      // Save to local storage for persistence and dashboard indicators
-      const activeBooking = {
-        name: bookingData.name,
-        email: bookingData.email,
-        phone: bookingData.phone,
-        service: bookingData.service,
-        doctor: bookingData.doctor,
-        date: bookingData.date,
-        time: bookingData.time,
-        token: tokenVal,
-        approxTime: approxVal,
-        reason: bookingData.reason || ''
-      };
-      localStorage.setItem('medtrust_active_booking', JSON.stringify(activeBooking));
-
-      // Proactively update any navbar badges on page
-      if (typeof initActiveBookingNavbarBadge === 'function') {
-        initActiveBookingNavbarBadge();
-      }
-
-      nextBtn.disabled = false;
-      nextBtn.textContent = originalText;
-    }
-
-    if (currentStep < totalSteps) {
-      currentStep++;
-      updateWizardDisplay();
-    }
-  });
-
-  prevBtn.addEventListener('click', () => {
-    if (currentStep > 1) {
-      currentStep--;
-      updateWizardDisplay();
-    }
-  });
-
-  // Watch input changes for step 3
-  const infoInputs = wizard.querySelectorAll('.wizard-step-panel[data-step="3"] input');
-  infoInputs.forEach(input => {
-    input.addEventListener('input', validateCurrentStep);
-  });
-
-  // --- Active Booking Persistence Logic ---
+  // Cancel Booking action
   const checkActiveBooking = () => {
     const bookingJson = localStorage.getItem('medtrust_active_booking');
     const container = document.getElementById('activeBookingContainer');
@@ -805,15 +365,10 @@ function initBookingWizard() {
     if (bookingJson && container) {
       const appt = JSON.parse(bookingJson);
 
-      // Populate visual active booking card
       const greetingEl = document.getElementById('activeCardGreeting');
       if (greetingEl) greetingEl.textContent = `Welcome back, ${appt.name}!`;
 
-      const tokenEl = document.getElementById('activeCardToken');
-      if (tokenEl) tokenEl.textContent = `Token #${appt.token}`;
 
-      const approxEl = document.getElementById('activeCardApproxTime');
-      if (approxEl) approxEl.textContent = `Approx. ${appt.approxTime}`;
 
       const docEl = document.getElementById('activeCardDoctor');
       if (docEl) docEl.textContent = appt.doctor;
@@ -827,7 +382,6 @@ function initBookingWizard() {
       const serviceEl = document.getElementById('activeCardService');
       if (serviceEl) serviceEl.textContent = appt.service;
 
-      // Show container and hide booking wizard
       container.style.display = 'block';
       if (wizardSection) wizardSection.style.display = 'none';
     } else {
@@ -839,79 +393,33 @@ function initBookingWizard() {
   const btnCancel = document.getElementById('btnCancelActiveBooking');
   if (btnCancel) {
     btnCancel.addEventListener('click', () => {
-      if (confirm("Are you sure you want to cancel your scheduled consultation? This will release your active token.")) {
+      if (confirm("Are you sure you want to cancel your scheduled consultation?")) {
         localStorage.removeItem('medtrust_active_booking');
 
-        // Reset wizard back to step 1
+        // Reset inputs
+        if (nameInput) nameInput.value = '';
+        if (phoneInput) phoneInput.value = '';
+        if (serviceSelect) serviceSelect.selectedIndex = 0;
+        if (dateInput) dateInput.value = '';
+        if (timeSelect) timeSelect.selectedIndex = 0;
+        if (notesTextarea) notesTextarea.value = '';
+
         currentStep = 1;
-        bookingData.service = '';
-        bookingData.doctor = '';
-        bookingData.date = '';
-        bookingData.time = '';
-        bookingData.name = '';
-        bookingData.email = '';
-        bookingData.phone = '';
-        bookingData.reason = '';
-
-        wizard.querySelectorAll('.select-card-option').forEach(o => o.classList.remove('selected'));
-        wizard.querySelectorAll('.calendar-day-node').forEach(o => o.classList.remove('selected'));
-        wizard.querySelectorAll('.wizard-step-panel input').forEach(i => i.value = '');
-        if (wizard.querySelector('#consultReason')) wizard.querySelector('#consultReason').value = '';
-
-        checkActiveBooking();
+        if (nextBtn) {
+          nextBtn.disabled = true;
+          nextBtn.textContent = 'Submit Request';
+        }
         updateWizardDisplay();
+        checkActiveBooking();
 
-        // Clear active booking navbar badge indicator immediately
-        initActiveBookingNavbarBadge();
+        if (typeof initActiveBookingNavbarBadge === 'function') {
+          initActiveBookingNavbarBadge();
+        }
       }
     });
   }
 
-  // Bind active booking check to dashboard link
-  const homeBtn = wizard.querySelector('.btn-dark[href="index.html"]') || wizard.querySelector('.btn-dark[style*="margin-left: 16px"]');
-  if (homeBtn) {
-    homeBtn.removeAttribute('href');
-    homeBtn.style.cursor = 'pointer';
-    homeBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      checkActiveBooking();
-      updateWizardDisplay();
-    });
-  }
 
-  // Bind Download active booking receipt (Pinnable active card)
-  const btnDownloadActive = document.getElementById('btnDownloadActiveReceipt');
-  if (btnDownloadActive) {
-    btnDownloadActive.addEventListener('click', () => {
-      const bookingJson = localStorage.getItem('medtrust_active_booking');
-      if (bookingJson) {
-        const appt = JSON.parse(bookingJson);
-        downloadReceiptPDF(appt);
-      }
-    });
-  }
-
-  // Bind Download wizard booking receipt (Step 4 Success Screen)
-  const btnDownloadWizard = document.getElementById('btnDownloadWizardReceipt');
-  if (btnDownloadWizard) {
-    btnDownloadWizard.addEventListener('click', () => {
-      const activeBooking = {
-        name: bookingData.name,
-        email: bookingData.email,
-        phone: bookingData.phone,
-        service: bookingData.service,
-        doctor: bookingData.doctor,
-        date: bookingData.date,
-        time: bookingData.time,
-        token: wizard.querySelector('#summaryToken').textContent.replace('Token #', '').trim(),
-        approxTime: wizard.querySelector('#summaryApproxTime').textContent.replace('Approximate Consultation Time:', '').replace('Approx.', '').trim(),
-        reason: bookingData.reason || ''
-      };
-      downloadReceiptPDF(activeBooking);
-    });
-  }
-
-  // Initialize
   checkActiveBooking();
   updateWizardDisplay();
 }
@@ -921,7 +429,7 @@ function initBookingWizard() {
    ======================================================================== */
 function initActiveBookingNavbarBadge() {
   const bookingJson = localStorage.getItem('medtrust_active_booking');
-  const navLinks = document.querySelectorAll('.nav-link[href="patients.html"], .mobile-nav-link[href="patients.html"]');
+  const navLinks = document.querySelectorAll('.nav-link[href="appointment.html"], .mobile-nav-link[href="appointment.html"]');
 
   if (!bookingJson) {
     // Clean up indicator if it exists
@@ -949,7 +457,7 @@ function initActiveBookingNavbarBadge() {
       dot.style.backgroundColor = '#16A34A';
       dot.style.borderRadius = '50%';
       dot.style.display = 'inline-block';
-      dot.title = `Active Booking: Token #${appt.token}`;
+      dot.title = `Active Booking`;
       dot.style.boxShadow = '0 0 0 0 rgba(22, 163, 74, 0.7)';
       dot.style.animation = 'pulse-green 2s infinite';
 
@@ -958,261 +466,6 @@ function initActiveBookingNavbarBadge() {
   });
 }
 
-/* ========================================================================
-   6C. PREMIUM CLIENT-SIDE PDF RECEIPT GENERATOR (jspdf)
-   ======================================================================== */
-function downloadReceiptPDF(booking) {
-  if (!window.jspdf) {
-    alert("PDF library is still loading. Please try again in a moment.");
-    return;
-  }
-
-  try {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF({
-      orientation: 'portrait',
-      unit: 'mm',
-      format: 'a4'
-    });
-
-    // Set brand colors (MEDTRUST corporate color tokens)
-    const colorTeal = [13, 148, 136];      // #0D9488 Primary Accent
-    const colorCharcoal = [30, 41, 59];    // #1E293B Primary Text
-    const colorGreen = [22, 163, 74];      // #16A34A Success Indicator
-    const colorLightGray = [248, 250, 252]; // #F8FAFC Card BG
-    const colorDarkGray = [71, 85, 105];   // #475569 Secondary Text
-    const colorBorder = [226, 232, 240];    // #E2E8F0 Grid Border
-
-    // Helper to draw horizontal dashed line
-    const drawDashedLine = (y) => {
-      doc.setDrawColor(203, 213, 225); // #CBD5E1
-      doc.setLineDashPattern([2, 2], 0);
-      doc.line(20, y, 190, y);
-      doc.setLineDashPattern([], 0); // Reset
-    };
-
-    // Draw Outer Teal Border
-    doc.setDrawColor(13, 148, 136);
-    doc.setLineWidth(0.8);
-    doc.rect(10, 10, 190, 277);
-
-    // Draw Inner Subtle Border
-    doc.setDrawColor(226, 232, 240);
-    doc.setLineWidth(0.4);
-    doc.rect(12, 12, 186, 273);
-
-    // Logo icon (Teal cross)
-    doc.setFillColor(13, 148, 136);
-    doc.rect(20, 20, 10, 3, 'F');
-    doc.rect(23.5, 16.5, 3, 10, 'F');
-
-    // Header Brand Name
-    doc.setTextColor(30, 41, 59);
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(22);
-    doc.text('MEDTRUST CLINIC', 35, 24);
-
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(8.5);
-    doc.setTextColor(115, 115, 115);
-    doc.text('PREMIUM MEDICAL CONSULTING & TRIAGE', 35, 29);
-
-    // Right-aligned ticket meta
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(8);
-    doc.setTextColor(30, 41, 59);
-    doc.text('RECEIPT NO:', 138, 22);
-    doc.setFont('helvetica', 'normal');
-    doc.text(`MT-${Math.floor(100000 + Math.random() * 900000)}`, 162, 22);
-
-    doc.setFont('helvetica', 'bold');
-    doc.text('DATE ISSUED:', 138, 26);
-    doc.setFont('helvetica', 'normal');
-    doc.text(new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }), 162, 26);
-
-    doc.setFont('helvetica', 'bold');
-    doc.text('STATUS:', 138, 30);
-    doc.setTextColor(22, 163, 74);
-    doc.text('CONFIRMED', 162, 30);
-
-    // Divider
-    drawDashedLine(36);
-
-    // Section Header: Appointment Confirmation
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(13);
-    doc.setTextColor(30, 41, 59);
-    doc.text('APPOINTMENT TICKET & CLINICAL RECEIPT', 20, 46);
-
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(9);
-    doc.setTextColor(71, 85, 105);
-    doc.text('Please hold onto this document on your device. Show it upon checking in at the reception desk.', 20, 51);
-
-    // --- Hero Token Card block ---
-    // Background card rect
-    doc.setFillColor(240, 253, 250); // very soft teal/green tint
-    doc.setDrawColor(13, 148, 136); // Teal outline
-    doc.setLineWidth(0.5);
-    doc.rect(20, 58, 170, 48, 'FD');
-
-    // Dash decoration inside card
-    doc.setDrawColor(45, 212, 191);
-    doc.setLineDashPattern([3, 3], 0);
-    doc.rect(22, 60, 166, 44);
-    doc.setLineDashPattern([], 0); // Reset
-
-    // Token Title
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(10.5);
-    doc.setTextColor(13, 148, 136);
-    doc.text('YOUR ASSIGNED QUEUE TOKEN', 105, 68, { align: 'center' });
-
-    // Big Token Text
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(36);
-    doc.setTextColor(30, 41, 59);
-    doc.text(`Token #${booking.token}`, 105, 83, { align: 'center' });
-
-    // Approx Arrival Time
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(13);
-    doc.setTextColor(22, 163, 74);
-    doc.text(`Approximate Arrival Time: ${booking.approxTime}`, 105, 93, { align: 'center' });
-
-    // Brief note
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(8.5);
-    doc.setTextColor(71, 85, 105);
-    doc.text('*Triage times may vary slightly. Please arrive 10 minutes prior for consultation pre-checks.', 105, 99, { align: 'center' });
-
-    // Divider
-    drawDashedLine(114);
-
-    // --- Patient & Consultation Details Grid ---
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(11);
-    doc.setTextColor(30, 41, 59);
-    doc.text('CONFIRMED APPOINTMENT DETAILS', 20, 124);
-
-    // Grid details helper
-    let currentY = 132;
-    const drawDetailRow = (label1, val1, label2, val2) => {
-      // Label 1
-      doc.setFont('helvetica', 'bold');
-      doc.setFontSize(9);
-      doc.setTextColor(71, 85, 105);
-      doc.text(label1, 20, currentY);
-
-      // Val 1
-      doc.setFont('helvetica', 'normal');
-      doc.setTextColor(30, 41, 59);
-      doc.text(String(val1), 58, currentY);
-
-      if (label2) {
-        // Label 2
-        doc.setFont('helvetica', 'bold');
-        doc.setTextColor(71, 85, 105);
-        doc.text(label2, 110, currentY);
-
-        // Val 2
-        doc.setFont('helvetica', 'normal');
-        doc.setTextColor(30, 41, 59);
-        doc.text(String(val2), 148, currentY);
-      }
-
-      // Bottom thin line divider
-      doc.setDrawColor(241, 245, 249);
-      doc.setLineWidth(0.3);
-      doc.line(20, currentY + 4, 190, currentY + 4);
-      currentY += 12;
-    };
-
-    drawDetailRow('Patient Name:', booking.name, 'Contact Phone:', booking.phone);
-    drawDetailRow('Registered Email:', booking.email, 'Scheduled Date:', booking.date);
-    drawDetailRow('Specialist Doctor:', booking.doctor, 'Session Block:', booking.time);
-    drawDetailRow('Department Care:', booking.service, 'Consultation Fee:', '$120.00 (Settled)');
-
-    if (booking.reason) {
-      doc.setFont('helvetica', 'bold');
-      doc.setFontSize(9);
-      doc.setTextColor(71, 85, 105);
-      doc.text('Reason for Visit:', 20, currentY);
-      doc.setFont('helvetica', 'normal');
-      doc.setTextColor(30, 41, 59);
-
-      // Wrap reason text
-      const splitReason = doc.splitTextToSize(booking.reason, 130);
-      doc.text(splitReason, 58, currentY);
-
-      doc.setDrawColor(241, 245, 249);
-      doc.setLineWidth(0.3);
-      doc.line(20, currentY + (splitReason.length * 4) + 2, 190, currentY + (splitReason.length * 4) + 2);
-      currentY += 16;
-    }
-
-    // Divider
-    drawDashedLine(currentY + 2);
-
-    // --- Terms & Instructions Section ---
-    currentY += 12;
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(9.5);
-    doc.setTextColor(30, 41, 59);
-    doc.text('IMPORTANT GUIDELINES FOR YOUR VISIT', 20, currentY);
-
-    const guidelines = [
-      '• Virtual Consultation: If scheduled for Telehealth, check your email for a direct secure session link.',
-      '• Arrival & Intake Triage: Please check in with front-desk reception 10 mins prior to your scheduled time block.',
-      '• Ticket Verification: You may show this PDF file directly on your smartphone screen to check in.',
-      '• Rescheduling: Can be managed up to 24 hours prior to appointment time via the MedTrust Patient portal.'
-    ];
-
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(8);
-    doc.setTextColor(100, 116, 139);
-    guidelines.forEach(line => {
-      currentY += 5.5;
-      doc.text(line, 20, currentY);
-    });
-
-    // Draw a cool vector barcode at bottom
-    let barcodeY = 245;
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(7.5);
-    doc.setTextColor(148, 163, 184);
-    doc.text('*MEDTRUST-SYSTEM-SECURE-TICKET*', 105, barcodeY - 2, { align: 'center' });
-
-    // Draw the barcode stripes
-    const barcodeXStart = 65;
-    const stripePatterns = [2, 1, 3, 1, 2, 4, 1, 2, 1, 3, 2, 1, 4, 1, 2, 3, 1, 2, 1, 2, 3, 1, 4, 2, 1, 3, 1, 2];
-    let stripeX = barcodeXStart;
-    doc.setFillColor(30, 41, 59);
-    stripePatterns.forEach((width, index) => {
-      if (index % 2 === 0) {
-        doc.rect(stripeX, barcodeY, width * 0.7, 10, 'F');
-      }
-      stripeX += width * 0.7 + 0.5;
-    });
-
-    // Footer Branding
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(9);
-    doc.setTextColor(13, 148, 136);
-    doc.text('MEDTRUST HEALTHCARE SYSTEM', 105, barcodeY + 16, { align: 'center' });
-
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(8);
-    doc.setTextColor(148, 163, 184);
-    doc.text('Care You Can Believe In  |  www.medtrust.com', 105, barcodeY + 21, { align: 'center' });
-
-    // Save the PDF
-    doc.save(`MedTrust_Receipt_${booking.name.replace(/\s+/g, '_')}.pdf`);
-  } catch (err) {
-    console.error("PDF generation error: ", err);
-    alert("An error occurred while generating your receipt PDF. Please try again.");
-  }
-}
 
 /* ========================================================================
    7. DIALOGS MODALS SYSTEM
@@ -1388,7 +641,7 @@ function initWhatsAppWidget() {
     if (!chatBox.classList.contains('active')) {
       tooltip.style.opacity = '1';
       tooltip.style.transform = 'translateX(0)';
-      
+
       // Auto-hide tooltip after 6 seconds if not clicked
       setTimeout(() => {
         if (!chatBox.classList.contains('active')) {
@@ -1398,4 +651,457 @@ function initWhatsAppWidget() {
       }, 6000);
     }
   }, 3000);
+}
+
+/* ========================================================================
+   SPECIALITIES HORIZONTAL SLIDER (INFINITE LOOP CAROUSEL)
+   ======================================================================== */
+function initSpecialitiesSlider() {
+  const container = document.querySelector('.specialities-scroll-container');
+  const prevBtn = document.querySelector('.slider-arrow.prev');
+  const nextBtn = document.querySelector('.slider-arrow.next');
+
+  if (!container) return;
+
+  const originalCards = Array.from(container.querySelectorAll('.speciality-image-card'));
+  if (originalCards.length === 0) return;
+
+  const cloneCount = 4; // Number of cards to clone for infinite wrapping safety margin
+
+  // Clone first 4 cards and append to the end
+  for (let i = 0; i < cloneCount; i++) {
+    const clone = originalCards[i].cloneNode(true);
+    container.appendChild(clone);
+  }
+
+  // Clone last 4 cards and prepend to the start
+  for (let i = originalCards.length - cloneCount; i < originalCards.length; i++) {
+    const clone = originalCards[i].cloneNode(true);
+    container.insertBefore(clone, container.firstChild);
+  }
+
+  // Function to get scroll step (width of one card + gap)
+  const getScrollStep = () => {
+    const card = container.querySelector('.speciality-image-card');
+    if (!card) return 320;
+    const style = window.getComputedStyle(container);
+    const gap = parseFloat(style.gap) || 32;
+    return card.offsetWidth + gap;
+  };
+
+  // Set initial scroll position to skip start clones
+  let isScrollLock = false;
+  const initPosition = () => {
+    const step = getScrollStep();
+    container.style.scrollBehavior = 'auto'; // Instant shift
+    container.scrollLeft = cloneCount * step;
+    container.style.scrollBehavior = 'smooth'; // Restore smooth scroll
+  };
+
+  // Run initial alignment after layout settles
+  setTimeout(initPosition, 100);
+
+  // Click listeners for arrows
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      container.style.scrollBehavior = 'smooth';
+      container.scrollBy({
+        left: -getScrollStep(),
+        behavior: 'smooth'
+      });
+      resetAutoPlay();
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      container.style.scrollBehavior = 'smooth';
+      container.scrollBy({
+        left: getScrollStep(),
+        behavior: 'smooth'
+      });
+      resetAutoPlay();
+    });
+  }
+
+  // Loop wrapping check
+  const handleLoopWrapping = () => {
+    if (isScrollLock) return;
+
+    const step = getScrollStep();
+    const originalWidth = originalCards.length * step;
+    const maxScroll = container.scrollWidth - container.clientWidth;
+
+    // Wrap around from beginning (left clones) to actual end cards
+    if (container.scrollLeft <= step) {
+      isScrollLock = true;
+      container.style.scrollBehavior = 'auto'; // Disable smooth scroll for instant jump
+      container.scrollLeft += originalWidth;
+      requestAnimationFrame(() => {
+        container.style.scrollBehavior = 'smooth';
+        isScrollLock = false;
+      });
+    }
+    // Wrap around from end (right clones) to actual beginning cards
+    else if (container.scrollLeft >= maxScroll - step) {
+      isScrollLock = true;
+      container.style.scrollBehavior = 'auto'; // Disable smooth scroll for instant jump
+      container.scrollLeft -= originalWidth;
+      requestAnimationFrame(() => {
+        container.style.scrollBehavior = 'smooth';
+        isScrollLock = false;
+      });
+    }
+  };
+
+  // Function to update the center card styling scale
+  const updateCenterCard = () => {
+    const rect = container.getBoundingClientRect();
+    const containerCenter = rect.left + rect.width / 2;
+    const cards = container.querySelectorAll('.speciality-image-card');
+
+    let closestCard = null;
+    let minDistance = Infinity;
+
+    cards.forEach(card => {
+      const cardRect = card.getBoundingClientRect();
+      const cardCenter = cardRect.left + cardRect.width / 2;
+      const distance = Math.abs(cardCenter - containerCenter);
+
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestCard = card;
+      }
+    });
+
+    cards.forEach(card => {
+      if (card === closestCard) {
+        card.classList.add('is-center');
+      } else {
+        card.classList.remove('is-center');
+      }
+    });
+  };
+
+  // Mouse Drag-to-Scroll Functionality
+  let isDown = false;
+  let startX;
+  let scrollLeftStart;
+  let wasDragged = false;
+
+  container.addEventListener('mousedown', (e) => {
+    isDown = true;
+    wasDragged = false;
+    startX = e.pageX - container.offsetLeft;
+    scrollLeftStart = container.scrollLeft;
+    container.style.scrollBehavior = 'auto'; // Instant response during drag
+    stopAutoPlay();
+  });
+
+  container.addEventListener('mouseleave', () => {
+    if (isDown) {
+      isDown = false;
+      container.style.scrollBehavior = 'smooth';
+      startAutoPlay();
+    }
+  });
+
+  container.addEventListener('mouseup', () => {
+    if (isDown) {
+      isDown = false;
+      container.style.scrollBehavior = 'smooth';
+      startAutoPlay();
+    }
+  });
+
+  container.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - container.offsetLeft;
+    const walk = (x - startX) * 1.25; // Speed factor
+    if (Math.abs(walk) > 5) {
+      wasDragged = true;
+    }
+    container.scrollLeft = scrollLeftStart - walk;
+  });
+
+  // Attach scroll listeners
+  container.addEventListener('scroll', () => {
+    handleLoopWrapping();
+    updateCenterCard();
+  });
+
+  window.addEventListener('resize', () => {
+    initPosition();
+    updateCenterCard();
+  });
+
+  // Make all cards (including clones) clickable to redirect to department-details.html
+  const attachClickRedirection = () => {
+    const cards = container.querySelectorAll('.speciality-image-card');
+    cards.forEach(card => {
+      card.style.cursor = 'pointer';
+      card.onclick = (e) => {
+        if (wasDragged) {
+          wasDragged = false; // Reset flag and prevent navigation
+          return;
+        }
+        stopAutoPlay(); // Stop scroll auto stop!
+        const deptKey = card.getAttribute('data-dept') || 'general-medicine';
+        window.location.href = `department-details.html?dept=${deptKey}`;
+      };
+    });
+  };
+  
+  // Attach listeners to original + clones
+  setTimeout(attachClickRedirection, 200);
+
+  // Auto-play sliding animation (seamless loop, card-by-card)
+  let autoPlayInterval;
+  
+  const startAutoPlay = () => {
+    autoPlayInterval = setInterval(() => {
+      container.style.scrollBehavior = 'smooth';
+      container.scrollBy({
+        left: getScrollStep(),
+        behavior: 'smooth'
+      });
+    }, 3000); // Transitions every 3.0 seconds
+  };
+
+  const stopAutoPlay = () => {
+    if (autoPlayInterval) {
+      clearInterval(autoPlayInterval);
+    }
+  };
+
+  const resetAutoPlay = () => {
+    stopAutoPlay();
+    startAutoPlay();
+  };
+
+  // Start autoplay
+  startAutoPlay();
+
+  // Pause autoplay on mouse hover or touch interaction
+  container.addEventListener('touchstart', stopAutoPlay, { passive: true });
+  container.addEventListener('touchend', startAutoPlay, { passive: true });
+
+  // Initial center card calculation
+  setTimeout(updateCenterCard, 150);
+}
+
+/* ========================================================================
+   11. SCROLL REVEAL INTRO ANIMATIONS
+   ======================================================================== */
+function initScrollReveal() {
+  const revealElements = document.querySelectorAll('.reveal-element');
+  if (revealElements.length === 0) return;
+
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px 0px -50px 0px',
+    threshold: 0.02
+  };
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  revealElements.forEach(el => {
+    observer.observe(el);
+  });
+}
+
+/* ========================================================================
+   12. SCROLL-DRIVEN HERO FRAME ANIMATION
+   ======================================================================== */
+function initHeroScrollAnimation() {
+  const section = document.getElementById("heroScrollSection");
+  const canvas = document.getElementById("heroCanvas");
+  if (!section || !canvas) return;
+
+  const context = canvas.getContext("2d");
+  const frameCount = 120;
+  const currentFrame = index => (
+    `assets/images/her2/ezgif-frame-${index.toString().padStart(3, '0')}.jpg`
+  );
+
+  // Preload Images
+  const images = [];
+  let loadedCount = 0;
+  
+  // Resizing Cover Ratio Logic Helper (Cover style drawing on Canvas)
+  const drawImageProp = (ctx, img) => {
+    const w = ctx.canvas.width;
+    const h = ctx.canvas.height;
+    const iw = img.width;
+    const ih = img.height;
+    const r = Math.min(w / iw, h / ih);
+    let nw = iw * r;
+    let nh = ih * r;
+    let cx, cy, cw, ch, ar = 1;
+
+    if (nw < w) ar = w / nw;                             
+    if (Math.abs(ar - 1) < 1e-14 && nh < h) ar = h / nh;
+    nw *= ar;
+    nh *= ar;
+
+    cw = iw / (nw / w);
+    ch = ih / (nh / h);
+
+    cx = (iw - cw) * 0.5;
+    cy = (ih - ch) * 0.5;
+
+    if (cx < 0) cx = 0;
+    if (cy < 0) cy = 0;
+    if (cw > iw) cw = iw;
+    if (ch > ih) ch = ih;
+
+    ctx.drawImage(img, cx, cy, cw, ch, 0, 0, w, h);
+  };
+
+  const drawFrame = (index) => {
+    const img = images[index];
+    if (img && img.complete) {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      drawImageProp(context, img);
+    }
+  };
+
+  // Set up images array with Image objects
+  for (let i = 0; i < frameCount; i++) {
+    images.push(new Image());
+  }
+
+  // Load first frame with high priority
+  const firstImage = images[0];
+  firstImage.onload = () => {
+    loadedCount++;
+    // Render first frame immediately once loaded
+    drawFrame(0);
+
+    // Kick off remaining frames preloading after first frame is drawn
+    preloadRemainingFrames();
+  };
+  firstImage.src = currentFrame(1);
+
+  function preloadRemainingFrames() {
+    for (let i = 2; i <= frameCount; i++) {
+      const img = images[i - 1];
+      img.onload = () => {
+        loadedCount++;
+      };
+      img.src = currentFrame(i);
+    }
+  }
+
+  // Handle Resize
+  const resizeCanvas = () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    // Find current scroll fraction and redraw the correct frame
+    const sectionRect = section.getBoundingClientRect();
+    const sectionTop = window.scrollY + sectionRect.top;
+    const sectionHeight = sectionRect.height;
+    const scrollMax = sectionHeight - window.innerHeight;
+    const relativeScroll = window.scrollY - sectionTop;
+    
+    let fraction = 0;
+    if (relativeScroll > 0) {
+      fraction = Math.min(1, relativeScroll / scrollMax);
+    }
+    const frameIndex = Math.min(frameCount - 1, Math.floor(fraction * frameCount));
+    drawFrame(frameIndex);
+  };
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  window.addEventListener("resize", resizeCanvas);
+
+  // Text Elements
+  const step1 = document.getElementById("scrollStep1");
+  const step2 = document.getElementById("scrollStep2");
+
+  // Initial opacity setup
+  if (step1) {
+    step1.style.opacity = "1";
+    step1.style.transform = "translateY(0)";
+  }
+  if (step2) {
+    step2.style.opacity = "0";
+    step2.style.transform = "translateY(30px)";
+    step2.style.pointerEvents = "none";
+  }
+
+  // Scroll Handler
+  const handleScroll = () => {
+    const sectionRect = section.getBoundingClientRect();
+    const sectionTop = window.scrollY + sectionRect.top;
+    const sectionHeight = sectionRect.height;
+    const scrollMax = sectionHeight - window.innerHeight;
+    const relativeScroll = window.scrollY - sectionTop;
+
+    let fraction = 0;
+    if (relativeScroll <= 0) {
+      fraction = 0;
+    } else if (relativeScroll >= scrollMax) {
+      fraction = 1;
+    } else {
+      fraction = relativeScroll / scrollMax;
+    }
+
+    const frameIndex = Math.min(frameCount - 1, Math.floor(fraction * frameCount));
+    
+    // Draw canvas frame
+    drawFrame(frameIndex);
+
+    // Text step opacity / translate animations based on scroll fraction
+    if (step1 && step2) {
+      if (fraction <= 0.35) {
+        step1.style.opacity = "1";
+        step1.style.transform = "translateY(0)";
+        step1.style.pointerEvents = "auto";
+        
+        step2.style.opacity = "0";
+        step2.style.transform = "translateY(30px)";
+        step2.style.pointerEvents = "none";
+      } else if (fraction > 0.35 && fraction < 0.45) {
+        const outFraction = (fraction - 0.35) / 0.10;
+        step1.style.opacity = (1 - outFraction).toString();
+        step1.style.transform = `translateY(${-outFraction * 30}px)`;
+        step1.style.pointerEvents = "none";
+        
+        step2.style.opacity = "0";
+        step2.style.transform = "translateY(30px)";
+        step2.style.pointerEvents = "none";
+      } else if (fraction >= 0.45 && fraction <= 0.80) {
+        step1.style.opacity = "0";
+        step1.style.transform = "translateY(-30px)";
+        step1.style.pointerEvents = "none";
+        
+        const inFraction = Math.min(1, (fraction - 0.45) / 0.10);
+        step2.style.opacity = inFraction.toString();
+        step2.style.transform = `translateY(${(1 - inFraction) * 30}px)`;
+        step2.style.pointerEvents = "auto";
+      } else {
+        const outFraction = Math.min(1, (fraction - 0.80) / 0.15);
+        step1.style.opacity = "0";
+        
+        step2.style.opacity = (1 - outFraction).toString();
+        step2.style.transform = `translateY(${-outFraction * 30}px)`;
+        step2.style.pointerEvents = "none";
+      }
+    }
+  };
+
+  window.addEventListener("scroll", handleScroll, { passive: true });
+  // Run scroll align on slight timeout to match browser content loading offsets
+  setTimeout(handleScroll, 100);
 }
