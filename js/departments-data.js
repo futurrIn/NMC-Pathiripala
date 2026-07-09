@@ -40,11 +40,11 @@ const DEPARTMENTS_DATA = {
         bio: "Dr. Mario Jose is a specialist in interventional and diagnostic radiology with a focused interest in pediatric imaging and musculoskeletal scans."
       },
       {
-        name: "Dr. Naffir",
-        title: "Consultant Radiologist",
-        qualifications: "MBBS, MD (Radiology)",
-        image: "assets/images/doctor_rajesh.png",
-        bio: "Dr. Naffir is an expert in CT/MRI diagnostics and advanced ultrasound screening with 8+ years of dedicated experience in critical radiographical assessments."
+        name: "Dr. Nafir",
+        title: "Radiology Department",
+        qualifications: "",
+        image: "",
+        bio: ""
       }
     ]
   },
@@ -98,20 +98,6 @@ const DEPARTMENTS_DATA = {
         qualifications: "MBBS, MD (Paediatrics)",
         image: "assets/images/Doctors/Dr. Sajeev Kumar.jpg",
         bio: "Dr. Sajeev Kumar is a pediatrician with 15+ years of clinical practice. He is an expert in childhood nutrition and developmental assessment."
-      },
-      {
-        name: "Dr. Nithin Das",
-        title: "Consultant Pediatrician",
-        qualifications: "MBBS, MD (Paediatrics)",
-        image: "assets/images/Doctors/Dr.Nithin Das.png",
-        bio: "Dr. Nithin Das is dedicated to providing comprehensive healthcare for infants and children, specializing in pediatric emergencies and growth assessment."
-      },
-      {
-        name: "Dr. Aneesha",
-        title: "Consultant Pediatrician",
-        qualifications: "MBBS, MD (Paediatrics)",
-        image: "assets/images/Doctors/Dr.Aneesha.png",
-        bio: "Dr. Aneesha is a pediatric specialist focused on child wellness, immunization support, and managing developmental check-ups for infants and toddlers."
       }
     ]
   },
@@ -196,13 +182,6 @@ const DEPARTMENTS_DATA = {
         qualifications: "MBBS, MD, DM (Cardiology)",
         image: "assets/images/Doctors/Dr. Rajeshkumar.png",
         bio: "Dr. Rajesh Kumar has over 18 years of cardiology experience, focusing on heart attack prevention and clinical management of complex arrhythmias."
-      },
-      {
-        name: "Dr. Nijin Jose",
-        title: "Consultant Cardiologist",
-        qualifications: "MBBS, MD, DM (Cardiology)",
-        image: "assets/images/Doctors/Dr.Nijin Jose.png",
-        bio: "Dr. Nijin Jose is an expert in echocardiographic studies and medical management of valvular and coronary diseases."
       }
     ]
   },
@@ -243,7 +222,7 @@ const DEPARTMENTS_DATA = {
         name: "Dr. Sreevalli",
         title: "Consultant Neurosurgeon",
         qualifications: "MBBS, MS, MCh",
-        image: "assets/images/doctor_meera.png",
+        image: "",
         bio: "Dr. Sreevalli specializes in neurology and microsurgical procedures for spinal and cranial conditions with a compassionate patient approach."
       }
     ]
@@ -352,11 +331,11 @@ const DEPARTMENTS_DATA = {
         bio: "Dr. Sajith specializes in complex trauma care and arthroscopic knee/hip joint surgeries with a history of successful recovery rates."
       },
       {
-        name: "Dr. Vinoth",
-        title: "Consultant Orthopaedic Surgeon",
-        qualifications: "MBBS, D-Ortho, DNB-Ortho",
-        image: "assets/images/doctor_vikram.png",
-        bio: "Dr. Vinoth is an expert in clinical pediatric orthopedics, spinal alignment consulting, and fracture management panels."
+        name: "Dr. Vinoth K",
+        title: "Orthopaedic Surgeon",
+        qualifications: "MBBS, D-Ortho, DNB",
+        image: "assets/images/Doctors/Dr. Vinoth K.png",
+        bio: "Dr. Vinoth K is a highly skilled Orthopaedic Surgeon specializing in trauma, joint disorders, and musculoskeletal rehabilitation at NMC Pathiripala."
       }
     ]
   },

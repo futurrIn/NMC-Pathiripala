@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Departments - NMC Pathiripala Clinical Specialties</title>
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Explore NMC Pathiripala's clinical departments. From Cardiology and Neurology to Paediatrics and Dentistry, find specialist care for your family.">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ==========================================
+       SITE HEADER
+       ========================================== -->
+  <header class="site-header" id="mainHeader">
+    <div class="container header-container">
+      <a href="index.html" class="brand-logo" id="headerLogo">
+        <img src="assets/images/logo.png" alt="NMC Pathiripala Logo" class="logo-img">
+        <span class="logo-text"><span class="logo-text-short">NMC</span> <span class="logo-text-long">Pathiripala</span></span>
+      </a>
+      <nav class="nav-container">
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="about.html" class="nav-link">About Us</a></li>
+          <li><a href="departments.html" class="nav-link active">Departments</a></li>
+          <li><a href="services.html" class="nav-link">Services</a></li>
+          <li><a href="facilities.html" class="nav-link">Facilities</a></li>
+          <li><a href="appointment.html" class="nav-link">Appointment</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button class="action-btn" id="searchActionBtn" data-open-modal="searchModal" aria-label="Search site">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+        <!-- Call Icon -->
+        <a href="tel:04912874700" class="action-btn" id="callActionBtn" aria-label="Call Hospital" style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none; color: inherit;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+          </svg>
+        </a>
+        <a href="appointment.html#bookingSection" class="btn btn-dark btn-sans" id="headerBookBtn">Book Now</a>
+        <button class="mobile-nav-toggle" id="mobileNavToggler" aria-label="Toggle navigation menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Nav Drawer Menu -->
+  <aside class="mobile-nav-drawer" id="mobileDrawer">
+    <ul class="mobile-nav-list">
+      <li><a href="index.html" class="mobile-nav-link">Home</a></li>
+      <li><a href="about.html" class="mobile-nav-link">About Us</a></li>
+      <li><a href="departments.html" class="mobile-nav-link active">Departments</a></li>
+      <li><a href="services.html" class="mobile-nav-link">Services</a></li>
+      <li><a href="facilities.html" class="mobile-nav-link">Facilities</a></li>
+      <li><a href="appointment.html" class="mobile-nav-link">Appointment</a></li>
+    </ul>
+    <div class="mobile-nav-footer">
+      <a href="appointment.html#bookingSection" class="btn btn-dark btn-sans">Book Appointment</a>
+    </div>
+  </aside>
+
+  <main>
+    <!-- ==========================================
+         HERO / TITLE SECTION
+         ========================================== -->
+    <section class="departments-page-hero">
+      <div class="container">
+        <h1 class="section-title">Our Specialized Departments</h1>
+        <p class="section-desc">
+          NMC Pathiripala houses world-class specialty clinics managed by senior consultants, clinical experts, and advanced diagnostics to secure your daily health.
+        </p>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         DEPARTMENTS DIRECTORY GRID
+         ========================================== -->
+    <section class="departments-page-grid-section">
+      <div class="container">
+        <div class="departments-page-grid">
+          
+          <!-- Card 1: Cardiology -->
+          <a href="department-details.html?dept=cardiology" class="department-grid-card">
+            <div class="department-grid-card-img-wrapper">
+              <img src="assets/images/department_bento/cardiology.png" alt="Cardiology">
+            </div>
+            <div class="department-grid-card-body">
+              <h2 class="department-grid-card-title">Cardiology</h2>
+              <p class="department-grid-card-desc">Specialized heart care and diagnostic testing for cardiovascular health, heart attack prevention, and long-term cardiac wellness.</p>
+              <span class="department-grid-card-link">
+                View Department Details
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </span>
+            </div>
+          </a>
+
+          <!-- Card 2: Urology -->
+          <a href="department-details.html?dept=urology" class="department-grid-card">
+            <div class="department-grid-card-img-wrapper">
+              <img src="assets/images/department_bento/urology.png" alt="Urology">
+            </div>
+            <div class="department-grid-card-body">
+              <h2 class="department-grid-card-title">Urology</h2>
+              <p class="department-grid-card-desc">Specialized clinical care for urinary tract conditions, kidney wellness, and reproductive health.</p>
+              <span class="department-grid-card-link">
+                View Department Details
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </span>
+            </div>
+          </a>
+
+          <!-- Card 3: Neurology -->
+          <a href="department-details.html?dept=neurology" class="department-grid-card">
+            <div class="department-grid-card-img-wrapper">
+              <img src="assets/images/department_bento/neurology.png" alt="Neurology">
+            </div>
+            <div class="department-grid-card-body">
+              <h2 class="department-grid-card-title">Neurology</h2>
+              <p class="department-grid-card-desc">Advanced diagnosis and clinical care for brain, spine, nerve disorders, and neurological conditions.</p>
+              <span class="department-grid-card-link">
+                View Department Details
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </span>
+            </div>
+          </a>
+
+          <!-- Card 4: Pulmonology -->
+          <a href="department-details.html?dept=pulmonology" class="department-grid-card">
+            <div class="department-grid-card-img-wrapper">
+              <img src="assets/images/department_bento/pulmonology.png" alt="Pulmonology">
+            </div>
+            <div class="department-grid-card-body">
+              <h2 class="department-grid-card-title">Pulmonology</h2>
+              <p class="department-grid-card-desc">Expert care for respiratory issues, lung diseases, asthma management, and breathing disorders.</p>
+              <span class="department-grid-card-link">
+                View Department Details
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </span>
+            </div>
+          </a>
+
+          <!-- Card 5: Gastroenterology -->
+          <a href="department-details.html?dept=gastro" class="department-grid-card">
+            <div class="department-grid-card-img-wrapper">
+              <img src="assets/images/department_bento/gastroenterology.png" alt="Gastroenterology">
+            </div>
+            <div class="department-grid-card-body">
+              <h2 class="department-grid-card-title">Gastroenterology</h2>
+              <p class="department-grid-card-desc">Comprehensive treatment for digestive tract disorders, liver care, stomach issues, and gastrointestinal health.</p>
+              <span class="department-grid-card-link">
+                View Department Details
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </span>
+            </div>
+          </a>
+
+          <!-- Card 6: Orthopaedics -->
+          <a href="department-details.html?dept=ortho" class="department-grid-card">
+            <div class="department-grid-card-img-wrapper">
+              <img src="assets/images/department_bento/orthopaedics.png" alt="Orthopaedics">
+            </div>
+            <div class="department-grid-card-body">
+              <h2 class="department-grid-card-title">Orthopaedics</h2>
+              <p class="department-grid-card-desc">Comprehensive care for bones, joints, muscles, ligaments, and sports injuries, helping you move freely and pain-free.</p>
+              <span class="department-grid-card-link">
+                View Department Details
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </span>
+            </div>
+          </a>
+
+          <!-- Card 7: General Medicine & Diabetology -->
+          <a href="department-details.html?dept=general-medicine" class="department-grid-card">
+            <div class="department-grid-card-img-wrapper">
+              <img src="assets/images/department_bento/general_medicine.png" alt="General Medicine & Diabetology">
+            </div>
+            <div class="department-grid-card-body">
+              <h2 class="department-grid-card-title">General Medicine & Diabetology</h2>
+              <p class="department-grid-card-desc">Comprehensive healthcare for acute and chronic conditions, specializing in diabetes management and preventative wellness.</p>
+              <span class="department-grid-card-link">
+                View Department Details
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </span>
+            </div>
+          </a>
+
+          <!-- Card 8: General Surgery -->
+          <a href="department-details.html?dept=surgery" class="department-grid-card">
+            <div class="department-grid-card-img-wrapper">
+              <img src="assets/images/department_bento/general_surgery.png" alt="General Surgery">
+            </div>
+            <div class="department-grid-card-body">
+              <h2 class="department-grid-card-title">General Surgery</h2>
+              <p class="department-grid-card-desc">State-of-the-art surgical procedures for varied medical conditions, focusing on safety and rapid recovery.</p>
+              <span class="department-grid-card-link">
+                View Department Details
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </span>
+            </div>
+          </a>
+
+          <!-- Card 9: Gynaecology -->
+          <a href="department-details.html?dept=gynaecology" class="department-grid-card">
+            <div class="department-grid-card-img-wrapper">
+              <img src="assets/images/department_bento/gynaecology.png" alt="Gynaecology">
+            </div>
+            <div class="department-grid-card-body">
+              <h2 class="department-grid-card-title">Gynaecology</h2>
+              <p class="department-grid-card-desc">Compassionate healthcare for women at every stage of life, including prenatal care, pregnancy, and reproductive wellness.</p>
+              <span class="department-grid-card-link">
+                View Department Details
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </span>
+            </div>
+          </a>
+
+          <!-- Card 10: Paediatrics -->
+          <a href="department-details.html?dept=paediatrics" class="department-grid-card">
+            <div class="department-grid-card-img-wrapper">
+              <img src="assets/images/department_bento/paediatrics.png" alt="Paediatrics">
+            </div>
+            <div class="department-grid-card-body">
+              <h2 class="department-grid-card-title">Paediatrics</h2>
+              <p class="department-grid-card-desc">Compassionate medical care for infants, children, and adolescents, supporting healthy growth and development.</p>
+              <span class="department-grid-card-link">
+                View Department Details
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </span>
+            </div>
+          </a>
+
+          <!-- Card 11: ENT (Ear, Nose & Throat) -->
+          <a href="department-details.html?dept=ent" class="department-grid-card">
+            <div class="department-grid-card-img-wrapper">
+              <img src="assets/images/department_bento/ent.png" alt="ENT (Ear, Nose & Throat)">
+            </div>
+            <div class="department-grid-card-body">
+              <h2 class="department-grid-card-title">ENT (Ear, Nose & Throat)</h2>
+              <p class="department-grid-card-desc">Expert diagnosis and medical care for ear, nose, and throat ailments, sinus problems, and hearing issues.</p>
+              <span class="department-grid-card-link">
+                View Department Details
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </span>
+            </div>
+          </a>
+
+          <!-- Card 12: Casualty & Trauma Care -->
+          <a href="department-details.html?dept=casualty" class="department-grid-card">
+            <div class="department-grid-card-img-wrapper">
+              <img src="assets/images/department_bento/casualty.png" alt="Casualty & Trauma Care">
+            </div>
+            <div class="department-grid-card-body">
+              <h2 class="department-grid-card-title">Casualty & Trauma Care</h2>
+              <p class="department-grid-card-desc">24/7 emergency services equipped with expert medical staff to handle trauma, critical injuries, and urgent care.</p>
+              <span class="department-grid-card-link">
+                View Department Details
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </span>
+            </div>
+          </a>
+
+          <!-- Card 13: Dental Department -->
+          <a href="department-details.html?dept=dental" class="department-grid-card">
+            <div class="department-grid-card-img-wrapper">
+              <img src="assets/images/department_bento/dental.png" alt="Dental Department">
+            </div>
+            <div class="department-grid-card-body">
+              <h2 class="department-grid-card-title">Dental Department</h2>
+              <p class="department-grid-card-desc">Expert dental care from routine cleanings to advanced orthodontics, keeping your smile bright and healthy.</p>
+              <span class="department-grid-card-link">
+                View Department Details
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </span>
+            </div>
+          </a>
+
+          <!-- Card 14: Physiotherapy -->
+          <a href="department-details.html?dept=physiotherapy" class="department-grid-card">
+            <div class="department-grid-card-img-wrapper">
+              <img src="assets/images/department_bento/physiotherapy.png" alt="Physiotherapy">
+            </div>
+            <div class="department-grid-card-body">
+              <h2 class="department-grid-card-title">Physiotherapy</h2>
+              <p class="department-grid-card-desc">Customized physical therapy and rehabilitation programs to restore mobility, alleviate pain, and rebuild strength.</p>
+              <span class="department-grid-card-link">
+                View Department Details
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </span>
+            </div>
+          </a>
+
+          <!-- Card 15: Radiology -->
+          <a href="department-details.html?dept=radiology" class="department-grid-card">
+            <div class="department-grid-card-img-wrapper">
+              <img src="assets/images/department_bento/radiology.png" alt="Radiology">
+            </div>
+            <div class="department-grid-card-body">
+              <h2 class="department-grid-card-title">Radiology</h2>
+              <p class="department-grid-card-desc">Advanced medical imaging services including X-rays, ultrasounds, and diagnostic scans for accurate and fast health insights.</p>
+              <span class="department-grid-card-link">
+                View Department Details
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </span>
+            </div>
+          </a>
+
+          <!-- Card 16: Psychology -->
+          <a href="department-details.html?dept=psychology" class="department-grid-card">
+            <div class="department-grid-card-img-wrapper">
+              <img src="assets/images/department_bento/psychology.png" alt="Psychology">
+            </div>
+            <div class="department-grid-card-body">
+              <h2 class="department-grid-card-title">Psychology</h2>
+              <p class="department-grid-card-desc">Professional counseling and psychological therapy services to support mental well-being, mindfulness, and emotional health.</p>
+              <span class="department-grid-card-link">
+                View Department Details
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================
+       SITE FOOTER
+       ========================================== -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <!-- Info Column -->
+      <div class="footer-col footer-info">
+        <a href="index.html" class="brand-logo footer-logo">
+          <img src="assets/images/logo.png" alt="NMC Pathiripala Logo" class="logo-img">
+          <span class="logo-text"><span class="logo-text-short">NMC</span> <span class="logo-text-long">Pathiripala</span></span>
+        </a>
+        <p class="footer-about">
+          Providing high-fidelity daily medical counselling, prompt ambulance dispatching, emergency triaging, and dedicated specialist consultations for Pathiripala and surrounding communities.
+        </p>
+        <div class="footer-emergency-block">
+          <span class="emergency-label">EMERGENCY HOTLINE</span>
+          <a href="tel:04912874700" class="emergency-number">0491 - 2874 700</a>
+        </div>
+      </div>
+
+      <!-- Links Column 1 -->
+      <div class="footer-col">
+        <h3 class="footer-heading">Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="departments.html">Our Departments</a></li>
+          <li><a href="services.html">Medical Services</a></li>
+          <li><a href="facilities.html">Clinical Facilities</a></li>
+          <li><a href="appointment.html">Book Appointment</a></li>
+        </ul>
+      </div>
+
+      <!-- Links Column 2 -->
+      <div class="footer-col">
+        <h3 class="footer-heading">Support Desk</h3>
+        <ul class="footer-links">
+          <li><a href="tel:04912874700">General Support</a></li>
+          <li><a href="tel:04912874701">24/7 Ambulance Dispatch</a></li>
+          <li><a href="tel:9562225777">Casualty Hotline</a></li>
+          <li><a href="mailto:support@nmcpathiripala.com">Email Support</a></li>
+        </ul>
+      </div>
+
+      <!-- Address Column -->
+      <div class="footer-col footer-contact">
+        <h3 class="footer-heading">Hospital Location</h3>
+        <p class="footer-address">
+          <strong>NMC Pathiripala</strong><br>
+          Nagaripuram Road, Near Pathiripala Junction,<br>
+          Palakkad, Kerala, Pin: 678642
+        </p>
+        <p class="footer-working-hours">
+          <strong>Outpatient Hours:</strong> 8:00 AM - 8:00 PM<br>
+          <strong>Casualty & Trauma:</strong> Open 24 Hours / 7 Days
+        </p>
+      </div>
+    </div>
+
+    <!-- Bottom Copyright -->
+    <div class="container footer-bottom">
+      <div class="footer-copyright-text">
+        &copy; 2026 NMC Pathiripala. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Actions Stack (Call, WhatsApp, Email) -->
+  <div class="floating-actions-stack">
+    <a href="tel:04912874700" class="floating-action-circle call-btn" aria-label="Call Hospital">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+      </svg>
+      <span class="floating-action-tooltip">Call Us: 0491 - 2874 700</span>
+    </a>
+    <a href="https://wa.me/919562225777" target="_blank" rel="noopener" class="floating-action-circle wa-btn" aria-label="WhatsApp Support">
+      <svg width="24" height="24" viewBox="0 0 448 512" fill="currentColor">
+        <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L3 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+      </svg>
+      <span class="floating-action-tooltip">WhatsApp: 956 222 5777</span>
+    </a>
+    <a href="mailto:support@nmcpathiripala.com" class="floating-action-circle email-btn" aria-label="Email Support">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+        <polyline points="22,6 12,13 2,6"></polyline>
+      </svg>
+      <span class="floating-action-tooltip">Email: support@nmcpathiripala.com</span>
+    </a>
+  </div>
+
+  <!-- Search Modal -->
+  <div class="modal-overlay" id="searchModal">
+    <div class="modal-box">
+      <button class="modal-close-btn" data-close-modal>✕</button>
+      <h3 class="modal-title">Search NMC Pathiripala</h3>
+      <p class="modal-desc">Type queries to locate doctors, resources, or advice.</p>
+      <div style="display:flex; gap:10px;">
+        <input type="text" placeholder="Enter keywords..." class="form-input" style="flex-grow:1;">
+        <button class="btn btn-dark btn-sans" style="padding:10px 20px;">Search</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Login Modal -->
+  <div class="modal-overlay" id="loginModal">
+    <div class="modal-box">
+      <button class="modal-close-btn" data-close-modal>✕</button>
+      <h3 class="modal-title">Patient Portal Login</h3>
+      <p class="modal-desc">Access clinical history, active appointments and billing files.</p>
+      <form style="display:flex; flex-direction:column; gap:16px;">
+        <div>
+          <label class="input-label">Email Address</label>
+          <input type="email" class="form-input" required>
+        </div>
+        <div>
+          <label class="input-label">Password</label>
+          <input type="password" class="form-input" required>
+        </div>
+        <button type="submit" class="btn btn-dark btn-sans" style="margin-top:10px;">Login Account</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+</body>
+</html>

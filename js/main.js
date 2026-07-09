@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initBookingWizard();
   initModals();
   initActiveBookingNavbarBadge(); // Initialize navbar booking indicator badge
-  initWhatsAppWidget(); // Initialize floating WhatsApp CTA widget
+  // initWhatsAppWidget(); // Initialize floating WhatsApp CTA widget
   initSpecialitiesSlider(); // Initialize specialties horizontal image slider
   initScrollReveal(); // Initialize scroll-reveal intro animations
   initHeroScrollAnimation(); // Initialize scroll-driven hero frame animation
@@ -512,7 +512,7 @@ function initWhatsAppWidget() {
   // Check if widget already exists to prevent duplication
   if (document.getElementById('whatsappWidgetContainer')) return;
 
-  const phone = '9162388520'; // Clean phone number format for WhatsApp link API
+  const phone = '919562225777'; // Clean phone number format for WhatsApp link API
   const defaultMsg = encodeURIComponent("Hi! I'd like to ask a question about MEDTRUST services.");
   const waLink = 'https://wa.me/' + phone + '?text=' + defaultMsg;
 
@@ -1042,6 +1042,19 @@ function initHeroScrollAnimation() {
 
   // Scroll Handler
   const handleScroll = () => {
+    if (window.innerWidth <= 768) {
+      if (step1 && step2) {
+        step1.style.opacity = "1";
+        step1.style.transform = "translateY(0)";
+        step1.style.pointerEvents = "auto";
+        
+        step2.style.opacity = "0";
+        step2.style.transform = "translateY(30px)";
+        step2.style.pointerEvents = "none";
+      }
+      return;
+    }
+
     const sectionRect = section.getBoundingClientRect();
     const sectionTop = window.scrollY + sectionRect.top;
     const sectionHeight = sectionRect.height;

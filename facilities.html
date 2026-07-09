@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,16 +20,17 @@
   <header class="site-header" id="mainHeader">
     <div class="container header-container">
       <a href="index.html" class="brand-logo" id="headerLogo">
-        <img src="assets/images/logo.svg" alt="NMC Pathiripala Logo" class="logo-img">
+        <img src="assets/images/logo.png" alt="NMC Pathiripala Logo" class="logo-img">
         <span class="logo-text"><span class="logo-text-short">NMC</span> <span class="logo-text-long">Pathiripala</span></span>
       </a>
       <nav class="nav-container">
         <ul class="nav-menu">
           <li><a href="index.html" class="nav-link">Home</a></li>
           <li><a href="about.html" class="nav-link">About Us</a></li>
+          <li><a href="departments.html" class="nav-link">Departments</a></li>
           <li><a href="services.html" class="nav-link">Services</a></li>
-          <li><a href="appointment.html" class="nav-link">Appointment</a></li>
           <li><a href="facilities.html" class="nav-link active">Facilities</a></li>
+          <li><a href="appointment.html" class="nav-link">Appointment</a></li>
         </ul>
       </nav>
       <div class="header-actions">
@@ -39,12 +40,13 @@
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
         </button>
-        <button class="action-btn" id="profileActionBtn" data-open-modal="loginModal" aria-label="User Account">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-            <circle cx="12" cy="7" r="4"></circle>
+        <!-- Call Icon -->
+        <a href="tel:04912874700" class="action-btn" id="callActionBtn" aria-label="Call Hospital" style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none; color: inherit;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
           </svg>
-        </button>
+        </a>
         <a href="appointment.html#bookingSection" class="btn btn-dark btn-sans" id="headerBookBtn">Book Now</a>
         <button class="mobile-nav-toggle" id="mobileNavToggler" aria-label="Toggle navigation menu">
           <span></span>
@@ -60,9 +62,10 @@
     <ul class="mobile-nav-list">
       <li><a href="index.html" class="mobile-nav-link">Home</a></li>
       <li><a href="about.html" class="mobile-nav-link">About Us</a></li>
+      <li><a href="departments.html" class="mobile-nav-link">Departments</a></li>
       <li><a href="services.html" class="mobile-nav-link">Services</a></li>
-      <li><a href="appointment.html" class="mobile-nav-link">Appointment</a></li>
       <li><a href="facilities.html" class="mobile-nav-link active">Facilities</a></li>
+      <li><a href="appointment.html" class="mobile-nav-link">Appointment</a></li>
     </ul>
     <div class="mobile-nav-footer">
       <a href="appointment.html#bookingSection" class="btn btn-dark btn-sans">Book Appointment</a>
@@ -87,7 +90,17 @@
          ========================================== -->
     <section class="facilities-section" id="facilitiesDirectory">
       <div class="container">
-                <div class="facilities-grid">
+        <div class="section-header" style="margin-bottom: 50px;">
+          <div>
+            <h2 class="section-title">Clinical &amp; Diagnostic Facilities</h2>
+          </div>
+          <div class="section-header-right">
+            <p class="section-header-desc">
+              Explore our state-of-the-art specialized departments, high-care diagnostic suites, emergency casualty wards, and sterile operating environments designed for patient safety and clinical excellence.
+            </p>
+          </div>
+        </div>
+        <div class="facilities-grid">
 
           <!-- Facility 1: Emergency Casualty -->
           <article class="facility-card reveal-element reveal-delay-1" id="facCard1">
@@ -315,6 +328,95 @@
     </section>
 
     <!-- ==========================================
+         OTHER FACILITIES SECTION
+         ========================================== -->
+    <section class="other-facilities-section" id="otherFacilities">
+      <div class="container">
+        <div class="section-header" style="margin-bottom: 50px;">
+          <div>
+            <h2 class="section-title">Other Support Facilities &amp; Amenities</h2>
+          </div>
+          <div class="section-header-right">
+            <p class="section-header-desc">
+              For the convenience of our patients, families, and visitors, we offer key support services including 24/7 transportation, clean vegetarian dining, and on-site banking services.
+            </p>
+          </div>
+        </div>
+
+        <div class="facilities-grid other-facilities-grid">
+          
+          <!-- Other Facility 1: 24/7 Ambulance -->
+          <article class="facility-card reveal-element reveal-delay-1" id="otherFacAmbulance">
+            <div class="facility-img-wrapper">
+              <img src="assets/images/ambulance.jpg" alt="NMC Ambulance Service">
+            </div>
+            <div class="facility-info">
+              <h3 class="facility-card-title">24/7 Emergency Ambulance</h3>
+              <p class="facility-desc">
+                Equipped with primary patient transport setups and emergency responder equipment to provide rapid triage transit.
+              </p>
+            </div>
+          </article>
+
+          <!-- Other Facility 2: 24/7 Taxi Service -->
+          <article class="facility-card reveal-element reveal-delay-2" id="otherFacTaxi">
+            <div class="facility-img-wrapper">
+              <img src="assets/images/taxi.jpg" alt="24/7 Patient Taxi Service">
+            </div>
+            <div class="facility-info">
+              <h3 class="facility-card-title">24/7 Patient &amp; Visitor Taxi</h3>
+              <p class="facility-desc">
+                On-call passenger transport stationed at the hospital parking lobby for comfortable pickup and discharge drop-offs.
+              </p>
+            </div>
+          </article>
+
+          <!-- Other Facility 3: NMC Vegetarian Restaurant -->
+          <article class="facility-card reveal-element reveal-delay-3" id="otherFacRestaurant">
+            <div class="facility-img-wrapper" style="position: relative;">
+              <span class="tag-label tag-yellow" style="position: absolute; top: 12px; left: 12px; z-index: 10; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); font-weight: 700;">Best in Pathiripala</span>
+              <img src="assets/images/canteen.jpg" alt="NMC Restaurant Pure Vegetarian">
+            </div>
+            <div class="facility-info">
+              <h3 class="facility-card-title">NMC Vegetarian Restaurant</h3>
+              <p class="facility-desc">
+                Serving clean, hygienic, and nutritious South Indian vegetarian meals, snacks, and refreshments for patients and visitors.
+              </p>
+            </div>
+          </article>
+
+          <!-- Other Facility 4: 24/7 FindiATM -->
+          <article class="facility-card reveal-element reveal-delay-1" id="otherFacATM">
+            <div class="atm-image-container">
+              <img src="assets/images/atm_outdoor.jpg" class="atm-img img-outdoor" alt="FindiATM Kiosk Outside View">
+              <img src="assets/images/atm_indoor.jpg" class="atm-img img-indoor" alt="FindiATM Machine Inside View">
+            </div>
+            <div class="facility-info">
+              <h3 class="facility-card-title">24/7 FindiATM Kiosk</h3>
+              <p class="facility-desc">
+                Safe, walk-in cash point at the main entrance corridor, accepting all bank debit and credit cards for instant withdrawal.
+              </p>
+            </div>
+          </article>
+
+          <!-- Other Facility 5: Mobile Mortuary Freezer -->
+          <article class="facility-card reveal-element reveal-delay-2" id="otherFacFreezer">
+            <div class="facility-img-wrapper">
+              <img src="assets/images/freezer.png" alt="NMC Mobile Mortuary Freezer Box">
+            </div>
+            <div class="facility-info">
+              <h3 class="facility-card-title">Mobile Mortuary Freezer</h3>
+              <p class="facility-desc">
+                24/7 mobile mortuary freezer service equipped to assist families with preservation care requirements.
+              </p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
          CALL TO ACTION SECTION
          ========================================== -->
     <!-- ==========================================
@@ -368,7 +470,7 @@
     <div class="container footer-grid">
       <div class="footer-info">
         <a href="index.html" class="brand-logo">
-          <img src="assets/images/logo.svg" alt="NMC Pathiripala Logo" class="logo-img">
+          <img src="assets/images/logo.png" alt="NMC Pathiripala Logo" class="logo-img">
           <span class="logo-text"><span class="logo-text-short">NMC</span> <span class="logo-text-long">Pathiripala</span></span>
         </a>
         <p class="footer-desc">
@@ -381,6 +483,7 @@
         <ul class="footer-links">
           <li><a href="about.html" class="footer-link">Our Story</a></li>
           <li><a href="about.html#doctorsSection" class="footer-link">Our Doctors</a></li>
+          <li><a href="departments.html" class="footer-link">Our Departments</a></li>
           <li><a href="appointment.html#faqsSection" class="footer-link">FAQs</a></li>
         </ul>
       </div>
@@ -408,7 +511,7 @@
             <svg viewBox="0 0 24 24" style="width:16px; height:16px; fill:currentColor; flex-shrink:0;">
               <path d="M6.62 10.79a15.15 15.15 0 0 0 6.5 6.5l2.2-2.2c.27-.27.67-.36 1.01-.24 1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
             </svg>
-            <span>0491 287 4700</span>
+            <span>0491 - 2874 700</span>
           </div>
         </div>
         <form class="signup-form" id="newsletterForm">
@@ -466,6 +569,28 @@
         <button type="submit" class="btn btn-dark btn-sans" style="margin-top:10px;">Login Account</button>
       </form>
     </div>
+  </div>
+  <!-- Floating Actions Stack (Call, WhatsApp, Email) -->
+  <div class="floating-actions-stack">
+    <a href="tel:04912874700" class="floating-action-circle call-btn" aria-label="Call Hospital">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+      </svg>
+      <span class="floating-action-tooltip">Call Us: 0491 - 2874 700</span>
+    </a>
+    <a href="https://wa.me/919562225777" target="_blank" rel="noopener" class="floating-action-circle wa-btn" aria-label="WhatsApp Support">
+      <svg width="24" height="24" viewBox="0 0 448 512" fill="currentColor">
+        <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L3 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+      </svg>
+      <span class="floating-action-tooltip">WhatsApp: 956 222 5777</span>
+    </a>
+    <a href="mailto:support@nmcpathiripala.com" class="floating-action-circle email-btn" aria-label="Email Support">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+        <polyline points="22,6 12,13 2,6"></polyline>
+      </svg>
+      <span class="floating-action-tooltip">Email: support@nmcpathiripala.com</span>
+    </a>
   </div>
 
   <!-- Core Javascript -->
