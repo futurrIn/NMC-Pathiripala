@@ -970,7 +970,6 @@ function initHeroScrollAnimation() {
   const drawFrame = (index) => {
     const img = images[index];
     if (img && img.complete) {
-      context.clearRect(0, 0, canvas.width, canvas.height);
       drawImageProp(context, img);
     }
   };
@@ -993,13 +992,41 @@ function initHeroScrollAnimation() {
   firstImage.src = currentFrame(1);
 
   function preloadRemainingFrames() {
-    for (let i = 2; i <= frameCount; i++) {
-      const img = images[i - 1];
-      img.onload = () => {
-        loadedCount++;
-      };
-      img.src = currentFrame(i);
-    }
+    const batchSize = 6;
+    let nextImageIndex = 2;
+
+    const loadNextBatch = () => {
+      if (nextImageIndex > frameCount) return;
+
+      let loadedInBatch = 0;
+      const limit = Math.min(nextImageIndex + batchSize - 1, frameCount);
+      const currentBatchCount = limit - nextImageIndex + 1;
+
+      for (let i = nextImageIndex; i <= limit; i++) {
+        const img = images[i - 1];
+        
+        img.onload = () => {
+          loadedCount++;
+          loadedInBatch++;
+          if (loadedInBatch === currentBatchCount) {
+            nextImageIndex += batchSize;
+            setTimeout(loadNextBatch, 20); // sequential batch delay
+          }
+        };
+
+        img.onerror = () => {
+          loadedInBatch++;
+          if (loadedInBatch === currentBatchCount) {
+            nextImageIndex += batchSize;
+            setTimeout(loadNextBatch, 20);
+          }
+        };
+
+        img.src = currentFrame(i);
+      }
+    };
+
+    loadNextBatch();
   }
 
   // Handle Resize
@@ -1024,7 +1051,15 @@ function initHeroScrollAnimation() {
 
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-  window.addEventListener("resize", resizeCanvas);
+
+  let resizeTimeout;
+  const debouncedResize = () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      resizeCanvas();
+    }, 100);
+  };
+  window.addEventListener("resize", debouncedResize);
 
   // Text Elements
   const step1 = document.getElementById("scrollStep1");
@@ -1041,8 +1076,9 @@ function initHeroScrollAnimation() {
     step2.style.pointerEvents = "none";
   }
 
-  // Scroll Handler
-  const handleScroll = () => {
+  let tick = false;
+
+  const updateScrollAnimation = () => {
     const sectionRect = section.getBoundingClientRect();
     const sectionTop = window.scrollY + sectionRect.top;
     const sectionHeight = sectionRect.height;
@@ -1099,6 +1135,17 @@ function initHeroScrollAnimation() {
         step2.style.transform = `translateY(${-outFraction * 30}px)`;
         step2.style.pointerEvents = "none";
       }
+    }
+  };
+
+  // Scroll Handler
+  const handleScroll = () => {
+    if (!tick) {
+      window.requestAnimationFrame(() => {
+        updateScrollAnimation();
+        tick = false;
+      });
+      tick = true;
     }
   };
 
