@@ -63,7 +63,7 @@
 html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
@@ -71,7 +71,7 @@ body {
   background-color: var(--color-bg-base);
   color: var(--color-text-primary);
   line-height: 1.6;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 img {
@@ -516,14 +516,8 @@ h4 {
    ======================================================================== */
 .hero-scroll-animation-section {
   position: relative;
-  height: 300vh; /* scrollable height for animations */
+  height: 300vh; /* optimized scroll height */
   background-color: var(--color-bg-base);
-}
-
-@media (max-width: 768px) {
-  .hero-scroll-animation-section {
-    height: 100vh; /* Make hero standard height on mobile to stack layout naturally */
-  }
 }
 
 .sticky-wrapper {
@@ -562,7 +556,7 @@ h4 {
     rgba(0, 0, 0, 1) 0%,
     rgba(0, 0, 0, 0.8) 15%,
     rgba(0, 0, 0, 0) 35%,
-    rgba(255, 255, 255, 0) 75%,
+    rgba(255, 255, 255, 0) 85%,
     rgba(255, 255, 255, 1) 100%
   );
   pointer-events: none;

@@ -926,6 +926,7 @@ function initHeroScrollAnimation() {
   const canvas = document.getElementById("heroCanvas");
   if (!section || !canvas) return;
 
+  const stickyWrapper = section.querySelector('.sticky-wrapper');
   const context = canvas.getContext("2d");
   const frameCount = 120;
   const currentFrame = index => (
@@ -1042,19 +1043,6 @@ function initHeroScrollAnimation() {
 
   // Scroll Handler
   const handleScroll = () => {
-    if (window.innerWidth <= 768) {
-      if (step1 && step2) {
-        step1.style.opacity = "1";
-        step1.style.transform = "translateY(0)";
-        step1.style.pointerEvents = "auto";
-        
-        step2.style.opacity = "0";
-        step2.style.transform = "translateY(30px)";
-        step2.style.pointerEvents = "none";
-      }
-      return;
-    }
-
     const sectionRect = section.getBoundingClientRect();
     const sectionTop = window.scrollY + sectionRect.top;
     const sectionHeight = sectionRect.height;
