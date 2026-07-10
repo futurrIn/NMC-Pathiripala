@@ -2317,7 +2317,7 @@ textarea.form-input {
   padding-top: 180px;
   padding-bottom: 80px;
   text-align: center;
-  background-image: linear-gradient(to bottom, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.5) 60%, var(--color-bg-base) 100%), url('../assets/images/hospital 2/generalSurgeryOT1.png');
+  background-image: linear-gradient(to bottom, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.5) 60%, var(--color-bg-base) 100%), url('../assets/images/hospital 2/generalSurgeryOT1.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -4055,7 +4055,7 @@ textarea.form-input {
   padding-top: 180px;
   padding-bottom: 80px;
   text-align: center;
-  background-image: linear-gradient(to bottom, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.5) 60%, var(--color-bg-base) 100%), url('../assets/images/hospital 2/Front Intrance.jpg');
+  background-image: linear-gradient(to bottom, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.5) 60%, var(--color-bg-base) 100%), url('../assets/images/hospital 2/Front Intrance.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

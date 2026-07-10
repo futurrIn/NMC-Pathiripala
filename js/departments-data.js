@@ -2,7 +2,7 @@ const DEPARTMENTS_DATA = {
   "general-medicine": {
     name: "General Medicine & Diabetology",
     description: "Comprehensive healthcare for acute and chronic conditions, specializing in diabetes management and preventative wellness.",
-    heroImage: "assets/images/department_bento/general_medicine.png",
+    heroImage: "assets/images/department_bento/general_medicine.webp",
     intro: "Our General Medicine & Diabetology department is dedicated to providing superior clinical services for diagnosing and treating a broad spectrum of medical conditions, from common infections to complex metabolic syndromes.",
     careHighlights: [
       "Expert blood sugar monitoring and customized diabetes therapies",
@@ -15,7 +15,7 @@ const DEPARTMENTS_DATA = {
         name: "Dr. Akhil Prakash",
         title: "Senior Consultant - General Medicine",
         qualifications: "MBBS, MD, DNB (General Medicine)",
-        image: "assets/images/Doctors/Dr.Akhil Prakash.png",
+        image: "assets/images/Doctors/Dr.Akhil Prakash.webp",
         bio: "Dr. Akhil Prakash has over 12 years of clinical experience in treating complex internal medicine cases and metabolic disorders. He is renowned for his patient-centered approach to diabetes management."
       }
     ]
@@ -23,7 +23,7 @@ const DEPARTMENTS_DATA = {
   "radiology": {
     name: "Radiology",
     description: "Advanced medical imaging services including X-rays, ultrasounds, and diagnostic scans for accurate and fast health insights.",
-    heroImage: "assets/images/department_bento/radiology.png",
+    heroImage: "assets/images/department_bento/radiology.webp",
     intro: "Our Radiology department utilizes state-of-the-art imaging technology to deliver precise diagnosis, helping physicians plan accurate and timely treatment pathways.",
     careHighlights: [
       "High-resolution digital X-rays with minimized radiation exposure",
@@ -36,7 +36,7 @@ const DEPARTMENTS_DATA = {
         name: "Dr. Mario Jose",
         title: "Consultant Radiologist",
         qualifications: "MBBS, MD (Radiology)",
-        image: "assets/images/Doctors/Dr.Mario Jose.png",
+        image: "assets/images/Doctors/Dr.Mario Jose.webp",
         bio: "Dr. Mario Jose is a specialist in interventional and diagnostic radiology with a focused interest in pediatric imaging and musculoskeletal scans."
       },
       {
@@ -53,8 +53,8 @@ const DEPARTMENTS_DATA = {
     description: "Expert dental care from routine cleanings to advanced orthodontics, keeping your smile bright and healthy.",
     heroImage: "assets/images/department_bento/dental.png",
     galleryImages: [
-      "assets/images/hospital 2/Dental1.png",
-      "assets/images/hospital 2/Dental3.png"
+      "assets/images/hospital 2/Dental1.webp",
+      "assets/images/hospital 2/Dental3.webp"
     ],
     intro: "Our Dental Department offers comprehensive oral healthcare under one roof, using modern sterilizers and high-tech diagnostics to deliver pain-free treatments.",
     careHighlights: [
@@ -68,14 +68,14 @@ const DEPARTMENTS_DATA = {
         name: "Dr. Sagma",
         title: "General Dentist",
         qualifications: "BDS",
-        image: "assets/images/Doctors/Dr.Sagma.jpg",
+        image: "assets/images/Doctors/Dr.Sagma.webp",
         bio: "Dr. Sagma provides cosmetic dental procedures, dental fillings, and root canal therapy. She makes dental visits stress-free and pain-free."
       },
       {
         name: "Dr. Hridya",
         title: "Senior Dental Specialist",
         qualifications: "BDS, MDS",
-        image: "assets/images/doctor_ananya.png",
+        image: "assets/images/doctor_ananya.webp",
         bio: "Dr. Hridya specializes in orthodontics and oral surgery. She brings advanced MDS-level clinical training to handle complex restorative cases."
       }
     ]
@@ -83,7 +83,7 @@ const DEPARTMENTS_DATA = {
   "paediatrics": {
     name: "Paediatrics",
     description: "Compassionate medical care for infants, children, and adolescents, supporting healthy growth and development.",
-    heroImage: "assets/images/department_bento/paediatrics.png",
+    heroImage: "assets/images/department_bento/paediatrics.webp",
     intro: "Our Paediatrics department focuses on physical, emotional, and social wellness of children, from birth through adolescence, in a child-friendly clinic environment.",
     careHighlights: [
       "Standard newborn care and pediatric growth & development tracking",
@@ -96,7 +96,7 @@ const DEPARTMENTS_DATA = {
         name: "Dr. Sajeev Kumar",
         title: "Senior Pediatrician",
         qualifications: "MBBS, MD (Paediatrics)",
-        image: "assets/images/Doctors/Dr. Sajeev Kumar.jpg",
+        image: "assets/images/Doctors/Dr. Sajeev Kumar.webp",
         bio: "Dr. Sajeev Kumar is a pediatrician with 15+ years of clinical practice. He is an expert in childhood nutrition and developmental assessment."
       }
     ]
@@ -104,7 +104,7 @@ const DEPARTMENTS_DATA = {
   "casualty": {
     name: "Casualty & Trauma Care",
     description: "24/7 emergency services equipped with expert medical staff to handle trauma, critical injuries, and urgent care.",
-    heroImage: "assets/images/department_bento/casualty.png",
+    heroImage: "assets/images/department_bento/casualty.webp",
     intro: "Our Casualty & Trauma department operates round-the-clock to manage critical emergencies, medical trauma, and acute distress with instant triaging.",
     careHighlights: [
       "24/7 dedicated emergency response team and fully equipped trauma beds",
@@ -117,7 +117,7 @@ const DEPARTMENTS_DATA = {
         name: "Dr. Jyothi Murukan",
         title: "Emergency Medical Officer",
         qualifications: "MBBS",
-        image: "assets/images/Doctors/Dr.Jyothi murukan.png",
+        image: "assets/images/Doctors/Dr.Jyothi murukan.webp",
         bio: "Dr. Jyothi Murukan specializes in emergency medicine, trauma life support, and rapid-response stabilization protocols."
       }
     ]
@@ -125,7 +125,7 @@ const DEPARTMENTS_DATA = {
   "psychology": {
     name: "Psychology",
     description: "Professional counseling and psychological therapy services to support mental well-being, mindfulness, and emotional health.",
-    heroImage: "assets/images/department_bento/psychology.png",
+    heroImage: "assets/images/department_bento/psychology.webp",
     intro: "Our Psychology department provides clinical counseling and therapeutic sessions to assist individuals in managing stress, emotional issues, and cognitive behavioral development.",
     careHighlights: [
       "Cognitive Behavioral Therapy (CBT) and clinical stress management",
@@ -138,7 +138,7 @@ const DEPARTMENTS_DATA = {
         name: "Dr. K. Radhakrishnan",
         title: "Senior Clinical Psychologist",
         qualifications: "M.Sc. (Applied Psychology), M.Phil., PhD",
-        image: "assets/images/Doctors/Dr.K.Radhakrishnan.jpg",
+        image: "assets/images/Doctors/Dr.K.Radhakrishnan.webp",
         bio: "Dr. K. Radhakrishnan is a respected clinical psychologist with multiple research papers and over 20 years of experience helping patients build emotional resilience."
       }
     ]
@@ -146,7 +146,7 @@ const DEPARTMENTS_DATA = {
   "physiotherapy": {
     name: "Physiotherapy",
     description: "Customized physical therapy and rehabilitation programs to restore mobility, alleviate pain, and rebuild strength.",
-    heroImage: "assets/images/department_bento/physiotherapy.png",
+    heroImage: "assets/images/department_bento/physiotherapy.webp",
     intro: "Our Physiotherapy department offers rehabilitative treatment programs customized to rebuild muscle function, improve joint range-of-motion, and manage post-operative recovery.",
     careHighlights: [
       "Post-operative orthopedic rehabilitation and joint replacement recovery",
@@ -159,7 +159,7 @@ const DEPARTMENTS_DATA = {
         name: "Mr. Shyam Kumar",
         title: "Consultant Physiotherapist",
         qualifications: "BPT, MPT (Neuro)",
-        image: "assets/images/Doctors/Mr. ShyamKumar.png",
+        image: "assets/images/Doctors/Mr. ShyamKumar.webp",
         bio: "Mr. Shyam Kumar specializes in neuro-physiotherapy, assisting patients in restoring physical balance, coordination, and post-stroke movement recovery."
       }
     ]
@@ -167,7 +167,7 @@ const DEPARTMENTS_DATA = {
   "cardiology": {
     name: "Cardiology",
     description: "Specialized heart care and diagnostic testing for cardiovascular health, heart attack prevention, and long-term cardiac wellness.",
-    heroImage: "assets/images/department_bento/cardiology.png",
+    heroImage: "assets/images/department_bento/cardiology.webp",
     intro: "Our Cardiology department stands at the forefront of cardiovascular medicine, offering primary preventative and advanced management strategies for heart disorders.",
     careHighlights: [
       "Comprehensive diagnostic screening (ECG, Echocardiogram, TMT stress testing)",
@@ -180,7 +180,7 @@ const DEPARTMENTS_DATA = {
         name: "Dr. Rajesh Kumar",
         title: "Senior Consultant Cardiologist",
         qualifications: "MBBS, MD, DM (Cardiology)",
-        image: "assets/images/Doctors/Dr. Rajeshkumar.png",
+        image: "assets/images/Doctors/Dr. Rajeshkumar.webp",
         bio: "Dr. Rajesh Kumar has over 18 years of cardiology experience, focusing on heart attack prevention and clinical management of complex arrhythmias."
       }
     ]
@@ -188,7 +188,7 @@ const DEPARTMENTS_DATA = {
   "gastro": {
     name: "Gastroenterology",
     description: "Comprehensive treatment for digestive tract disorders, liver care, stomach issues, and gastrointestinal health.",
-    heroImage: "assets/images/department_bento/gastroenterology.png",
+    heroImage: "assets/images/department_bento/gastroenterology.webp",
     intro: "Our Gastroenterology department manages disorders of the esophagus, stomach, intestines, liver, gallbladder, and pancreas with high clinical precision.",
     careHighlights: [
       "Diagnosis and management of acid reflux, IBS, and peptic ulcers",
@@ -201,7 +201,7 @@ const DEPARTMENTS_DATA = {
         name: "Dr. Sandheep Janardhanan",
         title: "Senior Gastroenterologist",
         qualifications: "MBBS, MD (Internal Medicine), DNB (Gastroenterology), MRCP (UK), ESEGH",
-        image: "assets/images/Doctors/Dr.Sandheep.jpg",
+        image: "assets/images/Doctors/Dr.Sandheep.webp",
         bio: "Dr. Sandheep Janardhanan is a highly qualified specialist with MRCP validation from the United Kingdom. He has extensive expertise in managing gastrointestinal and hepatic disorders."
       }
     ]
@@ -209,7 +209,7 @@ const DEPARTMENTS_DATA = {
   "neurology": {
     name: "Neurology",
     description: "Advanced diagnosis and clinical care for brain, spine, nerve disorders, and neurological conditions.",
-    heroImage: "assets/images/department_bento/neurology.png",
+    heroImage: "assets/images/department_bento/neurology.webp",
     intro: "Our Neurology department delivers clinical evaluations and treatments for neurological disorders affecting the brain, spinal cord, nerves, and muscles.",
     careHighlights: [
       "Treatment for migraine, chronic headaches, and neuropathic pain patterns",
@@ -230,7 +230,7 @@ const DEPARTMENTS_DATA = {
   "urology": {
     name: "Urology",
     description: "Specialized clinical care for urinary tract conditions, kidney wellness, and reproductive health.",
-    heroImage: "assets/images/department_bento/urology.png",
+    heroImage: "assets/images/department_bento/urology.webp",
     intro: "Our Urology department handles surgical and medical conditions of the urinary system for both genders, alongside male reproductive organs.",
     careHighlights: [
       "Non-invasive and minimally invasive management of kidney stones",
@@ -243,7 +243,7 @@ const DEPARTMENTS_DATA = {
         name: "Dr. Eeshwaran",
         title: "Senior Consultant Urologist",
         qualifications: "MBBS, MS, MCh (Urology)",
-        image: "assets/images/Doctors/Dr.Eeshwaran.png",
+        image: "assets/images/Doctors/Dr.Eeshwaran.webp",
         bio: "Dr. Eeshwaran has 14+ years of specialized experience in reconstructive urology and advanced treatment of renal tract calculus."
       }
     ]
@@ -251,7 +251,7 @@ const DEPARTMENTS_DATA = {
   "pulmonology": {
     name: "Pulmonology",
     description: "Expert care for respiratory issues, lung diseases, asthma management, and breathing disorders.",
-    heroImage: "assets/images/department_bento/pulmonology.png",
+    heroImage: "assets/images/department_bento/pulmonology.webp",
     intro: "Our Pulmonology department provides therapeutic care for lung disease, pulmonary infections, asthma, COPD, and sleep-disordered breathing problems.",
     careHighlights: [
       "Comprehensive asthma and allergy screening and inhaler therapy tuning",
@@ -264,7 +264,7 @@ const DEPARTMENTS_DATA = {
         name: "Dr. Noufal Chooriyath",
         title: "Consultant Pulmonologist",
         qualifications: "MBBS, MD, DNB (Pulmonology)",
-        image: "assets/images/Doctors/Dr.Noufal chooriyath.jpeg",
+        image: "assets/images/Doctors/Dr.Noufal chooriyath.webp",
         bio: "Dr. Noufal is a specialist in respiratory medicine, treating severe asthma, interstitial lung diseases, and critical care pulmonary issues."
       }
     ]
@@ -272,7 +272,7 @@ const DEPARTMENTS_DATA = {
   "surgery": {
     name: "General Surgery",
     description: "State-of-the-art surgical procedures for varied medical conditions, focusing on safety and rapid recovery.",
-    heroImage: "assets/images/department_bento/general_surgery.png",
+    heroImage: "assets/images/department_bento/general_surgery.webp",
     intro: "Our General Surgery department provides diagnostic screening, pre-operative management, and advanced surgical interventions for varied gastrointestinal, abdominal, and vascular conditions.",
     careHighlights: [
       "Advanced laparoscopic surgeries for hernia, appendix, and gallstones",
@@ -285,7 +285,7 @@ const DEPARTMENTS_DATA = {
         name: "Dr. Animesh",
         title: "Senior General Surgeon",
         qualifications: "MBBS, MS (General Surgery)",
-        image: "assets/images/Doctors/DR.Animesh.png",
+        image: "assets/images/Doctors/DR.Animesh.webp",
         bio: "Dr. Animesh is an expert in minimally invasive laparoscopic procedures and complex abdominal operations, prioritizing surgical safety."
       }
     ]
@@ -293,7 +293,7 @@ const DEPARTMENTS_DATA = {
   "ent": {
     name: "ENT (Ear, Nose & Throat)",
     description: "Expert diagnosis and medical care for ear, nose, and throat ailments, sinus problems, and hearing issues.",
-    heroImage: "assets/images/department_bento/ent.png",
+    heroImage: "assets/images/department_bento/ent.webp",
     intro: "Our ENT department treats diverse ear, nose, and throat medical conditions, alongside balance disorders and pediatric ENT ailments.",
     careHighlights: [
       "Clinical treatment of ear discharge, hearing loss, and balance issues",
@@ -306,7 +306,7 @@ const DEPARTMENTS_DATA = {
         name: "Dr. Vidya V. Nair",
         title: "Consultant ENT Surgeon",
         qualifications: "MBBS, MS (ENT)",
-        image: "assets/images/Doctors/Dr.vidya v Nair.png",
+        image: "assets/images/Doctors/Dr.vidya v Nair.webp",
         bio: "Dr. Vidya V. Nair is a specialist in microscopic ear surgeries and functional endoscopic sinus surgery (FESS)."
       }
     ]
@@ -314,7 +314,7 @@ const DEPARTMENTS_DATA = {
   "ortho": {
     name: "Orthopaedics",
     description: "Comprehensive care for bones, joints, muscles, ligaments, and sports injuries, helping you move freely and pain-free.",
-    heroImage: "assets/images/department_bento/orthopaedics.png",
+    heroImage: "assets/images/department_bento/orthopaedics.webp",
     intro: "Our Orthopaedics department treats bones, joints, ligaments, tendons, and muscles. We specialize in joint replacement, sports injuries, and fracture healing.",
     careHighlights: [
       "Advanced treatment for arthritis, osteopenia, and degenerative bone disease",
@@ -327,14 +327,14 @@ const DEPARTMENTS_DATA = {
         name: "Dr. Sajith",
         title: "Senior Orthopaedic Specialist",
         qualifications: "MBBS, D-Ortho, DNB-Ortho",
-        image: "assets/images/Doctors/Dr.Sajith.png",
+        image: "assets/images/Doctors/Dr.Sajith.webp",
         bio: "Dr. Sajith specializes in complex trauma care and arthroscopic knee/hip joint surgeries with a history of successful recovery rates."
       },
       {
         name: "Dr. Vinoth K",
         title: "Orthopaedic Surgeon",
         qualifications: "MBBS, D-Ortho, DNB",
-        image: "assets/images/Doctors/Dr. Vinoth K.png",
+        image: "assets/images/Doctors/Dr. Vinoth K.webp",
         bio: "Dr. Vinoth K is a highly skilled Orthopaedic Surgeon specializing in trauma, joint disorders, and musculoskeletal rehabilitation at NMC Pathiripala."
       }
     ]
@@ -342,7 +342,7 @@ const DEPARTMENTS_DATA = {
   "gynaecology": {
     name: "Gynaecology",
     description: "Compassionate healthcare for women at every stage of life, including prenatal care, pregnancy, and reproductive wellness.",
-    heroImage: "assets/images/department_bento/gynaecology.png",
+    heroImage: "assets/images/department_bento/gynaecology.webp",
     intro: "Our Obstetrics & Gynaecology department provides supportive and complete wellness check-ups, diagnostic scans, prenatal pregnancy care, and female health solutions.",
     careHighlights: [
       "Complete prenatal screening, routine antenatal check-ups, and pregnancy panels",
@@ -355,14 +355,14 @@ const DEPARTMENTS_DATA = {
         name: "Dr. Shailaja",
         title: "Senior Consultant Gynecologist",
         qualifications: "MBBS, DGO",
-        image: "assets/images/Doctors/Dr.Shailaja.png",
+        image: "assets/images/Doctors/Dr.Shailaja.webp",
         bio: "Dr. Shailaja has 20+ years of dedicated practice in obstetrics, guiding expectant mothers safely through high-risk pregnancies and child delivery."
       },
       {
         name: "Dr. Nithya Nambiar",
         title: "Gynecologist & Laparoscopic Surgeon",
         qualifications: "MBBS, DGO, DNB, FMAS, DMAS (Obstetrician & Gynaecologist)",
-        image: "assets/images/Doctors/Dr. Nithya Nambiar.jpg",
+        image: "assets/images/Doctors/Dr. Nithya Nambiar.webp",
         bio: "Dr. Nithya Nambiar has advanced qualifications in minimally invasive keyhole gynecological surgery, offering fast-recovery laparoscopic procedures."
       }
     ]
