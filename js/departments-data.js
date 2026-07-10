@@ -51,7 +51,7 @@ const DEPARTMENTS_DATA = {
   "dental": {
     name: "Dental Department",
     description: "Expert dental care from routine cleanings to advanced orthodontics, keeping your smile bright and healthy.",
-    heroImage: "assets/images/department_bento/dental.png",
+    heroImage: "assets/images/department_bento/Dental.webp",
     galleryImages: [
       "assets/images/hospital 2/Dental1.webp",
       "assets/images/hospital 2/Dental3.webp"
