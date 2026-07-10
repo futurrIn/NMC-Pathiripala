@@ -42,7 +42,7 @@ const DEPARTMENTS_DATA = {
       {
         name: "Dr. Nafir",
         title: "Radiology Department",
-        qualifications: "",
+        qualifications: "MBBS, MD (Radiology)",
         image: "",
         bio: ""
       }
