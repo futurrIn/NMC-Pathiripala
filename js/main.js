@@ -1,14 +1,14 @@
 /*
 ========================================================================
-   MEDTRUST PRIMARY INTERACTIVE SCRIPTS
+   NMC PATHIRIPALA PRIMARY INTERACTIVE SCRIPTS
    Responsive Handlers, Tickers, Filters, and Wizard State Machine
 ========================================================================
 */
 
-// --- Google Sheets Deployed Apps Script Web App URL Endpoint ---
-// Paste your deployed Google Apps Script Web App URL here to connect the frontend to Google Sheets!
-// If left empty, the site automatically runs in offline/mock preview mode for styling/testing.
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw7j1z7mtr5B8B_akLT5WKOof0fxJA2Ahv54Fbb4cHO-DhZEWA6K0K8UBfpvi8ZlLDI/exec";
+// --- Google Sheets Deployed Apps Script Web App URL Endpoints ---
+// Paste your deployed Google Apps Script Web App URLs here to connect the frontend to Google Sheets!
+const APPOINTMENT_SHEET_URL = "https://script.google.com/macros/s/AKfycbwHPNHZFmlquqXwLVakNJW-5oM_mWFC4M4kHPwA96nU5bBs4eIhRPe861eCzDTOMZbq/exec";
+const CONTACT_SHEET_URL = ""; // Paste your contact message sheet Web App URL here
 
 document.addEventListener('DOMContentLoaded', () => {
   // Initialize general elements
@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initAccordions();
   initServiceFilters();
   initBookingWizard();
+  initContactForm(); // Initialize contact message form handler
   initModals();
   initActiveBookingNavbarBadge(); // Initialize navbar booking indicator badge
   // initWhatsAppWidget(); // Initialize floating WhatsApp CTA widget
@@ -337,7 +338,49 @@ function initBookingWizard() {
         date: dateVal,
         time: timeVal
       };
-      localStorage.setItem('medtrust_active_booking', JSON.stringify(activeBooking));
+      localStorage.setItem('nmc_active_booking', JSON.stringify(activeBooking));
+
+      // Google Sheet Integration for Appointments
+      if (APPOINTMENT_SHEET_URL) {
+        const params = new URLSearchParams();
+        params.append('formType', 'appointment');
+        params.append('name', nameVal);
+        params.append('phone', phoneVal);
+        params.append('service', serviceVal);
+        params.append('date', dateVal);
+        params.append('time', timeVal);
+        params.append('notes', notesVal);
+
+        fetch(APPOINTMENT_SHEET_URL, {
+          method: 'POST',
+          body: params,
+          mode: 'no-cors'
+        }).catch(err => {
+          console.error('Error submitting appointment to Google Sheets:', err);
+        });
+      }
+
+      // WhatsApp Confirmation integration
+      const btnSendWhatsApp = document.getElementById('btnSendWhatsApp');
+      if (btnSendWhatsApp) {
+        const msgText = `*NMC Pathiripala - Appointment Request*\n` +
+          `-----------------------------------------\n` +
+          `*Patient Name:* ${nameVal}\n` +
+          `*Phone Number:* ${phoneVal}\n` +
+          `*Service/Package:* ${serviceVal}\n` +
+          `*Preferred Date:* ${dateVal}\n` +
+          `*Preferred Session:* ${timeVal}\n` +
+          (notesVal ? `*Notes/Symptoms:* ${notesVal}\n` : '') +
+          `-----------------------------------------`;
+
+        const whatsappUrl = `https://wa.me/918137028900?text=${encodeURIComponent(msgText)}`;
+        btnSendWhatsApp.setAttribute('href', whatsappUrl);
+
+        // Auto open WhatsApp chat after a short delay for smooth UI transition
+        setTimeout(() => {
+          window.open(whatsappUrl, '_blank');
+        }, 1000);
+      }
 
       if (typeof initActiveBookingNavbarBadge === 'function') {
         initActiveBookingNavbarBadge();
@@ -358,7 +401,7 @@ function initBookingWizard() {
 
   // Cancel Booking action
   const checkActiveBooking = () => {
-    const bookingJson = localStorage.getItem('medtrust_active_booking');
+    const bookingJson = localStorage.getItem('nmc_active_booking');
     const container = document.getElementById('activeBookingContainer');
     const wizardSection = document.getElementById('bookingSection');
 
@@ -382,6 +425,22 @@ function initBookingWizard() {
       const serviceEl = document.getElementById('activeCardService');
       if (serviceEl) serviceEl.textContent = appt.service;
 
+      // WhatsApp link for existing booking resend/confirm
+      const btnResendWhatsApp = document.getElementById('btnResendWhatsApp');
+      if (btnResendWhatsApp) {
+        const msgText = `*NMC Pathiripala - Appointment Request*\n` +
+          `-----------------------------------------\n` +
+          `*Patient Name:* ${appt.name}\n` +
+          `*Phone Number:* ${appt.phone || ''}\n` +
+          `*Service/Package:* ${appt.service}\n` +
+          `*Preferred Date:* ${appt.date}\n` +
+          `*Preferred Session:* ${appt.time}\n` +
+          `-----------------------------------------`;
+
+        const whatsappUrl = `https://wa.me/918137028900?text=${encodeURIComponent(msgText)}`;
+        btnResendWhatsApp.setAttribute('href', whatsappUrl);
+      }
+
       container.style.display = 'block';
       if (wizardSection) wizardSection.style.display = 'none';
     } else {
@@ -394,7 +453,7 @@ function initBookingWizard() {
   if (btnCancel) {
     btnCancel.addEventListener('click', () => {
       if (confirm("Are you sure you want to cancel your scheduled consultation?")) {
-        localStorage.removeItem('medtrust_active_booking');
+        localStorage.removeItem('nmc_active_booking');
 
         // Reset inputs
         if (nameInput) nameInput.value = '';
@@ -425,10 +484,90 @@ function initBookingWizard() {
 }
 
 /* ========================================================================
+   6C. ABOUT US CONTACT MESSAGE FORM HANDLER (GOOGLE SHEETS)
+   ======================================================================== */
+function initContactForm() {
+  const form = document.getElementById('contactForm');
+  if (!form) return;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const nameInput = document.getElementById('contactName');
+    const emailInput = document.getElementById('contactEmail');
+    const phoneInput = document.getElementById('contactPhone');
+    const subjectSelect = document.getElementById('contactSubject');
+    const msgTextarea = document.getElementById('contactMsg');
+
+    const nameVal = nameInput ? nameInput.value.trim() : '';
+    const emailVal = emailInput ? emailInput.value.trim() : '';
+    const phoneVal = phoneInput ? phoneInput.value.trim() : '';
+    const subjectVal = subjectSelect ? subjectSelect.value : '';
+    const msgVal = msgTextarea ? msgTextarea.value.trim() : '';
+
+    const submitBtn = form.querySelector('.contact-submit-btn');
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending Message... ⏳';
+    }
+
+    // Google Sheet Integration for Contact Form
+    const sheetUrl = CONTACT_SHEET_URL || APPOINTMENT_SHEET_URL;
+    if (sheetUrl) {
+      const params = new URLSearchParams();
+      params.append('formType', 'contact');
+      params.append('name', nameVal);
+      params.append('email', emailVal);
+      params.append('phone', phoneVal);
+      params.append('subject', subjectVal);
+      params.append('message', msgVal);
+
+      fetch(sheetUrl, {
+        method: 'POST',
+        body: params,
+        mode: 'no-cors'
+      }).then(() => {
+        form.innerHTML = `
+          <div class="contact-success-message" style="text-align: center; padding: 40px 20px; animation: fadeIn 0.5s ease-in-out;">
+            <div style="width: 60px; height: 60px; background-color: #10B981; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 24px;">✓</div>
+            <h3 style="font-family: var(--font-serif); font-size: 1.5rem; color: var(--color-text-primary); margin-bottom: 12px;">Message Submitted!</h3>
+            <p style="color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 24px;">
+              Thank you for contacting Narikott Medical Centre. Our administrative team will review your message and reach out shortly.
+            </p>
+            <button type="button" onclick="window.location.reload();" class="btn btn-dark btn-sans" style="padding: 10px 24px; font-size: 0.85rem; border-radius: 6px;">Send Another Message</button>
+          </div>
+        `;
+      }).catch(err => {
+        console.error('Error sending message to Google Sheets:', err);
+        alert('There was an error sending your message. Please try again.');
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Send Secure Message';
+        }
+      });
+    } else {
+      // Offline/Mock success fallback
+      setTimeout(() => {
+        form.innerHTML = `
+          <div class="contact-success-message" style="text-align: center; padding: 40px 20px; animation: fadeIn 0.5s ease-in-out;">
+            <div style="width: 60px; height: 60px; background-color: #10B981; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 24px;">✓</div>
+            <h3 style="font-family: var(--font-serif); font-size: 1.5rem; color: var(--color-text-primary); margin-bottom: 12px;">Message Submitted!</h3>
+            <p style="color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 24px;">
+              Thank you for contacting Narikott Medical Centre. Our administrative team will review your message and reach out shortly.
+            </p>
+            <button type="button" onclick="window.location.reload();" class="btn btn-dark btn-sans" style="padding: 10px 24px; font-size: 0.85rem; border-radius: 6px;">Send Another Message</button>
+          </div>
+        `;
+      }, 800);
+    }
+  });
+}
+
+/* ========================================================================
    6B. ACTIVE BOOKING NAVBAR BADGE INDICATOR
    ======================================================================== */
 function initActiveBookingNavbarBadge() {
-  const bookingJson = localStorage.getItem('medtrust_active_booking');
+  const bookingJson = localStorage.getItem('nmc_active_booking');
   const navLinks = document.querySelectorAll('.nav-link[href="appointment.html"], .mobile-nav-link[href="appointment.html"]');
 
   if (!bookingJson) {
@@ -512,8 +651,8 @@ function initWhatsAppWidget() {
   // Check if widget already exists to prevent duplication
   if (document.getElementById('whatsappWidgetContainer')) return;
 
-  const phone = '919562225777'; // Clean phone number format for WhatsApp link API
-  const defaultMsg = encodeURIComponent("Hi! I'd like to ask a question about MEDTRUST services.");
+  const phone = '918137028900'; // Clean phone number format for WhatsApp link API
+  const defaultMsg = encodeURIComponent("Hi! I'd like to ask a question about NMC Pathiripala services.");
   const waLink = 'https://wa.me/' + phone + '?text=' + defaultMsg;
 
   // Create the widget HTML structure
@@ -527,16 +666,16 @@ function initWhatsAppWidget() {
     <!-- Chat Box Card -->
     <div class="whatsapp-chat-box" id="whatsappChatBox">
       <div class="whatsapp-chat-header">
-        <div class="whatsapp-chat-avatar">MT</div>
+        <div class="whatsapp-chat-avatar">NMC</div>
         <div class="whatsapp-chat-meta">
-          <span class="whatsapp-chat-name">MEDTRUST Support</span>
+          <span class="whatsapp-chat-name">NMC Pathiripala Support</span>
           <span class="whatsapp-chat-status">Typically replies in minutes</span>
         </div>
         <button class="whatsapp-chat-close" id="whatsappChatClose" aria-label="Close Chat">✕</button>
       </div>
       <div class="whatsapp-chat-body">
         <div class="whatsapp-chat-bubble">
-          Hi there! 👋 Welcome to MEDTRUST.
+          Hi there! 👋 Welcome to NMC Pathiripala.
           <br><br>
           How can we help you today? Let us know if you need assistance with booking, clinics, or doctors!
           <span class="whatsapp-chat-time" id="whatsappChatTime">10:00 AM</span>
@@ -852,13 +991,13 @@ function initSpecialitiesSlider() {
       };
     });
   };
-  
+
   // Attach listeners to original + clones
   setTimeout(attachClickRedirection, 200);
 
   // Auto-play sliding animation (seamless loop, card-by-card)
   let autoPlayInterval;
-  
+
   const startAutoPlay = () => {
     autoPlayInterval = setInterval(() => {
       container.style.scrollBehavior = 'smooth';
@@ -936,7 +1075,7 @@ function initHeroScrollAnimation() {
   // Preload Images
   const images = [];
   let loadedCount = 0;
-  
+
   // Resizing Cover Ratio Logic Helper (Cover style drawing on Canvas)
   const drawImageProp = (ctx, img) => {
     const w = ctx.canvas.width;
@@ -948,7 +1087,7 @@ function initHeroScrollAnimation() {
     let nh = ih * r;
     let cx, cy, cw, ch, ar = 1;
 
-    if (nw < w) ar = w / nw;                             
+    if (nw < w) ar = w / nw;
     if (Math.abs(ar - 1) < 1e-14 && nh < h) ar = h / nh;
     nw *= ar;
     nh *= ar;
@@ -1004,7 +1143,7 @@ function initHeroScrollAnimation() {
 
       for (let i = nextImageIndex; i <= limit; i++) {
         const img = images[i - 1];
-        
+
         img.onload = () => {
           loadedCount++;
           loadedInBatch++;
@@ -1033,14 +1172,14 @@ function initHeroScrollAnimation() {
   const resizeCanvas = () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    
+
     // Find current scroll fraction and redraw the correct frame
     const sectionRect = section.getBoundingClientRect();
     const sectionTop = window.scrollY + sectionRect.top;
     const sectionHeight = sectionRect.height;
     const scrollMax = sectionHeight - window.innerHeight;
     const relativeScroll = window.scrollY - sectionTop;
-    
+
     let fraction = 0;
     if (relativeScroll > 0) {
       fraction = Math.min(1, relativeScroll / scrollMax);
@@ -1095,7 +1234,7 @@ function initHeroScrollAnimation() {
     }
 
     const frameIndex = Math.min(frameCount - 1, Math.floor(fraction * frameCount));
-    
+
     // Draw canvas frame
     drawFrame(frameIndex);
 
@@ -1105,7 +1244,7 @@ function initHeroScrollAnimation() {
         step1.style.opacity = "1";
         step1.style.transform = "translateY(0)";
         step1.style.pointerEvents = "auto";
-        
+
         step2.style.opacity = "0";
         step2.style.transform = "translateY(30px)";
         step2.style.pointerEvents = "none";
@@ -1114,7 +1253,7 @@ function initHeroScrollAnimation() {
         step1.style.opacity = (1 - outFraction).toString();
         step1.style.transform = `translateY(${-outFraction * 30}px)`;
         step1.style.pointerEvents = "none";
-        
+
         step2.style.opacity = "0";
         step2.style.transform = "translateY(30px)";
         step2.style.pointerEvents = "none";
@@ -1122,7 +1261,7 @@ function initHeroScrollAnimation() {
         step1.style.opacity = "0";
         step1.style.transform = "translateY(-30px)";
         step1.style.pointerEvents = "none";
-        
+
         const inFraction = Math.min(1, (fraction - 0.45) / 0.10);
         step2.style.opacity = inFraction.toString();
         step2.style.transform = `translateY(${(1 - inFraction) * 30}px)`;
@@ -1130,7 +1269,7 @@ function initHeroScrollAnimation() {
       } else {
         const outFraction = Math.min(1, (fraction - 0.80) / 0.15);
         step1.style.opacity = "0";
-        
+
         step2.style.opacity = (1 - outFraction).toString();
         step2.style.transform = `translateY(${-outFraction * 30}px)`;
         step2.style.pointerEvents = "none";
