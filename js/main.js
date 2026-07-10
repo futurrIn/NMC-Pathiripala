@@ -1069,7 +1069,7 @@ function initHeroScrollAnimation() {
   const context = canvas.getContext("2d");
   const frameCount = 120;
   const currentFrame = index => (
-    `assets/images/her2/ezgif-frame-${index.toString().padStart(3, '0')}.jpg`
+    `assets/images/her2/ezgif-frame-${index.toString().padStart(3, '0')}.webp`
   );
 
   // Preload Images
