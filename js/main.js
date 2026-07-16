@@ -652,7 +652,7 @@ function initWhatsAppWidget() {
   if (document.getElementById('whatsappWidgetContainer')) return;
 
   const phone = '919562225777'; // Clean phone number format for WhatsApp link API
-  const defaultMsg = encodeURIComponent("Hello NMC Pathiripala, I would like to know more about your services.");
+  const defaultMsg = encodeURIComponent("I would like to know more about your services.");
   const waLink = 'https://wa.me/' + phone + '?text=' + defaultMsg;
 
   // Create the widget HTML structure
