@@ -373,7 +373,7 @@ function initBookingWizard() {
           (notesVal ? `*Notes/Symptoms:* ${notesVal}\n` : '') +
           `-----------------------------------------`;
 
-        const whatsappUrl = `https://wa.me/918137028900?text=${encodeURIComponent(msgText)}`;
+        const whatsappUrl = `https://wa.me/919562225777?text=${encodeURIComponent(msgText)}`;
         btnSendWhatsApp.setAttribute('href', whatsappUrl);
 
         // Auto open WhatsApp chat after a short delay for smooth UI transition
@@ -437,7 +437,7 @@ function initBookingWizard() {
           `*Preferred Session:* ${appt.time}\n` +
           `-----------------------------------------`;
 
-        const whatsappUrl = `https://wa.me/918137028900?text=${encodeURIComponent(msgText)}`;
+        const whatsappUrl = `https://wa.me/919562225777?text=${encodeURIComponent(msgText)}`;
         btnResendWhatsApp.setAttribute('href', whatsappUrl);
       }
 
@@ -651,8 +651,8 @@ function initWhatsAppWidget() {
   // Check if widget already exists to prevent duplication
   if (document.getElementById('whatsappWidgetContainer')) return;
 
-  const phone = '918137028900'; // Clean phone number format for WhatsApp link API
-  const defaultMsg = encodeURIComponent("Hi! I'd like to ask a question about NMC Pathiripala services.");
+  const phone = '919562225777'; // Clean phone number format for WhatsApp link API
+  const defaultMsg = encodeURIComponent("Hello NMC Pathiripala, I would like to know more about your services.");
   const waLink = 'https://wa.me/' + phone + '?text=' + defaultMsg;
 
   // Create the widget HTML structure

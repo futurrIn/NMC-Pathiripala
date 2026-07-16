@@ -4911,3 +4911,45 @@ textarea.form-input {
 
 
 
+
+/* ==========================================
+   FACILITIES MARQUEE
+   ========================================== */
+.facilities-marquee-link {
+  display: block;
+  text-decoration: none;
+  background-color: var(--color-text-primary);
+  color: #ffffff;
+  padding: 16px 0;
+  overflow: hidden;
+  position: relative;
+  transition: background-color var(--transition-normal);
+  border-bottom: 2px solid var(--color-teal-accent);
+}
+.facilities-marquee-link:hover {
+  background-color: var(--color-teal-dark);
+  color: #ffffff;
+}
+.facilities-marquee {
+  display: flex;
+  white-space: nowrap;
+}
+.marquee-content {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  width: max-content;
+  animation: marquee-scroll 20s linear infinite;
+}
+.marquee-dot {
+  margin: 0 40px;
+  opacity: 0.5;
+}
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-33.3333%); }
+}
