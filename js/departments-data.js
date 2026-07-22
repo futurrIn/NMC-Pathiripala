@@ -40,7 +40,7 @@ const DEPARTMENTS_DATA = {
         bio: "Dr. Mario Jose is a specialist in interventional and diagnostic radiology with a focused interest in pediatric imaging and musculoskeletal scans."
       },
       {
-        name: "Dr. Nafir",
+        name: "Dr. Naffir",
         title: "Radiology Department",
         qualifications: "MBBS, MD (Radiology)",
         image: "",
@@ -114,11 +114,11 @@ const DEPARTMENTS_DATA = {
     ],
     doctors: [
       {
-        name: "Dr. Jyothi Murukan",
+        name: "Dr. Jothimurugan",
         title: "Emergency Medical Officer",
         qualifications: "MBBS",
-        image: "assets/images/Doctors/Dr.Jyothi murukan.webp",
-        bio: "Dr. Jyothi Murukan specializes in emergency medicine, trauma life support, and rapid-response stabilization protocols."
+        image: "assets/images/Doctors/Dr.Jothimurugan.webp",
+        bio: "Dr. Jothimurugan specializes in emergency medicine, trauma life support, and rapid-response stabilization protocols."
       }
     ]
   },
@@ -240,11 +240,11 @@ const DEPARTMENTS_DATA = {
     ],
     doctors: [
       {
-        name: "Dr. Eeshwaran",
+        name: "Dr. Eswaran",
         title: "Senior Consultant Urologist",
         qualifications: "MBBS, MS, MCh (Urology)",
-        image: "assets/images/Doctors/Dr.Eeshwaran.webp",
-        bio: "Dr. Eeshwaran has 14+ years of specialized experience in reconstructive urology and advanced treatment of renal tract calculus."
+        image: "assets/images/Doctors/Dr.Eswaran.webp",
+        bio: "Dr. Eswaran has 14+ years of specialized experience in reconstructive urology and advanced treatment of renal tract calculus."
       }
     ]
   },
